@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "list.h"
+# include "get_next_line.h"
 # include <string.h>
 
 /*

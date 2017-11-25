@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 NAME = libft.a
-HEADNAMES = libft list
+HEADNAMES = libft list get_next_line
 INCDIR = ./includes
 HEADERS = $(patsubst %, $(INCDIR)/%.h, $(HEADNAMES))
 PRINTFUNCS = ft_putchar \
@@ -92,7 +92,8 @@ CALCFUNCS = ft_atoi \
 			ft_count_digits \
 			ft_itoa_base \
 			ft_abs \
-			ft_dsqrt
+			ft_dsqrt \
+			get_next_line
 CALCFDIR = ./calcfuncs
 DCALCFUNCS = $(patsubst %, $(CALCFDIR)/%, $(CALCFUNCS))
 CHARFUNCS = ft_isdigit \
