@@ -26,7 +26,9 @@ PRINTFUNCS = ft_putchar \
 			ft_print_word_tab \
 			ft_print_num_tab \
 			ft_log \
-			ft_printf
+			ft_printf \
+			ft_putnbr_uns_fd \
+			ft_putnbr_uns 
 PRINTFDIR = ./printfuncs
 DPRINTFUNCS = $(patsubst %, $(PRINTFDIR)/%, $(PRINTFUNCS))
 STRFUNCS =	ft_strlen \

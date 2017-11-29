@@ -12,29 +12,13 @@
 
 #include "libft.h"
 
-static void	small_f(long n, int fd, int ismin)
+void	ft_putnbr_uns_fd(unsigned long n, int fd)
 {
-	char	c;
-
 	if (n >= 10)
 	{
-		small_f(n / 10, fd, 0);
-		c = n % 10 + '0';
-		if (ismin == 1)
-			c += 1;
-		ft_putchar_fd(c, fd);
+		ft_putnbr_uns_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
 	}
 	else
 		ft_putchar_fd(n % 10 + '0', fd);
-}
-
-void		ft_putnbr_fd(long n, int fd)
-{
-	long	num;
-
-	num = n;
-	if (num < 0)
-		ft_putchar_fd('-', fd);
-	num = num < 0 ? -num : num;
-	small_f(num, fd, n < 0 && (long)(n - 1) > 0 ? 1 : 0);
 }

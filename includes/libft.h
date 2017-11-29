@@ -91,6 +91,8 @@ void	ft_putendl_fd(char *str, int fd);
 void	ft_putendl(char *str);
 void	ft_putnbr_fd(long n, int fd);
 void	ft_putnbr(long n);
+void	ft_putnbr_uns_fd(unsigned long n, int fd);
+void	ft_putnbr_uns(unsigned long n);
 void	ft_putnbrendl(long n);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putstr(char *str);
