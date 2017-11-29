@@ -23,7 +23,8 @@
 
 long	ft_abs(long x);
 int		ft_atoi(const char *str);
-int		ft_count_digits(int value, int base);
+int		ft_count_digits_uns(unsigned long value, int base);
+int		ft_count_digits(long value, int base);
 double	ft_dsqrt(int nb, double delta);
 size_t	ft_factorial(size_t num);
 long	ft_isprime(long nb);

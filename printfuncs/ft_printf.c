@@ -34,13 +34,7 @@ int		print_signed_num(long n)
 int		print_unsigned_num(unsigned long n)
 {
 	ft_putnbr_uns(n);
-	return (ft_count_digits_uns(n, 10) + n < 0 ? 1 : 0);
-}
-
-int		print_bd(unsigned int n)
-{
-	ft_putnbr(n);
-	return (ft_count_digits(n, 10));
+	return (ft_count_digits_uns(n, 10));
 }
 
 int		ft_printf(char *fmt, ...)
@@ -63,15 +57,15 @@ int		ft_printf(char *fmt, ...)
 			else if (fmt[i] == 's')
 				ret += print_s(va_arg(ap, char *));
 			else if (fmt[i] == 'd')
-				ret += print_d(va_arg(ap, int));
+				ret += print_signed_num(va_arg(ap, int));
 			else if (fmt[i] == 'D')
-				ret += print_bd(va_arg(ap, unsigned int));
+				ret += print_unsigned_num(va_arg(ap, unsigned int));
 			else if (fmt[i] == 'c')
 				ret += print_c((char)va_arg(ap, int));
 			else if (fmt[i] == 'C')
 				ret += print_c((unsigned char)va_arg(ap, int));
 			else if (fmt[i] == 'u')
-				ret += print_num((unsigned char)va_arg(ap, int));
+				ret += print_unsigned_num((unsigned char)va_arg(ap, int));
 		}
 		else
 			ret += print_c(fmt[i]);

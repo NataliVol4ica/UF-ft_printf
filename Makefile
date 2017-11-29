@@ -97,7 +97,8 @@ CALCFUNCS = ft_atoi \
 			ft_itoa_base \
 			ft_abs \
 			ft_dsqrt \
-			get_next_line
+			get_next_line \
+			ft_count_digits_uns
 CALCFDIR = ./calcfuncs
 DCALCFUNCS = $(patsubst %, $(CALCFDIR)/%, $(CALCFUNCS))
 CHARFUNCS = ft_isdigit \
