@@ -12,7 +12,6 @@
 
 #include <stdarg.h>
 #include "libft.h"
-# include <stdio.h>
 
 int		print_c(char c)
 {
@@ -47,8 +46,7 @@ int		ft_printf(char *fmt, ...)
 	va_start(ap, fmt);
 	i = -1;
 	ret = 0;
-	printf("%s\n", fmt);
-	/*if (!fmt)
+	if (!fmt)
 		return (ret);
 	while (fmt[++i])
 		if (fmt[i] == '%' && fmt[i + 1])
@@ -66,7 +64,7 @@ int		ft_printf(char *fmt, ...)
 				ret += print_c((char)va_arg(ap, int));
 		}
 		else
-			ret += print_c(fmt[i]);*/
+			ret += print_c(fmt[i]);
 	va_end(ap);
 	return (ret);
 }

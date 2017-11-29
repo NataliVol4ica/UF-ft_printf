@@ -13,9 +13,22 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void		ft_putnbr_fd(long num, int fd)
+static void	small_f(t_list *l, int fd)
 {
 	char	*str;
+
+	if (!l)
+	{
+		ft_putstr_fd("0", fd);
+		return ;
+	}
+	str = ft_list_to_string(l);
+	ft_putstr_fd(ft_strrev(str), fd);
+	free(str);
+}
+
+void		ft_putnbr_fd(long num, int fd)
+{
 	long	n;
 	char	dig;
 	t_list	*l;
@@ -35,8 +48,6 @@ void		ft_putnbr_fd(long num, int fd)
 	dig = '-';
 	if (num < 0)
 		ft_lstpushback(&l, ft_lstnew((void*)&dig, sizeof(dig)));
-	str = ft_list_to_string(l);
-	ft_putstr_fd(ft_strrev(str), fd);
-	free(str);
+	small_f(l, fd);	
 	ft_lstdel(&l, NULL);
 }
