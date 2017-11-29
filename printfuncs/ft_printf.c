@@ -47,8 +47,8 @@ int		ft_printf(char *fmt, ...)
 	va_start(ap, fmt);
 	i = -1;
 	ret = 0;
-	printf("%s", fmt);
-	if (!fmt)
+	printf("%s\n", fmt);
+	/*if (!fmt)
 		return (ret);
 	while (fmt[++i])
 		if (fmt[i] == '%' && fmt[i + 1])
@@ -66,7 +66,7 @@ int		ft_printf(char *fmt, ...)
 				ret += print_c((char)va_arg(ap, int));
 		}
 		else
-			ret += print_c(fmt[i]);
+			ret += print_c(fmt[i]);*/
 	va_end(ap);
 	return (ret);
 }

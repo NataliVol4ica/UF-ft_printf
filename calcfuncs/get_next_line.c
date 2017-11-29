@@ -80,7 +80,7 @@ int				get_next_line(const int fd, char **line)
 	char			*temp;
 	char			*cont;
 
-	if (BUFF_SIZE <= 0 || fd < 0 || line == NULL)
+	if (BUFF_SIZE <= 0 || BUFF_SIZE > 8387512 || fd < 0 || line == NULL)
 		return (-1);
 	fd_elem = get_list_elem(&fd_list, fd);
 	left = ft_strdup((char*)fd_elem->content);
