@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME = libft.a
+NAME = libftprintf.a
 HEADNAMES = libft list get_next_line
 INCDIR = ./includes
 HEADERS = $(patsubst %, $(INCDIR)/%.h, $(HEADNAMES))
@@ -25,7 +25,8 @@ PRINTFUNCS = ft_putchar \
 			ft_putnbr_fd \
 			ft_print_word_tab \
 			ft_print_num_tab \
-			ft_log
+			ft_log \
+			ft_printf
 PRINTFDIR = ./printfuncs
 DPRINTFUNCS = $(patsubst %, $(PRINTFDIR)/%, $(PRINTFUNCS))
 STRFUNCS =	ft_strlen \
@@ -172,8 +173,8 @@ norm:
 	@echo ${RED}[Checking the $(NAME) NORM]${NC}
 	@norminette $(CFILES) $(HEADERS)
 
-main:
-	gcc -Wall -Wextra -Werror -o e -L. -lft main.c
+main: $(NAME)
+	gcc -Wall -Wextra -Werror -o e -I $(INCDIR) -L. -lftprintf main.c
 
 gitclean: clean
 	find . -name "*.DS_Store*" -delete 
