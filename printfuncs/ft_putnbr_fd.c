@@ -11,25 +11,32 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static void	small_f(long n, int fd)
+void		ft_putnbr_fd(long num, int fd)
 {
-	if (n >= 10)
+	char	*str;
+	long	n;
+	char	dig;
+	t_list	*l;
+	int		is_min;
+
+	l = NULL;
+	is_min = num < 0 && ((long)(num - 1)) > 0 ? 1 : 0;
+	n = num < 0 ? -num : num;
+	while (n != 0)
 	{
-		small_f(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
+		dig = n % 10 + '0';
+		if (is_min && !l)
+			dig++;
+		n /= 10;
+		ft_lstpushback(&l, ft_lstnew((void*)&dig, sizeof(dig)));
 	}
-	else
-		ft_putchar_fd(n % 10 + '0', fd);
-}
-
-void		ft_putnbr_fd(int n, int fd)
-{
-	long	num;
-
-	num = n;
+	dig = '-';
 	if (num < 0)
-		ft_putchar_fd('-', fd);
-	num = num < 0 ? -num : num;
-	small_f(num, fd);
+		ft_lstpushback(&l, ft_lstnew((void*)&dig, sizeof(dig)));
+	str = ft_list_to_string(l);
+	ft_putstr_fd(ft_strrev(str), fd);
+	free(str);
+	ft_lstdel(&l, NULL);
 }

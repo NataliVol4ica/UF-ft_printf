@@ -12,15 +12,18 @@
 
 int		ft_count_digits(int value, int base)
 {
-	int ans;
+	long	temp;
+	int		ans;
 
+	temp = value;
+	temp = temp < 0 ? -temp : temp;
 	ans = 0;
-	if (value == 0)
+	if (temp == 0)
 		return (1);
-	while (value != 0)
+	while (temp != 0)
 	{
 		ans++;
-		value /= base;
+		temp /= base;
 	}
 	return (ans);
 }

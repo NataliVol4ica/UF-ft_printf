@@ -19,5 +19,8 @@ int		main(void)
 	char	*str2 = "2 string";
 
 	ft_printf("The string is: \"%s\"\nSecond string is \"%s\"\n", str, str2);
+	ft_printf("Number %d\n", -2147483648);
+	ft_printf("Number %D\n", -25);
+	ft_printf("Symbol %c\n", 'C');
 	return (0);
 }

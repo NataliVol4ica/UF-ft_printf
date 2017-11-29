@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbrendl.c                                    :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/01 17:11:39 by nkolosov          #+#    #+#             */
-/*   Updated: 2017/11/01 17:11:39 by nkolosov         ###   ########.fr       */
+/*   Created: 2017/11/29 17:04:02 by nkolosov          #+#    #+#             */
+/*   Updated: 2017/11/29 17:04:02 by nkolosov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putnbrendl(long n)
+char	*ft_strrev(char *str)
 {
-	ft_putnbr(n);
-	ft_putchar('\n');
+	int		i;
+	int		j;
+	char	c;
+
+	i = 0;
+	j = ft_strlen(str) - 1;
+	while (i < j)
+	{
+		c = str[i];
+		str[i] = str[j];
+		str[j] = c;
+		i++;
+		j--;
+	}
+	return (str);
 }

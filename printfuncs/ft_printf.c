@@ -14,16 +14,28 @@
 #include "libft.h"
 # include <stdio.h>
 
-int		print_symbol(char c)
+int		print_c(char c)
 {
 	ft_putchar(c);
 	return (1);
 }
 
-int		print_line(char *c)
+int		print_s(char *c)
 {
 	ft_putstr(c);
 	return (ft_strlen(c));
+}
+
+int		print_d(int n)
+{
+	ft_putnbr(n);
+	return (ft_count_digits(n, 10) + n < 0 ? 1 : 0);
+}
+
+int		print_D(unsigned int n)
+{
+	ft_putnbr(n);
+	return (ft_count_digits(n, 10));
 }
 
 int		ft_printf(char *fmt, ...)
@@ -42,12 +54,18 @@ int		ft_printf(char *fmt, ...)
 		{
 			i++;
 			if (fmt[i] == '%')
-				ret += print_symbol('%');
+				ret += print_c('%');
 			else if (fmt[i] == 's')
-				ret += print_line(va_arg(ap, char *));
+				ret += print_s(va_arg(ap, char *));
+			else if (fmt[i] == 'd')
+				ret += print_d(va_arg(ap, int));
+			else if (fmt[i] == 'D')
+				ret += print_D(va_arg(ap, unsigned int));
+			else if (fmt[i] == 'c')
+				ret += print_c((char)va_arg(ap, int));
 		}
 		else
-			ret += print_symbol(fmt[i]);
+			ret += print_c(fmt[i]);
 	va_end(ap);
 	return (ret);
 }

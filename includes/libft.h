@@ -21,7 +21,7 @@
 ** CALC FUNCS
 */
 
-int		ft_abs(int x);
+long	ft_abs(long x);
 int		ft_atoi(const char *str);
 int		ft_count_digits(int value, int base);
 double	ft_dsqrt(int nb, double delta);
@@ -89,9 +89,9 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putchar(char c);
 void	ft_putendl_fd(char *str, int fd);
 void	ft_putendl(char *str);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putnbr(int n);
-void	ft_putnbrendl(int n);
+void	ft_putnbr_fd(long n, int fd);
+void	ft_putnbr(long n);
+void	ft_putnbrendl(long n);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putstr(char *str);
 
@@ -121,6 +121,7 @@ char	*ft_strncpy(char *dest, char const *src, size_t len);
 int		ft_strnequ(char const *s1, char const *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *small, size_t len);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strrev(char *str);
 char	**ft_strsplit(char const *s, char c);
 char	*ft_strstr(const char *big, const char *small);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
