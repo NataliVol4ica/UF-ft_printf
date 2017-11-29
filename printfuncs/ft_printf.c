@@ -47,7 +47,7 @@ int		ft_printf(char *fmt, ...)
 	va_start(ap, fmt);
 	i = -1;
 	ret = 0;
-	printf("%s\n", fmt);
+	printf("%s", fmt);
 	if (!fmt)
 		return (ret);
 	while (fmt[++i])
