@@ -65,7 +65,7 @@ int		ft_printf(char *fmt, ...)
 			else if (fmt[i] == 'C')
 				ret += print_c((unsigned char)va_arg(ap, int));
 			else if (fmt[i] == 'u')
-				ret += print_unsigned_num((unsigned char)va_arg(ap, int));
+				ret += print_unsigned_num(va_arg(ap, unsigned int));
 		}
 		else
 			ret += print_c(fmt[i]);
