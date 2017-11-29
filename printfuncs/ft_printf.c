@@ -62,6 +62,8 @@ int		ft_printf(char *fmt, ...)
 				ret += print_D(va_arg(ap, unsigned int));
 			else if (fmt[i] == 'c')
 				ret += print_c((char)va_arg(ap, int));
+			else if (fmt[i] == 'C')
+				ret += print_c((unsigned char)va_arg(ap, int));
 		}
 		else
 			ret += print_c(fmt[i]);

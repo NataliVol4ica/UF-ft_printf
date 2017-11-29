@@ -13,41 +13,29 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static void	small_f(t_list *l, int fd)
+static void	small_f(long n, int fd, int ismin)
 {
-	char	*str;
+	char	c;
 
-	if (!l)
+	if (n >= 10)
 	{
-		ft_putstr_fd("0", fd);
-		return ;
+		small_f(n / 10, fd, 0);
+		c = n % 10 + '0';
+		if (ismin == 1)
+			c += 1;
+		ft_putchar_fd(c, fd);
 	}
-	str = ft_list_to_string(l);
-	ft_putstr_fd(ft_strrev(str), fd);
-	free(str);
+	else
+		ft_putchar_fd(n % 10 + '0', fd);
 }
 
-void		ft_putnbr_fd(long num, int fd)
+void		ft_putnbr_fd(long n, int fd)
 {
-	long	n;
-	char	dig;
-	t_list	*l;
-	int		is_min;
+	long	num;
 
-	l = NULL;
-	is_min = num < 0 && ((long)(num - 1)) > 0 ? 1 : 0;
-	n = num < 0 ? -num : num;
-	while (n != 0)
-	{
-		dig = n % 10 + '0';
-		if (is_min && !l)
-			dig++;
-		n /= 10;
-		ft_lstpushback(&l, ft_lstnew((void*)&dig, sizeof(dig)));
-	}
-	dig = '-';
+	num = n;
 	if (num < 0)
-		ft_lstpushback(&l, ft_lstnew((void*)&dig, sizeof(dig)));
-	small_f(l, fd);	
-	ft_lstdel(&l, NULL);
+		ft_putchar_fd('-', fd);
+	num = num < 0 ? -num : num;
+	small_f(num, fd, n < 0 && (long)(n - 1) > 0 ? 1 : 0);
 }
