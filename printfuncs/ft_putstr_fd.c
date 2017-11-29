@@ -14,10 +14,12 @@
 
 void	ft_putstr_fd(char *str, int fd)
 {
-	int i;
+	int		i;
 
 	i = -1;
 	if (str)
 		while (str[++i])
 			write(fd, &str[i], 1);
+		else
+		ft_putstr_fd("(null)", fd);
 }
