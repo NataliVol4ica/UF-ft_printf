@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_count_digits(int value, int base)
+int		ft_count_digits(long long value, int base)
 {
-	long	temp;
-	int		ans;
+	long long	temp;
+	int			ans;
 
-	temp = value;
-	temp = temp < 0 ? -temp : temp;
+	temp = value < 0 ? -value : value;
 	ans = 0;
 	if (temp == 0)
 		return (1);

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_digits_uns.c                              :+:      :+:    :+:   */
+/*   ft_strupper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/01 16:59:28 by nkolosov          #+#    #+#             */
-/*   Updated: 2017/11/01 16:59:28 by nkolosov         ###   ########.fr       */
+/*   Created: 2017/11/29 21:25:59 by nkolosov          #+#    #+#             */
+/*   Updated: 2017/11/29 21:25:59 by nkolosov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_count_digits_uns(unsigned long long value, int base)
-{
-	int		ans;
+#include "libft.h"
 
-	ans = 0;
-	if (value == 0)
-		return (1);
-	while (value != 0)
-	{
-		ans++;
-		value /= base;
-	}
-	return (ans);
+char	*ft_strupper(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		str[i] = ft_toupper(str[i]);
+	return (str);
 }

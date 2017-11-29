@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base_uns.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,14 +13,14 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static char	get_char(long n)
+static char	get_char(int n)
 {
 	if (n <= 9)
 		return (n + '0');
 	return (n - 10 + 'a');
 }
 
-static void	convert_number(long value, int base, char *str, int ssize)
+static void	convert_number(unsigned long value, int base, char *str, int ssize)
 {
 	int		i;
 
@@ -38,20 +38,16 @@ static void	convert_number(long value, int base, char *str, int ssize)
 	}
 }
 
-char		*ft_itoa_base(int value, int base)
+char		*ft_itoa_base_uns(unsigned int value, int base)
 {
-	char	*ans;
-	int		stringsize;
-	int		bonus;
-	long	val;
+	char			*ans;
+	int				stringsize;
+	unsigned long	val;
 
-	stringsize = ft_count_digits(value, base);
-	bonus = value < 0 ? 1 : 0;
-	ans = (char*)malloc(sizeof(char) * (stringsize + bonus + 1));
+	stringsize = ft_count_digits_uns(value, base);
+	ans = (char*)malloc(sizeof(char) * (stringsize + 1));
 	val = value;
-	val = val < 0 ? -val : val;
-	ans[0] = value < 0 ? '-' : '0';
-	convert_number(val, base, ans + bonus, stringsize);
-	ans[stringsize + bonus] = '\0';
+	convert_number(val, base, ans, stringsize);
+	ans[stringsize] = '\0';
 	return (ans);
 }

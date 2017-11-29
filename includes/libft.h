@@ -23,11 +23,12 @@
 
 long	ft_abs(long x);
 int		ft_atoi(const char *str);
-int		ft_count_digits_uns(unsigned long value, int base);
-int		ft_count_digits(long value, int base);
+int		ft_count_digits_uns(unsigned long long value, int base);
+int		ft_count_digits(long long value, int base);
 double	ft_dsqrt(int nb, double delta);
 size_t	ft_factorial(size_t num);
 long	ft_isprime(long nb);
+char	*ft_itoa_base_uns(unsigned int value, int base);
 char	*ft_itoa_base(int value, int base);
 char	*ft_itoa(int n);
 void	ft_sort_num_tab(int *mass, int size);
@@ -90,11 +91,11 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putchar(char c);
 void	ft_putendl_fd(char *str, int fd);
 void	ft_putendl(char *str);
-void	ft_putnbr_fd(long n, int fd);
-void	ft_putnbr(long n);
-void	ft_putnbr_uns_fd(unsigned long n, int fd);
-void	ft_putnbr_uns(unsigned long n);
-void	ft_putnbrendl(long n);
+void	ft_putnbr_fd(long long n, int fd);
+void	ft_putnbr(long long n);
+void	ft_putnbr_uns_fd(unsigned long long n, int fd);
+void	ft_putnbr_uns(unsigned long long n);
+void	ft_putnbrendl(long long n);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putstr(char *str);
 
@@ -129,5 +130,6 @@ char	**ft_strsplit(char const *s, char c);
 char	*ft_strstr(const char *big, const char *small);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s);
+char	*ft_strupper(char *str);
 
 #endif

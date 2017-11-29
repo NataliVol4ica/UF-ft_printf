@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void		ft_putnbrendl(long n)
+void		ft_putnbrendl(long long n)
 {
 	ft_putnbr(n);
 	ft_putchar('\n');

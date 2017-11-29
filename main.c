@@ -17,13 +17,17 @@ int		main(void)
 {
 	char	*str = "hi_word";
 	char	*str2 = "2 string";
+	short	t;
 
+	t = 25;
 	ft_printf("The string is: \"%s\"\nSecond string is \"%s\"\n", str, str2);
 	ft_printf("Number %d\n", -2147483648);
 	printf("Number %D\n", -25);
 	ft_printf("Number %D\n", -25);
 	ft_printf("Symbol %c\n", 'C');
 	printf("Symbol %C\n", -67);
+	printf("%hd\n", t);
+	printf("%O\n", -300);
 	/*ft_printf("%d", 42);
 	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);

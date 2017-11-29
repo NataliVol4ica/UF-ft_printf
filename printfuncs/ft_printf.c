@@ -19,13 +19,13 @@ int		print_c(char c)
 	return (1);
 }
 
-int		print_s(char *c)
+int		print_str(char *c)
 {
 	ft_putstr(c);
 	return (ft_strlen(c));
 }
 
-int		print_signed_num(long n)
+int		print_signed_num(long long n)
 {
 	ft_putnbr(n);
 	return (ft_count_digits(n, 10) + n < 0 ? 1 : 0);
@@ -55,7 +55,7 @@ int		ft_printf(char *fmt, ...)
 			if (fmt[i] == '%')
 				ret += print_c('%');
 			else if (fmt[i] == 's')
-				ret += print_s(va_arg(ap, char *));
+				ret += print_str(va_arg(ap, char *));
 			else if (fmt[i] == 'd')
 				ret += print_signed_num(va_arg(ap, int));
 			else if (fmt[i] == 'D')
@@ -66,6 +66,12 @@ int		ft_printf(char *fmt, ...)
 				ret += print_c((unsigned char)va_arg(ap, int));
 			else if (fmt[i] == 'u')
 				ret += print_unsigned_num(va_arg(ap, unsigned int));
+			else if (fmt[i] == 'o' || fmt[i] == 'O')
+				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 8));
+			else if (fmt[i] == 'x')
+				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 16));
+			else if (fmt[i] == 'X')
+				ret += print_str(ft_strupper(ft_itoa_base_uns(va_arg(ap, unsigned int), 16)));
 		}
 		else
 			ret += print_c(fmt[i]);

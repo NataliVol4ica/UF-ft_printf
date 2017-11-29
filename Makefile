@@ -57,7 +57,8 @@ STRFUNCS =	ft_strlen \
 			ft_strtrim \
 			ft_split_whitespaces \
 			ft_strdupab \
-			ft_strrev
+			ft_strrev \
+			ft_strupper
 STRFDIR = ./strfuncs
 DSTRFUNCS = $(patsubst %, $(STRFDIR)/%, $(STRFUNCS))
 LISTFUNCS = ft_find_del \
@@ -86,6 +87,7 @@ MEMFUNCS =	ft_strnew \
 MEMFDIR = ./memfuncs
 DMEMFUNCS = $(patsubst %, $(MEMFDIR)/%, $(MEMFUNCS))
 CALCFUNCS = ft_atoi \
+			ft_itoa_base_uns \
 			ft_itoa \
 			ft_swap \
 			ft_factorial \
@@ -162,8 +164,8 @@ $(ODIR):
 	@mkdir -p $(ODIR)/$(CALCFDIR)
 	@mkdir -p $(ODIR)/$(CHARFDIR)
 
-#echo ${RED}[Removing $(NAME) *.o files]${NC}
-clean:	
+clean:
+	echo ${RED}[Removing $(NAME) *.o files]${NC}
 	@/bin/rm -rf $(ODIR)
 
 fclean: clean
@@ -177,8 +179,8 @@ norm:
 	@echo ${RED}[Checking the $(NAME) NORM]${NC}
 	@norminette $(CFILES) $(HEADERS)
 
-main: $(NAME)
-	gcc -Wall -Wextra -Werror -o e -I $(INCDIR) -L. -lftprintf main.c
+main: 
+	gcc -o e -I $(INCDIR) -L. -lftprintf main.c
 
 gitclean: clean
 	find . -name "*.DS_Store*" -delete 
