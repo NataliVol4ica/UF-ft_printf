@@ -23,10 +23,9 @@ static void	react_on_flags(char *flags, char sys)
 		if (sys != 'o' && sys != 'O')
 			ft_putchar(sys);
 	}
-
 }
 
-int		print_oct_hex(va_list *ap, t_atributes *at, char sys)
+int			print_oct_hex(va_list *ap, t_atributes *at, char sys)
 {
 	char		*str;
 	uintmax_t	num;
@@ -39,7 +38,8 @@ int		print_oct_hex(va_list *ap, t_atributes *at, char sys)
 		str = ft_itoa_base_uns(num, 16);
 	if (sys == 'X')
 		ft_strupper(str);
-	react_on_flags(at->flags, sys);
+	if (num)
+		react_on_flags(at->flags, sys);
 	ft_putstr(str);
 	return (ft_strlen(str));
 }
