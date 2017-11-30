@@ -26,8 +26,10 @@ int		main(void)
 	ft_printf("Number %D\n", -25);
 	ft_printf("Symbol %c\n", 'C');
 	printf("Symbol %C\n", -67);
-	printf("%hd\n", t);
+	printf("Symbol %c\n", 23);
+	printf("%d\n", t);
 	printf("%O\n", -300);
+	printf("Number %zd\n", -2147483648);
 	/*ft_printf("%d", 42);
 	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
