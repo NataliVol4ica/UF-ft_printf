@@ -104,6 +104,7 @@ void	ft_putstr(char *str);
 ** STR FUNCS
 */
 
+char	*ft_rmdupsymb(char	*str);
 char	**ft_split_whitespaces(char *str);
 char	*ft_strcat(char *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);

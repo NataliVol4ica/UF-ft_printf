@@ -16,25 +16,24 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-int		print_c(char c)
+int			print_c(char c)
 {
 	ft_putchar(c);
 	return (1);
 }
 
-int		print_str(char *c)
+int			print_str(char *c)
 {
 	ft_putstr(c);
 	return (ft_strlen(c));
 }
 
-int		ft_printf(char *fmt, ...)
+int			ft_printf(char *fmt, ...)
 {
-	va_list ap;
-	int		i;
-	int		ret;
-	char	*len;
-	char	*flags;
+	va_list 	ap;
+	int			i;
+	int			ret;
+	t_atributes *at;
 
 	va_start(ap, fmt);
 	i = -1;
@@ -45,19 +44,16 @@ int		ft_printf(char *fmt, ...)
 		if (fmt[i] == '%' && fmt[i + 1])
 		{
 			i++;
-			flags = get_flags(&fmt[i]);
-			i += ft_strlen(flags);
-			len = get_length(&fmt[i]);
-			i += ft_strlen(len);
+			at = read_atributes(fmt, &i);
 			//printf("Flags: \"%s\"\nLen: \"%s\"\nNext symbol %c\n", flags, len, fmt[i]);
 			if (fmt[i] == '%')
 				ret += print_c('%');
 			else if (fmt[i] == 's')
 				ret += print_str(va_arg(ap, char *));
 			else if (fmt[i] == 'd' || fmt[i] == 'i')
-				ret += print_signed_num(&ap, len);
+				ret += print_signed_num(&ap, at);
 			else if (fmt[i] == 'D' || fmt[i] == 'u')
-				ret += print_unsigned_num(&ap, len);
+				ret += print_unsigned_num(&ap, at);
 			else if (fmt[i] == 'c')
 				ret += print_c((char)va_arg(ap, int));
 			else if (fmt[i] == 'C')
@@ -68,8 +64,7 @@ int		ft_printf(char *fmt, ...)
 				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 16));
 			else if (fmt[i] == 'X')
 				ret += print_str(ft_strupper(ft_itoa_base_uns(va_arg(ap, unsigned int), 16)));
-			ft_strdel(&len);
-			ft_strdel(&flags);
+			del_atributes(&at);
 		}
 		else
 			ret += print_c(fmt[i]);

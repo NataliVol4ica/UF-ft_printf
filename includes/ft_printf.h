@@ -13,9 +13,20 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-int		print_signed_num(va_list *ap, char *flag);
-int		print_unsigned_num(va_list *ap, char *flag);
-char	*get_length(char *str);
-char	*get_flags(char *str);
+#include <stdarg.h>
+
+typedef struct	s_atributes
+{
+	char	*flags;
+	char	*length;
+}				t_atributes;
+
+int				print_signed_num(va_list *ap, t_atributes *at);
+int				print_unsigned_num(va_list *ap, t_atributes *at);
+char			*get_length(char *str);
+char			*get_flags(char *str);
+
+t_atributes		*read_atributes(char *fmt, int *pos);
+void			del_atributes(t_atributes **at);
 
 #endif

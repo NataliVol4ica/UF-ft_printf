@@ -29,6 +29,8 @@ PRINTFUNCS = ft_putchar \
 			ft_printf \
 			ft_printf_tools1 \
 			ft_printf_tools2 \
+			ft_printf_tools3 \
+			ft_printf_tools4 \
 			ft_putnbr_uns_fd \
 			ft_putnbr_uns 
 PRINTFUNCDIR = ./printfuncs
@@ -60,7 +62,8 @@ STRFUNCS =	ft_strlen \
 			ft_split_whitespaces \
 			ft_strdupab \
 			ft_strrev \
-			ft_strupper
+			ft_strupper \
+			ft_rmdupsymb
 STRFDIR = ./strfuncs
 DSTRFUNCS = $(patsubst %, $(STRFDIR)/%, $(STRFUNCS))
 LISTFUNCS = ft_find_del \

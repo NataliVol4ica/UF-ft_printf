@@ -21,15 +21,17 @@ int		main(void)
 
 	t = 7825;
 	ft_printf("The string is: \"%s\"\nSecond string is \"%s\"\n", str, str2);
-	ft_printf("Number %d\n", -2147483648);
+	ft_printf("Number %+d\n", -2147483648);
 	//printf("Number %D\n", -25);
 	ft_printf("Number %D\n", -25);
 	ft_printf("Symbol %c\n", 'C');
 	//printf("Symbol %C\n", -67);
 	//printf("Symbol %c\n", 23);
 	//printf("aaaaa %++d bbbb\n", t);
-	ft_printf("aaaaa %d bbbb\n", t);
+	ft_printf("aaaaa %+ d bbbb\n", t);
+	ft_printf("aaaaa % d bbbb\n", t);
 	ft_printf("aaaaa %++d bbbb\n", t);
+
 	//printf("%O\n", -300);
 	//printf("Number %zd\n", -2147483648);
 	//printf("%ls\n", (int*)("@"));
