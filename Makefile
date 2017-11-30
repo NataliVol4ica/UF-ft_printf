@@ -27,10 +27,11 @@ PRINTFUNCS = ft_putchar \
 			ft_print_num_tab \
 			ft_log \
 			ft_printf \
+			ft_printf_tools1 \
 			ft_putnbr_uns_fd \
 			ft_putnbr_uns 
-PRINTFDIR = ./printfuncs
-DPRINTFUNCS = $(patsubst %, $(PRINTFDIR)/%, $(PRINTFUNCS))
+PRINTFUNCDIR = ./printfuncs
+DPRINTFUNCS = $(patsubst %, $(PRINTFUNCDIR)/%, $(PRINTFUNCS))
 STRFUNCS =	ft_strlen \
 			ft_strcat \
 			ft_strncat \
@@ -126,6 +127,8 @@ CFILES = $(patsubst %, %.c, $(FILENAMES))
 OFILES = $(patsubst %, $(ODIR)/%.o, $(FILENAMES))
 FLAGS = -Wall -Wextra -Werror
 
+PRRINTFO = $(ODIR)/ft_printf/ft_printf.o
+
 BLACK = '\033[0;30m'
 RED = '\033[0;31m'
 GREEN = '\033[0;32m'
@@ -146,7 +149,7 @@ NC = '\033[0m' # No Color
 
 all: $(NAME)
 
-$(NAME): $(ODIR) $(OFILES) $(HEADERS)
+$(NAME): $(ODIR) $(OFILES) $(PRINTFO) $(HEADERS)
 	@echo ${CYAN}[Compiling $(NAME)]${NC}
 	@ar rc $(NAME) $(OFILES)
 	@ranlib $(NAME)
@@ -155,14 +158,18 @@ $(NAME): $(ODIR) $(OFILES) $(HEADERS)
 $(ODIR)/%.o: %.c $(HEADERS)
 	gcc $(FLAGS) -o $@ -c $< -I$(INCDIR)
 
+$(PRINTFO):
+	make -C ft_printf/
+
 $(ODIR):
 	@mkdir -p $(ODIR)
 	@mkdir -p $(ODIR)/$(STRFDIR)
-	@mkdir -p $(ODIR)/$(PRINTFDIR)
+	@mkdir -p $(ODIR)/$(PRINTFUNCDIR)
 	@mkdir -p $(ODIR)/$(LISTFDIR)
 	@mkdir -p $(ODIR)/$(MEMFDIR)
 	@mkdir -p $(ODIR)/$(CALCFDIR)
 	@mkdir -p $(ODIR)/$(CHARFDIR)
+	@mkdir -p $(ODIR)/ft_printf
 
 clean:
 	echo ${RED}[Removing $(NAME) *.o files]${NC}
