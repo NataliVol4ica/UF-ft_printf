@@ -58,7 +58,7 @@ char		*get_length(char *str)
 	return (ft_strnew(0));
 }
 
-int		convert_numeric(intmax_t *n, t_atributes *at)
+int			convert_numeric(intmax_t *n, t_atributes *at)
 {
 	intmax_t	num;
 
@@ -85,7 +85,7 @@ int		convert_numeric(intmax_t *n, t_atributes *at)
 	return (1);
 }
 
-int		uconvert_numeric(uintmax_t *n, t_atributes *at)
+int			uconvert_numeric(uintmax_t *n, t_atributes *at)
 {
 	uintmax_t	num;
 

@@ -35,7 +35,7 @@ int			print_signed_num(va_list *ap, t_atributes *at)
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
-	if(!(convert_numeric(&num, at)))
+	if (!(convert_numeric(&num, at)))
 		return (print_signed_num_other_len(ap, at));
 	react_on_flags(num, at->flags);
 	ft_putnbr(num);
@@ -54,7 +54,7 @@ int			print_unsigned_num(va_list *ap, t_atributes *at)
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	if(!(uconvert_numeric(&num, at)))
+	if (!(uconvert_numeric(&num, at)))
 		return (print_unsigned_num_other_len(ap, at));
 	ft_putnbr_uns(num);
 	return (ft_count_digits_uns(num, 10));
