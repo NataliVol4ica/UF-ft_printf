@@ -58,12 +58,8 @@ int			ft_printf(char *fmt, ...)
 				ret += print_c((char)va_arg(ap, int));
 			else if (fmt[i] == 'C')
 				ret += print_c((unsigned char)va_arg(ap, int));
-			else if (fmt[i] == 'o' || fmt[i] == 'O')
-				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 8));
-			else if (fmt[i] == 'x')
-				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 16));
-			else if (fmt[i] == 'X')
-				ret += print_str(ft_strupper(ft_itoa_base_uns(va_arg(ap, unsigned int), 16)));
+			else if (fmt[i] == 'o' || fmt[i] == 'O' || fmt[i] == 'x' || fmt[i] == 'X')
+				ret += print_oct_hex(&ap, at, fmt[i]);
 			del_atributes(&at);
 		}
 		else

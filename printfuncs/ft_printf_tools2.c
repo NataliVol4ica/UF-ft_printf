@@ -10,16 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/ft_printf.h"
 #include "libft.h"
 #include <stdarg.h>
-#include "libft.h"
 #include <stdint.h>
 
-int		print_oct_hex(va_list *ap, char *flags, char *len, char sys)
+int		print_oct_hex(va_list *ap, t_atributes *at, char sys)
 {
-	(void)ap;
-	(void)flags;
-	(void)len;
-	(void)sys;
-	return (0);
+	char		*str;
+	intmax_t	num;
+
+	num = va_arg(*ap, intmax_t);
+	(void)at;
+	if (sys == 'o' || sys == 'O')
+		str = ft_itoa_base_uns(num, 8);
+	else
+		str = ft_itoa_base_uns(num, 16);
+	if (sys == 'X')
+		ft_strupper(str);
+	ft_putstr(str);
+	return (ft_strlen(str));
 }

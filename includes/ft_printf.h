@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 #include <stdarg.h>
+#include <stdint.h>
 
 typedef struct	s_atributes
 {
@@ -21,8 +22,12 @@ typedef struct	s_atributes
 	char	*length;
 }				t_atributes;
 
+int		convert_numeric(intmax_t *n, t_atributes *at);
+int		uconvert_numeric(uintmax_t *n, t_atributes *at);
+
 int				print_signed_num(va_list *ap, t_atributes *at);
 int				print_unsigned_num(va_list *ap, t_atributes *at);
+int				print_oct_hex(va_list *ap, t_atributes *at, char sys);
 char			*get_length(char *str);
 char			*get_flags(char *str);
 

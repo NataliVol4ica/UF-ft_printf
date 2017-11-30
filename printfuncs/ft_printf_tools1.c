@@ -35,23 +35,7 @@ int			print_signed_num(va_list *ap, t_atributes *at)
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
-	if (!*(at->length))
-		num = (int)num;
-	else if (at->length[0] == 'h')
-		if (at->length[1] == 'h')
-			num = (char)num;
-		else
-			num = (short)num;
-	else if (at->length[0] == 'l')
-		if (at->length[1] == 'l')
-			num = (long long)num;
-		else
-			num = (long)num;
-	else if (at->length[0] == 'j')
-		num = (intmax_t)num;
-	else if (at->length[0] == 'z')
-		num = (size_t)num;
-	else
+	if(!(convert_numeric(&num, at)))
 		return (print_signed_num_other_len(ap, at));
 	react_on_flags(num, at->flags);
 	ft_putnbr(num);
@@ -70,23 +54,7 @@ int			print_unsigned_num(va_list *ap, t_atributes *at)
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	if (!*(at->length))
-		num = (unsigned int)num;
-	else if (at->length[0] == 'h')
-		if (at->length[1] == 'h')
-			num = (unsigned char)num;
-		else
-			num = (unsigned short)num;
-	else if (at->length[0] == 'l')
-		if (at->length[1] == 'l')
-			num = (unsigned long long)num;
-		else
-			num = (unsigned long)num;
-	else if (at->length[0] == 'j')
-		num = (uintmax_t)num;
-	else if (at->length[0] == 'z')
-		num = (size_t)num;
-	else
+	if(!(uconvert_numeric(&num, at)))
 		return (print_unsigned_num_other_len(ap, at));
 	ft_putnbr_uns(num);
 	return (ft_count_digits_uns(num, 10));

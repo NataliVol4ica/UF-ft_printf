@@ -12,15 +12,16 @@
 
 #include "libft.h"
 #include <stdlib.h>
+#include <stdint.h>
 
-static char	get_char(long n)
+static char	get_char(int n)
 {
 	if (n <= 9)
 		return (n + '0');
 	return (n - 10 + 'a');
 }
 
-static void	convert_number(long value, int base, char *str, int ssize)
+static void	convert_number(uintmax_t value, int base, char *str, int ssize)
 {
 	int		i;
 
@@ -38,18 +39,18 @@ static void	convert_number(long value, int base, char *str, int ssize)
 	}
 }
 
-char		*ft_itoa_base(int value, int base)
+char		*ft_itoa_base(intmax_t value, int base)
 {
-	char	*ans;
-	int		stringsize;
-	int		bonus;
-	long	val;
+	char		*ans;
+	int			stringsize;
+	int			bonus;
+	uintmax_t	val;
 
 	stringsize = ft_count_digits(value, base);
 	bonus = value < 0 ? 1 : 0;
 	ans = (char*)malloc(sizeof(char) * (stringsize + bonus + 1));
-	val = value;
-	val = val < 0 ? -val : val;
+	val = value < 0 ? -value : value;
+	val += value < 0 && (intmax_t)(value - 1) > 0 ? 1 : 0;
 	ans[0] = value < 0 ? '-' : '0';
 	convert_number(val, base, ans + bonus, stringsize);
 	ans[stringsize + bonus] = '\0';

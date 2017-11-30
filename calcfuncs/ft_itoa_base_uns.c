@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdlib.h>
+#include <stdint.h>
 
 static char	get_char(int n)
 {
@@ -20,7 +21,7 @@ static char	get_char(int n)
 	return (n - 10 + 'a');
 }
 
-static void	convert_number(unsigned long value, int base, char *str, int ssize)
+static void	convert_number(uintmax_t value, int base, char *str, int ssize)
 {
 	int		i;
 
@@ -38,16 +39,14 @@ static void	convert_number(unsigned long value, int base, char *str, int ssize)
 	}
 }
 
-char		*ft_itoa_base_uns(unsigned int value, int base)
+char		*ft_itoa_base_uns(uintmax_t value, int base)
 {
-	char			*ans;
-	int				stringsize;
-	unsigned long	val;
+	char		*ans;
+	int			stringsize;
 
 	stringsize = ft_count_digits_uns(value, base);
 	ans = (char*)malloc(sizeof(char) * (stringsize + 1));
-	val = value;
-	convert_number(val, base, ans, stringsize);
+	convert_number(value, base, ans, stringsize);
 	ans[stringsize] = '\0';
 	return (ans);
 }
