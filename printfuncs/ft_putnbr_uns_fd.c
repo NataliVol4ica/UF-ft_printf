@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "libft.h"
 
-void	ft_putnbr_uns_fd(unsigned long long n, int fd)
+void	ft_putnbr_uns_fd(uintmax_t n, int fd)
 {
 	if (n >= 10)
 	{

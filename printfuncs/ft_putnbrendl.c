@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "libft.h"
 
-void		ft_putnbrendl(long long n)
+void		ft_putnbrendl(intmax_t n)
 {
 	ft_putnbr(n);
 	ft_putchar('\n');

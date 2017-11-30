@@ -15,6 +15,7 @@
 
 # include "list.h"
 # include "get_next_line.h"
+# include <stdint.h>
 # include <string.h>
 
 /*
@@ -23,8 +24,8 @@
 
 long	ft_abs(long x);
 int		ft_atoi(const char *str);
-int		ft_count_digits_uns(unsigned long long value, int base);
-int		ft_count_digits(long long value, int base);
+int		ft_count_digits_uns(uintmax_t value, int base);
+int		ft_count_digits(intmax_t value, int base);
 double	ft_dsqrt(int nb, double delta);
 size_t	ft_factorial(size_t num);
 long	ft_isprime(long nb);
@@ -91,11 +92,11 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putchar(char c);
 void	ft_putendl_fd(char *str, int fd);
 void	ft_putendl(char *str);
-void	ft_putnbr_fd(long long n, int fd);
-void	ft_putnbr(long long n);
-void	ft_putnbr_uns_fd(unsigned long long n, int fd);
-void	ft_putnbr_uns(unsigned long long n);
-void	ft_putnbrendl(long long n);
+void	ft_putnbr_fd(intmax_t n, int fd);
+void	ft_putnbr(intmax_t n);
+void	ft_putnbr_uns_fd(uintmax_t n, int fd);
+void	ft_putnbr_uns(uintmax_t n);
+void	ft_putnbrendl(intmax_t n);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putstr(char *str);
 

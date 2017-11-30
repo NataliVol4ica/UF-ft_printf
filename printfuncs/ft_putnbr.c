@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "libft.h"
 
-void		ft_putnbr(long long n)
+void		ft_putnbr(intmax_t n)
 {
 	ft_putnbr_fd(n, 1);
 }

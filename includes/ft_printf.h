@@ -15,6 +15,7 @@
 
 int		print_signed_num(va_list *ap, char *flag);
 int		print_unsigned_num(va_list *ap, char *flag);
-char	*get_flag(char *str);
+char	*get_length(char *str);
+char	*get_flags(char *str);
 
 #endif

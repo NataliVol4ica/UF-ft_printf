@@ -28,6 +28,7 @@ PRINTFUNCS = ft_putchar \
 			ft_log \
 			ft_printf \
 			ft_printf_tools1 \
+			ft_printf_tools2 \
 			ft_putnbr_uns_fd \
 			ft_putnbr_uns 
 PRINTFUNCDIR = ./printfuncs
@@ -186,7 +187,7 @@ norm:
 	@echo ${RED}[Checking the $(NAME) NORM]${NC}
 	@norminette $(CFILES) $(HEADERS)
 
-main: 
+main: $(NAME)
 	gcc -o e -I $(INCDIR) -L. -lftprintf main.c
 
 gitclean: clean

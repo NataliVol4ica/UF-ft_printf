@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "libft.h"
 
-void		ft_putnbr_uns(unsigned long long n)
+void		ft_putnbr_uns(uintmax_t n)
 {
 	ft_putnbr_uns_fd(n, 1);
 }

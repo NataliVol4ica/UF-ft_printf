@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_count_digits(long long value, int base)
+#include <stdint.h>
+
+int		ft_count_digits(intmax_t value, int base)
 {
-	long long	temp;
+	intmax_t	temp;
 	int			ans;
 
 	temp = value < 0 ? -value : value;

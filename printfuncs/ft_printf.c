@@ -14,6 +14,7 @@
 #include "libft.h"
 #include <stdint.h>
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 int		print_c(char c)
 {
@@ -32,7 +33,8 @@ int		ft_printf(char *fmt, ...)
 	va_list ap;
 	int		i;
 	int		ret;
-	char	*flag;
+	char	*len;
+	char	*flags;
 
 	va_start(ap, fmt);
 	i = -1;
@@ -43,28 +45,31 @@ int		ft_printf(char *fmt, ...)
 		if (fmt[i] == '%' && fmt[i + 1])
 		{
 			i++;
-			flag = get_flag(&fmt[i]);
-			i += ft_strlen(flag);
+			flags = get_flags(&fmt[i]);
+			i += ft_strlen(flags);
+			len = get_length(&fmt[i]);
+			i += ft_strlen(len);
+			//printf("Flags: \"%s\"\nLen: \"%s\"\nNext symbol %c\n", flags, len, fmt[i]);
 			if (fmt[i] == '%')
 				ret += print_c('%');
 			else if (fmt[i] == 's')
 				ret += print_str(va_arg(ap, char *));
 			else if (fmt[i] == 'd' || fmt[i] == 'i')
-				ret += print_signed_num(&ap, flag);
+				ret += print_signed_num(&ap, len);
 			else if (fmt[i] == 'D' || fmt[i] == 'u')
-				ret += print_unsigned_num(&ap, flag);
+				ret += print_unsigned_num(&ap, len);
 			else if (fmt[i] == 'c')
 				ret += print_c((char)va_arg(ap, int));
 			else if (fmt[i] == 'C')
-				ret += print_c((unsigned char)va_arg(ap, int));			
+				ret += print_c((unsigned char)va_arg(ap, int));
 			else if (fmt[i] == 'o' || fmt[i] == 'O')
 				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 8));
 			else if (fmt[i] == 'x')
 				ret += print_str(ft_itoa_base_uns(va_arg(ap, unsigned int), 16));
 			else if (fmt[i] == 'X')
 				ret += print_str(ft_strupper(ft_itoa_base_uns(va_arg(ap, unsigned int), 16)));
-			if (flag)
-				ft_strdel(&flag);
+			ft_strdel(&len);
+			ft_strdel(&flags);
 		}
 		else
 			ret += print_c(fmt[i]);

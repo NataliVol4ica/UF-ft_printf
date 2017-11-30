@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_count_digits_uns(unsigned long long value, int base)
+#include <stdint.h>
+
+int		ft_count_digits_uns(intmax_t value, int base)
 {
 	int		ans;
 
