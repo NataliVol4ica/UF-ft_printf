@@ -34,9 +34,9 @@ int			print_signed_num(va_list *ap, t_params *at)
 {
 	intmax_t	num;
 
+	num = va_arg(*ap, intmax_t);
 	if (!(convert_numeric(&num, at)))
 		return (print_signed_num_other_len(ap, at));
-	num = va_arg(*ap, intmax_t);
 	react_on_flags(num, at->flags);
 	ft_putnbr(num);
 	return (ft_count_digits(num, 10) + num < 0 ? 1 : 0);
