@@ -28,6 +28,15 @@ int			print_str(char *c)
 	return (ft_strlen(c));
 }
 
+int			n_type(va_list *ap, int ret)
+{
+	int	*n;
+
+	n = va_arg(*ap, int*);
+	*n = ret;
+	return (1);
+}
+
 int			ft_printf(char *fmt, ...)
 {
 	va_list 	ap;
@@ -59,6 +68,8 @@ int			ft_printf(char *fmt, ...)
 				ret += print_c((unsigned char)va_arg(ap, int));
 			else if (fmt[i] == 'o' || fmt[i] == 'O' || fmt[i] == 'x' || fmt[i] == 'X')
 				ret += print_oct_hex(&ap, at, fmt[i]);
+			else if (fmt[i] == 'n')
+				ret += n_type(&ap, ret);
 			del_params(&at);
 		}
 		else
