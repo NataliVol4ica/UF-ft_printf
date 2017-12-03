@@ -45,7 +45,6 @@ int			ft_printf(char *fmt, ...)
 		{
 			i++;
 			at = read_params(fmt, &i, &ap);
-			//printf("Flags: \"%s\"\nLen: \"%s\"\nNext symbol %c\n", flags, len, fmt[i]);
 			if (fmt[i] == '%')
 				ret += print_c('%');
 			else if (fmt[i] == 's')
