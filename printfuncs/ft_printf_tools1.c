@@ -15,47 +15,25 @@
 #include <stdarg.h>
 #include <stdint.h>
 
-static int	print_signed_num_other_len(va_list *ap, t_atributes *at)
+char		is_flag(char c)
 {
-	(void)ap;
-	(void)at;
+	if (c == '-' || c == '+' || c == ' ' || c == '0' || c == '#')
+		return (c);
 	return (0);
 }
 
-static void	react_on_flags(intmax_t num, char *flags)
+uintmax_t	printf_atoi(char *str, int *p)
 {
-	if ((ft_memchr(flags, '+', ft_strlen(flags))) && num > 0)
-		ft_putchar('+');
-	else if ((ft_memchr(flags, ' ', ft_strlen(flags))) && num > 0)
-		ft_putchar(' ');
-}
+	uintmax_t	ans;
+	int			i;
 
-int			print_signed_num(va_list *ap, t_atributes *at)
-{
-	intmax_t	num;
-
-	num = va_arg(*ap, intmax_t);
-	if (!(convert_numeric(&num, at)))
-		return (print_signed_num_other_len(ap, at));
-	react_on_flags(num, at->flags);
-	ft_putnbr(num);
-	return (ft_count_digits(num, 10) + num < 0 ? 1 : 0);
-}
-
-static int	print_unsigned_num_other_len(va_list *ap, t_atributes *at)
-{
-	(void)ap;
-	(void)at;
-	return (0);
-}
-
-int			print_unsigned_num(va_list *ap, t_atributes *at)
-{
-	uintmax_t	num;
-
-	num = va_arg(*ap, uintmax_t);
-	if (!(uconvert_numeric(&num, at)))
-		return (print_unsigned_num_other_len(ap, at));
-	ft_putnbr_uns(num);
-	return (ft_count_digits_uns(num, 10));
+	i = 0;
+	ans = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		ans = ans * 10 + str[i] - '0';
+		i++;
+	}
+	*p = *p + i;
+	return (ans);
 }

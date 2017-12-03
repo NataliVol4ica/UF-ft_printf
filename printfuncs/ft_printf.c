@@ -33,7 +33,7 @@ int			ft_printf(char *fmt, ...)
 	va_list 	ap;
 	int			i;
 	int			ret;
-	t_atributes *at;
+	t_params *at;
 
 	va_start(ap, fmt);
 	i = -1;
@@ -41,10 +41,10 @@ int			ft_printf(char *fmt, ...)
 	if (!fmt)
 		return (ret);
 	while (fmt[++i])
-		if (fmt[i] == '%' && fmt[i + 1])
+		if (fmt[i] == '%')
 		{
 			i++;
-			at = read_atributes(fmt, &i);
+			at = read_params(fmt, &i, &ap);
 			//printf("Flags: \"%s\"\nLen: \"%s\"\nNext symbol %c\n", flags, len, fmt[i]);
 			if (fmt[i] == '%')
 				ret += print_c('%');
@@ -52,7 +52,7 @@ int			ft_printf(char *fmt, ...)
 				ret += print_str(va_arg(ap, char *));
 			else if (fmt[i] == 'd' || fmt[i] == 'i')
 				ret += print_signed_num(&ap, at);
-			else if (fmt[i] == 'D' || fmt[i] == 'u')
+			else if (fmt[i] == 'D' || fmt[i] == 'u' || fmt[i] == 'U')
 				ret += print_unsigned_num(&ap, at);
 			else if (fmt[i] == 'c')
 				ret += print_c((char)va_arg(ap, int));
@@ -60,7 +60,7 @@ int			ft_printf(char *fmt, ...)
 				ret += print_c((unsigned char)va_arg(ap, int));
 			else if (fmt[i] == 'o' || fmt[i] == 'O' || fmt[i] == 'x' || fmt[i] == 'X')
 				ret += print_oct_hex(&ap, at, fmt[i]);
-			del_atributes(&at);
+			del_params(&at);
 		}
 		else
 			ret += print_c(fmt[i]);

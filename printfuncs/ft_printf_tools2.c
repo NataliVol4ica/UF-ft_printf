@@ -25,7 +25,7 @@ static void	react_on_flags(char *flags, char sys)
 	}
 }
 
-int			print_oct_hex(va_list *ap, t_atributes *at, char sys)
+int			print_oct_hex(va_list *ap, t_params *at, char sys)
 {
 	char		*str;
 	uintmax_t	num;

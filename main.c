@@ -15,14 +15,15 @@
 
 int		main(void)
 {
-	char	*str = "hi_word";
+	unsigned long long n = 123;
+	/*char	*str = "hi_word";
 	char	*str2 = "2 string";
 	short	t;
 
 	t = 7825;
 	ft_printf("The string is: \"%s\"\nSecond string is \"%s\"\n", str, str2);
 	ft_printf("Number %+d\n", -2147483648);
-	//printf("Number %D\n", -25);
+	printf("Number %D\n", -25);
 	ft_printf("Number %D\n", -25);
 	ft_printf("Symbol %c\n", 'C');
 	//printf("Symbol %C\n", -67);
@@ -31,7 +32,10 @@ int		main(void)
 	ft_printf("aaaaa %+ d bbbb\n", t);
 	ft_printf("aaaaa % d bbbb\n", t);
 	ft_printf("aaaaa %++d bbbb\n", t);
-
+	printf("aaaaa %+6d bbbb\n", t);
+	printf("aaaaa %#*o bbbb %#*o\n", 10, t, 10, t);
+	printf("uns %U\n", (unsigned int)2147483648);
+	ft_printf("uns %u\n", (unsigned int)2147483648);*/
 	//printf("%O\n", -300);
 	//printf("Number %zd\n", -2147483648);
 	//printf("%ls\n", (int*)("@"));
@@ -52,5 +56,7 @@ int		main(void)
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");*/
+	ft_printf("%5$ #0+--+00#0  *.*llu\n", 10, 25, (long long)123);
+	//ft_printf("%llu\n", n);
 	return (0);
 }

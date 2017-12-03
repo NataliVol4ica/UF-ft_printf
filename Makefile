@@ -30,7 +30,9 @@ PRINTFUNCS = ft_putchar \
 			ft_printf_tools1 \
 			ft_printf_tools2 \
 			ft_printf_tools3 \
-			ft_printf_tools4 \
+			ft_printf_tools_params \
+			ft_printf_tools_recogn \
+			ft_printf_tools_intnum \
 			ft_putnbr_uns_fd \
 			ft_putnbr_uns 
 PRINTFUNCDIR = ./printfuncs
