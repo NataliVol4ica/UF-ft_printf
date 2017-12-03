@@ -39,7 +39,7 @@ int			print_signed_num(va_list *ap, t_params *at)
 		return (print_signed_num_other_len(ap, at));
 	react_on_flags(num, at->flags);
 	ft_putnbr(num);
-	return (ft_count_digits(num, 10) + num < 0 ? 1 : 0);
+	return (ft_count_digits(num, 10) + (num < 0 ? 1 : 0));
 }
 
 static int	print_unsigned_num_other_len(va_list *ap, t_params *at)

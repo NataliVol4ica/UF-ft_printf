@@ -17,6 +17,8 @@
 # include <stdint.h>
 # include <string.h>
 
+#include <stdio.h>
+
 typedef struct	s_params
 {
 	size_t	n;
