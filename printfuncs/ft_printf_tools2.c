@@ -15,31 +15,23 @@
 #include <stdarg.h>
 #include <stdint.h>
 
-static void	react_on_flags(char *flags, char sys)
+size_t	react_on_flags_obo(char *flags)
 {
 	if ((ft_memchr(flags, '#', ft_strlen(flags))))
-	{
-		ft_putchar('0');
-		if (sys != 'o' && sys != 'O')
-			ft_putchar(sys);
-	}
+		return (ft_putchar('0'));
+	return (0);
 }
 
-int			print_oct_hex(va_list *ap, t_params *at, char sys)
+size_t	react_on_flags_x(char *flags)
 {
-	char		*str;
-	uintmax_t	num;
+	if ((ft_memchr(flags, '#', ft_strlen(flags))))
+		return (ft_putstr("0x"));
+	return (0);
+}
 
-	num = va_arg(*ap, uintmax_t);
-	uconvert_numeric(&num, at);
-	if (sys == 'o' || sys == 'O')
-		str = ft_itoa_base_uns(num, 8);
-	else
-		str = ft_itoa_base_uns(num, 16);
-	if (sys == 'X')
-		ft_strupper(str);
-	if (num)
-		react_on_flags(at->flags, sys);
-	ft_putstr(str);
-	return (ft_strlen(str));
+size_t	react_on_flags_bx(char *flags)
+{
+	if ((ft_memchr(flags, '#', ft_strlen(flags))))
+		return (ft_putstr("0X"));
+	return (0);
 }

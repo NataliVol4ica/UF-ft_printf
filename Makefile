@@ -192,7 +192,7 @@ norm:
 	@echo ${RED}[Checking the $(NAME) NORM]${NC}
 	@norminette $(CFILES) $(HEADERS)
 
-main: $(NAME)
+main:
 	gcc -o e -I $(INCDIR) -L. -lftprintf main.c
 
 gitclean: clean

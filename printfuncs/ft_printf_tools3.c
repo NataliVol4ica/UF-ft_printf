@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdint.h>
 
-int			convert_numeric(intmax_t *n, t_params *at)
+int			convert_numeric_signed(intmax_t *n, t_params *at)
 {
 	intmax_t	num;
 
@@ -36,12 +36,13 @@ int			convert_numeric(intmax_t *n, t_params *at)
 	else if (at->length[0] == 'z')
 		num = (size_t)num;
 	else
-		return (0);
+		//return (0);
+		num = (int)num;
 	*n = num;
 	return (1);
 }
 
-int			uconvert_numeric(uintmax_t *n, t_params *at)
+int			convert_numeric_unsigned(uintmax_t *n, t_params *at)
 {
 	uintmax_t	num;
 
@@ -63,7 +64,8 @@ int			uconvert_numeric(uintmax_t *n, t_params *at)
 	else if (at->length[0] == 'z')
 		num = (size_t)num;
 	else
-		return (0);
+		//return (0);
+		num = (unsigned int)num;
 	*n = num;
 	return (1);
 }

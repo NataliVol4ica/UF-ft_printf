@@ -28,14 +28,27 @@ typedef struct	s_params
 	char	*length;
 }				t_params;
 
-int				convert_numeric(intmax_t *n, t_params *at);
-int				uconvert_numeric(uintmax_t *n, t_params *at);
+typedef size_t	(*t_f)(va_list*, t_params*);
+
+typedef struct	s_funcs
+{
+	char	c;
+	t_f		func;
+}				t_funcs;
+
+size_t			react_on_flags_di(intmax_t num, char *flags);
+size_t			react_on_flags_obo(char *flags);
+size_t			react_on_flags_x(char *flags);
+size_t			react_on_flags_bx(char *flags);
+
+int				convert_numeric_signed(intmax_t *n, t_params *at);
+int				convert_numeric_unsigned(uintmax_t *n, t_params *at);
 
 int				print_signed_num(va_list *ap, t_params *at);
 int				print_unsigned_num(va_list *ap, t_params *at);
 int				print_oct_hex(va_list *ap, t_params *at, char sys);
 
-t_params		*read_params(char *fmt, int *pos, va_list *ap);
+t_params		*read_params(char *fmt, size_t *pos, va_list *ap);
 void			del_params(t_params **at);
 
 size_t			get_n(char *str, int *p);
@@ -46,5 +59,33 @@ char			*get_length(char *str);
 
 char			is_flag(char c);
 uintmax_t		printf_atoi(char *str, int *p);
+
+void			type_n(va_list *ap, int ret);
+
+size_t			type_percent(va_list *ap, t_params *p);
+size_t			type_cbc(va_list *ap, t_params *p);
+size_t			type_s(va_list *ap, t_params *p);
+size_t			type_di(va_list *ap, t_params *p);
+size_t			type_bdubu(va_list *ap, t_params *at);
+size_t			type_obo(va_list *ap, t_params *p);
+size_t			type_x(va_list *ap, t_params *p);
+size_t			type_bx(va_list *ap, t_params *p);
+
+t_funcs	type_funcs[] = 
+{
+	{'%', &type_percent},
+	{'c', &type_cbc},
+	{'C', &type_cbc},
+	{'s', &type_s},
+	{'d', &type_di},
+	{'i', &type_di},
+	{'D', &type_bdubu},
+	{'u', &type_bdubu},
+	{'U', &type_bdubu},
+	{'o', &type_obo},
+	{'O', &type_obo},
+	{'x', &type_x},
+	{'X', &type_bx}
+};
 
 #endif
