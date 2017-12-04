@@ -88,17 +88,17 @@ void	ft_log(char l, char *str, void (*f)(char *));
 void	ft_print_num_tab(int **tab, int size);
 void	ft_print_word_tab(char **tab);
 int		ft_printf(char *fmt, ...);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putchar(char c);
-void	ft_putendl_fd(char *str, int fd);
-void	ft_putendl(char *str);
-void	ft_putnbr_fd(intmax_t n, int fd);
-void	ft_putnbr(intmax_t n);
-void	ft_putnbr_uns_fd(uintmax_t n, int fd);
-void	ft_putnbr_uns(uintmax_t n);
-void	ft_putnbrendl(intmax_t n);
-void	ft_putstr_fd(char *str, int fd);
-void	ft_putstr(char *str);
+size_t	ft_putchar_fd(char c, int fd);
+size_t	ft_putchar(char c);
+size_t	ft_putendl_fd(char *str, int fd);
+size_t	ft_putendl(char *str);
+size_t	ft_putnbr_fd(intmax_t n, int fd);
+size_t	ft_putnbr(intmax_t n);
+size_t	ft_putnbr_uns_fd(uintmax_t n, int fd);
+size_t	ft_putnbr_uns(uintmax_t n);
+size_t	ft_putnbrendl(intmax_t n);
+size_t	ft_putstr_fd(char *str, int fd);
+size_t	ft_putstr(char *str);
 
 /*
 ** STR FUNCS

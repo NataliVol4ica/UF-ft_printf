@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
-void	ft_putchar(char c)
+size_t	ft_putchar(char c)
 {
-	ft_putchar_fd(c, 1);
+	return (ft_putchar_fd(c, 1));
 }

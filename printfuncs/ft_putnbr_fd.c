@@ -12,30 +12,35 @@
 
 #include "libft.h"
 #include <stdint.h>
+#include <string.h>
 
-static void	small_f(uintmax_t n, int fd, int ismin)
+static void	small_f(uintmax_t n, int fd, int ismin, size_t *ret)
 {
 	char	c;
 
 	if (n >= 10)
 	{
-		small_f(n / 10, fd, 0);
+		small_f(n / 10, fd, 0, ret);
 		c = n % 10 + '0';
 		if (ismin == 1)
 			c += 1;
-		ft_putchar_fd(c, fd);
+		*ret = *ret + ft_putchar_fd(c, fd);
+
 	}
 	else
-		ft_putchar_fd(n % 10 + '0', fd);
+		*ret = *ret + ft_putchar_fd(n % 10 + '0', fd);
 }
 
-void		ft_putnbr_fd(intmax_t n, int fd)
+size_t			ft_putnbr_fd(intmax_t n, int fd)
 {
 	uintmax_t	num;
+	size_t		ret;
 
+	ret = 0;
 	if (n < 0)
-		ft_putchar_fd('-', fd);
+		ret += ft_putchar_fd('-', fd);
 	num = n < 0 ? -n : n;
 	num = n < 0 && (intmax_t)(n - 1) > 0 ? num + 1 : num;
-	small_f(num, fd, n < 0 && (long long)(n - 1) > 0 ? 1 : 0);
+	small_f(num, fd, n < 0 && (long long)(n - 1) > 0 ? 1 : 0, &ret);
+	return (ret);
 }

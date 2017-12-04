@@ -12,8 +12,9 @@
 
 #include <stdint.h>
 #include "libft.h"
+#include <string.h>
 
-void		ft_putnbr_uns(uintmax_t n)
+size_t		ft_putnbr_uns(uintmax_t n)
 {
-	ft_putnbr_uns_fd(n, 1);
+	return (ft_putnbr_uns_fd(n, 1));
 }

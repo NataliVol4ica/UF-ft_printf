@@ -11,9 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
-void	ft_putendl_fd(char *str, int fd)
+size_t	ft_putendl_fd(char *str, int fd)
 {
-	ft_putstr_fd(str, fd);
+	size_t	ret;
+
+	ret = ft_putstr_fd(str, fd);
 	ft_putchar_fd('\n', fd);
+	return (ret + 1);
 }

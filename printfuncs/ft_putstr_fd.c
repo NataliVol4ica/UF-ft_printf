@@ -11,15 +11,19 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <string.h>
 
-void	ft_putstr_fd(char *str, int fd)
+size_t	ft_putstr_fd(char *str, int fd)
 {
 	int		i;
 
 	i = -1;
 	if (str)
+	{
 		while (str[++i])
 			write(fd, &str[i], 1);
+		return (i);
+	}
 	else
-		ft_putstr_fd("(null)", fd);
+		return (ft_putstr_fd("(null)", fd));
 }

@@ -12,9 +12,13 @@
 
 #include <stdint.h>
 #include "libft.h"
+#include <string.h>
 
-void		ft_putnbrendl(intmax_t n)
+size_t		ft_putnbrendl(intmax_t n)
 {
-	ft_putnbr(n);
+	size_t	ret;
+
+	ret = ft_putnbr(n);
 	ft_putchar('\n');
+	return (ret + 1);
 }

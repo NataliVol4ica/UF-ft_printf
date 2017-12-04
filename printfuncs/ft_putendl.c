@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
-void	ft_putendl(char *str)
+size_t	ft_putendl(char *str)
 {
-	ft_putendl_fd(str, 1);
+	return (ft_putendl_fd(str, 1));
 }

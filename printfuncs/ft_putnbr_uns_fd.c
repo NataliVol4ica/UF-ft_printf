@@ -12,14 +12,24 @@
 
 #include <stdint.h>
 #include "libft.h"
+#include <string.h>
 
-void	ft_putnbr_uns_fd(uintmax_t n, int fd)
+static void	small_f(uintmax_t n, int fd, size_t *ret)
 {
 	if (n >= 10)
 	{
-		ft_putnbr_uns_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
+		small_f(n / 10, fd, ret);
+		*ret = *ret + ft_putchar_fd(n % 10 + '0', fd);
 	}
 	else
-		ft_putchar_fd(n % 10 + '0', fd);
+		*ret = *ret + ft_putchar_fd(n % 10 + '0', fd);
+}
+
+size_t	ft_putnbr_uns_fd(uintmax_t n, int fd)
+{
+	size_t	ret;
+
+	ret = 0;
+	small_f(n, fd, &ret);
+	return (ret);
 }
