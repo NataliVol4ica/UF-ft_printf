@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_params	*read_params(char *fmt, int *pos, va_list *ap)
+t_params	*read_params(char *fmt, size_t *pos, va_list *ap)
 {
 	t_params	*at;
 	int			i;
