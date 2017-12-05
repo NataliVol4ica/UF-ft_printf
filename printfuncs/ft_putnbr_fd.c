@@ -25,13 +25,12 @@ static void	small_f(uintmax_t n, int fd, int ismin, size_t *ret)
 		if (ismin == 1)
 			c += 1;
 		*ret = *ret + ft_putchar_fd(c, fd);
-
 	}
 	else
 		*ret = *ret + ft_putchar_fd(n % 10 + '0', fd);
 }
 
-size_t			ft_putnbr_fd(intmax_t n, int fd)
+size_t		ft_putnbr_fd(intmax_t n, int fd)
 {
 	uintmax_t	num;
 	size_t		ret;

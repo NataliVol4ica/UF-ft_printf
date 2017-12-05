@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_printf_funcs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/25 13:55:03 by nkolosov          #+#    #+#             */
-/*   Updated: 2017/10/25 13:55:05 by nkolosov         ###   ########.fr       */
+/*   Created: 2017/12/05 15:48:51 by nkolosov          #+#    #+#             */
+/*   Updated: 2017/12/05 15:48:52 by nkolosov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-#include "libft.h"
-#include <string.h>
+#ifndef FT_PRINT_FUNCS_H
+# define FT_PRINT_FUNCS_H
 
-static void	small_f(uintmax_t n, int fd, size_t *ret)
+# include "ft_printf.h"
+
+static t_funcs	type_funcs[] = 
 {
-	if (n >= 10)
-	{
-		small_f(n / 10, fd, ret);
-		*ret = *ret + ft_putchar_fd(n % 10 + '0', fd);
-	}
-	else
-		*ret = *ret + ft_putchar_fd(n % 10 + '0', fd);
-}
+	{'%', &type_percent},
+	{'c', &type_cbc},
+	{'C', &type_cbc},
+	{'s', &type_s},
+	{'d', &type_di},
+	{'i', &type_di},
+	{'D', &type_bdubu},
+	{'u', &type_bdubu},
+	{'U', &type_bdubu},
+	{'o', &type_obo},
+	{'O', &type_obo},
+	{'x', &type_x},
+	{'X', &type_bx}
+};
 
-size_t		ft_putnbr_uns_fd(uintmax_t n, int fd)
-{
-	size_t	ret;
-
-	ret = 0;
-	small_f(n, fd, &ret);
-	return (ret);
-}
+#endif
