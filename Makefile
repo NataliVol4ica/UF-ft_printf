@@ -29,7 +29,7 @@ PRINTFUNCS = ft_putchar \
 			ft_printf \
 			ft_printf_tools1 \
 			ft_printf_tools2 \
-			ft_printf_tools3 \
+			ft_printf_tools_type_numeric \
 			ft_printf_tools_params \
 			ft_printf_tools_recogn \
 			ft_printf_tools_intnum \

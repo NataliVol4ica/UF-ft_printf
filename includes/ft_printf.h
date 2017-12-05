@@ -71,7 +71,7 @@ size_t			type_obo(va_list *ap, t_params *p);
 size_t			type_x(va_list *ap, t_params *p);
 size_t			type_bx(va_list *ap, t_params *p);
 
-t_funcs	type_funcs[] = 
+static t_funcs	type_funcs[] = 
 {
 	{'%', &type_percent},
 	{'c', &type_cbc},
