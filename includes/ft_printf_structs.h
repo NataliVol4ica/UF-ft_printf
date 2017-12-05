@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_funcs.h                                  :+:      :+:    :+:   */
+/*   ft_printf_structs.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_FUNCS_H
-# define FT_PRINTF_FUNCS_H
+#ifndef FT_PRINTF_STRUCTS_H
+# define FT_PRINTF_STRUCTS_H
 
-# include "ft_printf.h"
+# include <string.h>
 
-static t_funcs	g_type_funcs[] =
+typedef enum	e_length
 {
-	{'%', &type_percent},
-	{'c', &type_cbc},
-	{'C', &type_cbc},
-	{'s', &type_s},
-	{'d', &type_di},
-	{'i', &type_di},
-	{'D', &type_bdubu},
-	{'u', &type_bdubu},
-	{'U', &type_bdubu},
-	{'o', &type_obo},
-	{'O', &type_obo},
-	{'x', &type_x},
-	{'X', &type_bx}
-};
+	EMPTY = 0, L = 2, LL, H, HH, J, Z, T, BL
+}				t_length;
+
+typedef struct	s_output
+{
+	char	*str;
+	size_t	len;
+}				t_output;
+
+typedef struct	s_flags
+{
+	_Bool	space;
+	_Bool	hash;
+	_Bool	plus;
+	_Bool	minus;
+	_Bool	zero;
+}				t_flags;
+
+typedef struct	s_params
+{
+	size_t		n;
+	t_flags		*flags;
+	size_t		width;
+	size_t		precision;
+	t_length	length;
+	t_output	*output;
+}				t_params;
+
+typedef size_t	(*t_f)(va_list*, t_params*);
+typedef struct	s_funcs
+{
+	char	c;
+	t_f		func;
+}				t_funcs;
 
 #endif

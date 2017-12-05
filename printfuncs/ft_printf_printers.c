@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_funcs.h                                  :+:      :+:    :+:   */
+/*   ft_printf_printers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 15:48:51 by nkolosov          #+#    #+#             */
-/*   Updated: 2017/12/05 15:48:52 by nkolosov         ###   ########.fr       */
+/*   Created: 2017/11/30 16:24:20 by nkolosov          #+#    #+#             */
+/*   Updated: 2017/11/30 16:24:21 by nkolosov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_FUNCS_H
-# define FT_PRINTF_FUNCS_H
+#include "../includes/ft_printf.h"
+#include "libft.h"
+#include <unistd.h>
 
-# include "ft_printf.h"
-
-static t_funcs	g_type_funcs[] =
+void	final_putstr(t_params *p)
 {
-	{'%', &type_percent},
-	{'c', &type_cbc},
-	{'C', &type_cbc},
-	{'s', &type_s},
-	{'d', &type_di},
-	{'i', &type_di},
-	{'D', &type_bdubu},
-	{'u', &type_bdubu},
-	{'U', &type_bdubu},
-	{'o', &type_obo},
-	{'O', &type_obo},
-	{'x', &type_x},
-	{'X', &type_bx}
-};
+	write(1, p->output->str, p->output->len);
+}
 
-#endif
+void	printf_putchar(char c, t_params *p)
+{
+	p->output->str[p->output->len++] = c;
+	p->output->str[p->output->len] = '\0';
+}

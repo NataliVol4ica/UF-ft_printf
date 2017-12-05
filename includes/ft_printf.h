@@ -16,31 +16,11 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <string.h>
+# include "ft_printf_structs.h"
 
 #include <stdio.h>
 
-typedef enum	e_length
-{
-	EMPTY = 0, L = 2, LL, H, HH, J, Z, T, BL
-}				t_length;
-
-typedef struct	s_flags
-{
-	_Bool	space;
-	_Bool	hash;
-	_Bool	plus;
-	_Bool	minus;
-	_Bool	zero;
-}				t_flags;
-
-typedef struct	s_params
-{
-	size_t		n;
-	t_flags		*flags;
-	size_t		width;
-	size_t		precision;
-	t_length	length;
-}				t_params;
+# define MAX_STR 32
 
 /*
 ** FLAG PARSING
@@ -53,10 +33,14 @@ size_t			react_on_flags_bx(t_flags *flags);
 
 int				convert_numeric_signed(intmax_t *n, t_params *at);
 int				convert_numeric_unsigned(uintmax_t *n, t_params *at);
+uintmax_t		printf_atoi(char *str, int *p);
 
 /*
 ** PRINTERS
 */
+
+void			final_putstr(t_params *p);
+void			printf_putchar(char c, t_params *p);
 
 int				print_signed_num(va_list *ap, t_params *at);
 int				print_unsigned_num(va_list *ap, t_params *at);
@@ -69,7 +53,7 @@ int				print_oct_hex(va_list *ap, t_params *at, char sys);
 t_params		*init_params(void);
 void			read_params(t_params *at, char *fmt, size_t *pos, va_list *ap);
 void			del_params(t_params **at);
-void			zero_flags(t_flags *f);
+void			zero_flags_str(t_flags *f, t_output *outp);
 
 /*
 ** READING PARAMETERS
@@ -80,10 +64,6 @@ void			get_flags(char *str, int *p, t_flags *f);
 size_t			get_width(char *str, int *p, va_list *ap);
 size_t			get_precision(char *str, int *p, va_list *ap);
 t_length		get_length(char *str, int *i);
-
-uintmax_t		printf_atoi(char *str, int *p);
-
-void			type_n(va_list *ap, int ret);
 
 /*
 ** TYPE FUNCTIONS
@@ -97,6 +77,7 @@ size_t			type_bdubu(va_list *ap, t_params *at);
 size_t			type_obo(va_list *ap, t_params *p);
 size_t			type_x(va_list *ap, t_params *p);
 size_t			type_bx(va_list *ap, t_params *p);
+void			type_n(va_list *ap, int ret);
 
 /*
 ** DEVELOPMENT
