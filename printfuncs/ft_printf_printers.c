@@ -39,7 +39,7 @@ void	printf_putnbr(intmax_t n, t_params *p)
 
 	if (n == 0)
 	{
-		printf_putchar(0, p);
+		printf_putchar('0', p);
 		return ;
 	}
 	if (n < 0)
