@@ -29,7 +29,9 @@ size_t		type_percent(va_list *ap, t_params *p)
 size_t		type_cbc(va_list *ap, t_params *p)
 {
 	(void)p;
-	return (ft_putchar((char)va_arg(*ap, int)));
+	printf_putchar((char)va_arg(*ap, int), p);
+	final_putstr(p);
+	return (p->output->len);
 }
 
 size_t		type_s(va_list *ap, t_params *p)
