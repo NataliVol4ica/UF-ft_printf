@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_tools_params.c                           :+:      :+:    :+:   */
+/*   ft_printf_params_init.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,13 +15,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 void		read_params(t_params *at, char *fmt, size_t *pos, va_list *ap)
 {
 	int			i;
 
 	i = *pos;
 	at->n = get_n(&fmt[i], &i);
+	zero_flags(at->flags);
 	get_flags(&fmt[i], &i, at->flags);
 	at->width = get_width(&fmt[i], &i, ap);
 	at->precision = get_precision(&fmt[i], &i, ap);
@@ -71,13 +71,16 @@ void		zero_flags(t_flags *f)
 	f->zero = 0;
 }
 
-void		print_params(t_params *t)
-{
-	printf("\n=======\n");
-	printf("n = %zu\n", t->n);
-	printf("Flags = %d%d%d%d%d\n", t->flags->space, t->flags->hash, t->flags->plus, t->flags->minus, t->flags->zero);
-	printf("Width = %zu\n", t->width);
-	printf("Precision = %zu\n", t->precision);
-	printf("Length = %u\n", t->length);
-	printf("fi\n");
-}
+/*
+** void		print_params(t_params *t)
+** {
+** 	printf("\n=======\n");
+** 	printf("n = %zu\n", t->n);
+** 	printf("Flags = %d%d%d%d%d\n", t->flags->space, t->flags->hash,
+**	t->flags->plus, t->flags->minus, t->flags->zero);
+** 	printf("Width = %zu\n", t->width);
+** 	printf("Precision = %zu\n", t->precision);
+** 	printf("Length = %u\n", t->length);
+** 	printf("fi\n");
+** }
+*/

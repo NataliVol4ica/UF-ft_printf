@@ -22,7 +22,7 @@ size_t		type_percent(va_list *ap, t_params *p)
 	(void)ap;
 	(void)p;
 	return (ft_putchar('%'));
-}	
+}
 
 size_t		type_cbc(va_list *ap, t_params *p)
 {
@@ -156,6 +156,5 @@ int			ft_printf(char *fmt, ...)
 		else
 			ret += ft_putchar(fmt[--i]);
 	va_end(ap);
-
 	return (ret);
 }

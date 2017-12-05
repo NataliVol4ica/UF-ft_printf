@@ -12,28 +12,60 @@
 
 #include "../includes/ft_printf.h"
 #include "libft.h"
-#include <stdarg.h>
 #include <stdint.h>
 
-/*static int	print_signed_num_other_len(va_list *ap, t_params *at)
+int			convert_numeric_signed(intmax_t *n, t_params *at)
 {
-	(void)ap;
-	(void)at;
-	return (0);
-}*/
+	intmax_t	num;
 
-size_t	react_on_flags_di(intmax_t num, t_flags *flags)
-{
-	if (flags->plus && num > 0)
-		return (ft_putchar('+'));
-	else if (flags->space && num > 0)
-		return (ft_putchar(' '));
-	return (0);
+	num = *n;
+	if (at->length == EMPTY)
+		num = (int)num;
+	else if (at->length == HH)
+		num = (char)num;
+	else if (at->length == H)
+		num = (short)num;
+	else if (at->length == LL)
+		num = (long long)num;
+	else if (at->length == L)
+		num = (long)num;
+	else if (at->length == J)
+		num = (intmax_t)num;
+	else if (at->length == Z)
+		num = (size_t)num;
+	else
+	{
+		return (0);
+		num = (int)num;
+	}
+	*n = num;
+	return (1);
 }
 
-/*static int	print_unsigned_num_other_len(va_list *ap, t_params *at)
+int			convert_numeric_unsigned(uintmax_t *n, t_params *at)
 {
-	(void)ap;
-	(void)at;
-	return (0);
-}*/
+	uintmax_t	num;
+
+	num = *n;
+	if (at->length == EMPTY)
+		num = (unsigned int)num;
+	else if (at->length == HH)
+		num = (unsigned char)num;
+	else if (at->length == H)
+		num = (unsigned short)num;
+	else if (at->length == LL)
+		num = (unsigned long long)num;
+	else if (at->length == L)
+		num = (unsigned long)num;
+	else if (at->length == J)
+		num = (uintmax_t)num;
+	else if (at->length == Z)
+		num = (size_t)num;
+	else
+	{
+		return (0);
+		num = (unsigned int)num;
+	}
+	*n = num;
+	return (1);
+}

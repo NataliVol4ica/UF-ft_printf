@@ -102,7 +102,6 @@ size_t			type_bx(va_list *ap, t_params *p);
 ** DEVELOPMENT
 */
 
-void		print_params(t_params *t);
-
+void			print_params(t_params *t);
 
 #endif

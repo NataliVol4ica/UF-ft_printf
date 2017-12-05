@@ -15,6 +15,15 @@
 #include <stdarg.h>
 #include <stdint.h>
 
+size_t	react_on_flags_di(intmax_t num, t_flags *flags)
+{
+	if (flags->plus && num > 0)
+		return (ft_putchar('+'));
+	else if (flags->space && num > 0)
+		return (ft_putchar(' '));
+	return (0);
+}
+
 size_t	react_on_flags_obo(t_flags *flags)
 {
 	if (flags->hash)

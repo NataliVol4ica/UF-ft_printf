@@ -34,12 +34,12 @@ size_t		get_n(char *str, int *p)
 	}
 	return (0);
 }
+
 void		get_flags(char *str, int *p, t_flags *f)
 {
 	int		i;
 	char	cont;
 
-	zero_flags(f);
 	i = 0;
 	cont = 1;
 	while (cont)
