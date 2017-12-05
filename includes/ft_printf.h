@@ -41,7 +41,6 @@ uintmax_t		printf_atoi(char *str, int *p);
 
 void			final_putstr(t_params *p);
 void			printf_putchar(char c, t_params *p);
-void			printf_putstr(char *str, t_params *p);
 
 int				print_signed_num(va_list *ap, t_params *at);
 int				print_unsigned_num(va_list *ap, t_params *at);

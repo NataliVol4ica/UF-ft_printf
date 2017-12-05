@@ -36,8 +36,13 @@ size_t		type_cbc(va_list *ap, t_params *p)
 
 size_t		type_s(va_list *ap, t_params *p)
 {
-	printf_putstr(va_arg(*ap, char*), p);
+	char	*temp;
+
+	temp = p->output->str;
+	p->output->str = va_arg(*ap, char*);
+	p->output->len = ft_strlen(p->output->str);
 	final_putstr(p);
+	p->output->str = temp;
 	return (p->output->len);
 }
 
