@@ -24,3 +24,10 @@ void	printf_putchar(char c, t_params *p)
 	p->output->str[p->output->len++] = c;
 	p->output->str[p->output->len] = '\0';
 }
+
+void	printf_putstr(char *str, t_params *p)
+{
+	while (*str)
+		p->output->str[p->output->len++] = *str++;
+	p->output->str[p->output->len] = '\0';
+}
