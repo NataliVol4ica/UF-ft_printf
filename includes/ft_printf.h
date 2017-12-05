@@ -34,13 +34,15 @@ size_t			react_on_flags_bx(t_flags *flags);
 int				convert_numeric_signed(intmax_t *n, t_params *at);
 int				convert_numeric_unsigned(uintmax_t *n, t_params *at);
 uintmax_t		printf_atoi(char *str, int *p);
-
+void			rev_str(char *from, char *until);
 /*
 ** PRINTERS
 */
 
 void			final_putstr(t_params *p);
+void			print_width(char c, size_t num);
 void			printf_putchar(char c, t_params *p);
+void			printf_putnbr(intmax_t n, t_params *p);
 
 int				print_signed_num(va_list *ap, t_params *at);
 int				print_unsigned_num(va_list *ap, t_params *at);

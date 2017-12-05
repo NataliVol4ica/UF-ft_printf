@@ -48,7 +48,6 @@ size_t		type_s(va_list *ap, t_params *p)
 
 size_t		type_di(va_list *ap, t_params *p)
 {
-	size_t		ret;
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
@@ -56,11 +55,11 @@ size_t		type_di(va_list *ap, t_params *p)
 	//printf("Going to print num = %jd\n", num);
 	/*if (!(convert_numeric_signed(&num, p)))
 		return (print_signed_num_other_len(ap, p));*/
-	ret = 0;
 	convert_numeric_signed(&num, p);
-	react_on_flags_di(num, p->flags);
-	ret += ft_putnbr(num);
-	return (ret);
+	//react_on_flags_di(num, p->flags);
+	printf_putnbr(num, p);
+	final_putstr(p);
+	return (p->output->len);
 }
 
 size_t		type_bdubu(va_list *ap, t_params *at)
