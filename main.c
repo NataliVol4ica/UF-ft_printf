@@ -13,6 +13,7 @@
 #include "libft.h"
 #include <stdio.h>
 #include <stdint.h>
+#include "../includes/ft_printf_funcs.h"
 
 int		main(void)
 {
@@ -23,6 +24,9 @@ int		main(void)
 	intmax_t r;
 
 	t = 7825;
+	/*for (int i = 0; i < 13; i++)
+		printf("symb[%d] = \'%c\'\n", i, *type_funcs[i].c);
+	printf("\n=================\n");*/
 	/*ft_printf("%5$ #0+--+00#0  *.*llu\n", 10, 25, (long long)123);
 	ft_printf("lalala %%d %%i\n");
 	ft_printf("lalala %d\n", -2147483648);
@@ -36,18 +40,18 @@ int		main(void)
 	//printf("aaaaa %++d bbbb\n", t);
 	ft_printf("aaaaa %+ d bbbb\n", t);
 	ft_printf("aaaaa % d bbbb\n", t);
-	ft_printf("aaaaa %++d bbbb\n", t);
-	printf("aaaaa %+6d bbbb\n", t);
+	ft_printf("aaaaa %++d bbbb\n", t);/*/
+	/*printf("aaaaa %+6d bbbb\n", t);
 	printf("aaaaa %#*o bbbb %#*o\n", 10, t, 10, t);
-	printf("uns %U\n", (unsigned int)2147483648);
-	ft_printf("uns %u\n", (unsigned int)2147483648);*/
+	printf("uns %U\n", (unsigned int)2147483648);*/
+	/*ft_printf("uns %u\n", (unsigned int)2147483648);*/
 	//printf("%O\n", -300);
 	//printf("Number %zd\n", -2147483648);
 	//printf("%ls\n", (int*)("@"));
 	//printf("%d %3$d %d\n", 1, 2, 3, 4);
 	/*r = -8000;
 	printf("R = %jd\n", r);*/
-	/*ft_printf("%d", 42);
+	//ft_printf("%d", 42);
 	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
@@ -62,7 +66,7 @@ int		main(void)
 	ft_printf("%%d 	 == |%d|", 9);
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
-	ft_printf("\n");*/
+	ft_printf("\n");
 	//ft_printf("%llu\n", n);
 	/*int k;
 	ft_printf("LALALALALAL\n%n",&k);
@@ -73,5 +77,8 @@ int		main(void)
 	ft_printf("%d\n", k);*/
 	/*int nn = -47;
 	printf("%tn\n", nn);*/
+	//printf("111");
+	//printf("%d\n", printf("lalala %c\n", 11114645));
+	/*printf("%td\n", -5749885937593795);*/
 	return (0);
 }

@@ -26,7 +26,6 @@ size_t		type_percent(va_list *ap, t_params *p)
 
 size_t		type_cbc(va_list *ap, t_params *p)
 {
-	(void)ap;
 	(void)p;
 	return (ft_putchar((char)va_arg(*ap, int)));
 }
@@ -46,6 +45,7 @@ size_t		type_di(va_list *ap, t_params *p)
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
+	//printf("\n====\\\nGot a number %jd\n", num);
 	/*if (!(convert_numeric_signed(&num, p)))
 		return (print_signed_num_other_len(ap, p));*/
 	ret = 0;
@@ -141,8 +141,10 @@ int			ft_printf(char *fmt, ...)
 			j = -1;
 			fret = 0;
 			while (++j < 13)
-				if (fmt[i] == type_funcs[i].c)
-					fret += type_funcs[i].func(&ap, at);
+			{
+				if (fmt[i] == *type_funcs[j].c)
+					fret += type_funcs[j].func(&ap, at);
+			}
 			ret += fret;
 			if (fret == 0)
 				if (fmt[i] == 'n')

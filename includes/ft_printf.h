@@ -28,14 +28,6 @@ typedef struct	s_params
 	char	*length;
 }				t_params;
 
-typedef size_t	(*t_f)(va_list*, t_params*);
-
-typedef struct	s_funcs
-{
-	char	c;
-	t_f		func;
-}				t_funcs;
-
 size_t			react_on_flags_di(intmax_t num, char *flags);
 size_t			react_on_flags_obo(char *flags);
 size_t			react_on_flags_x(char *flags);
