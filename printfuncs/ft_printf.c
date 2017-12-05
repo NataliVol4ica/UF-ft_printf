@@ -45,6 +45,8 @@ size_t		type_di(va_list *ap, t_params *p)
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
+	//printf("\n=======\n");
+	//printf("Going to print num = %jd\n", num);
 	/*if (!(convert_numeric_signed(&num, p)))
 		return (print_signed_num_other_len(ap, p));*/
 	ret = 0;

@@ -53,7 +53,7 @@ int		main(void)
 	/*r = -8000;
 	printf("R = %jd\n", r);*/
 	//ft_printf("%d", 42);
-	/*ft_printf("Kashim a %d histoires à raconter", 1001);
+	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
 	ft_printf("%d", 0);
@@ -67,20 +67,20 @@ int		main(void)
 	ft_printf("%%d 	 == |%d|", 9);
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
-	ft_printf("\n");*/
+	ft_printf("\n");
 	/*ft_printf("%%d 0000042 == |%d|", 34);
 	ft_printf("\n");
 	ft_printf("%%d 	 == |%d|", 9);
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");*/
-	ft_printf("%%-i 42 == %-i\n", 42);
+	/*ft_printf("%%-i 42 == %-i\n", 42);
 	ft_printf("%%-d 42 == %-d\n", -2147483648);
 	ft_printf("%%-i -42 == %-i\n", -42);
 	ft_printf("%%-4d 42 == |%-4d|\n", 42);
 	ft_printf("%%-5d -42 == |%-5d|\n", -42);
 	ft_printf("|%3i|%-3i|\n", 42, 42);
-	ft_printf("%%-4i 42 == |%-4i|\n", 42);
+	ft_printf("%%-4i 42 == |%-4i|\n", 42);*/
 	//ft_printf("%llu\n", n);
 	/*int k;
 	ft_printf("LALALALALAL\n%n",&k);

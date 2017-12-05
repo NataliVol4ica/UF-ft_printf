@@ -38,11 +38,7 @@ t_params	*init_params(void)
 		if ((at->flags = (t_flags*)malloc(sizeof(t_flags))))
 		{
 			at->n = 0;
-			at->flags->space = 0;
-			at->flags->hash = 0;
-			at->flags->plus = 0;
-			at->flags->minus = 0;
-			at->flags->zero = 0;
+			zero_flags(at->flags);
 			at->width = 0;
 			at->precision = 0;
 			at->length = EMPTY;
@@ -64,4 +60,24 @@ void		del_params(t_params **at)
 		}
 		*at = NULL;
 	}
+}
+
+void		zero_flags(t_flags *f)
+{
+	f->space = 0;
+	f->hash = 0;
+	f->plus = 0;
+	f->minus = 0;
+	f->zero = 0;
+}
+
+void		print_params(t_params *t)
+{
+	printf("\n=======\n");
+	printf("n = %zu\n", t->n);
+	printf("Flags = %d%d%d%d%d\n", t->flags->space, t->flags->hash, t->flags->plus, t->flags->minus, t->flags->zero);
+	printf("Width = %zu\n", t->width);
+	printf("Precision = %zu\n", t->precision);
+	printf("Length = %u\n", t->length);
+	printf("fi\n");
 }

@@ -39,11 +39,7 @@ void		get_flags(char *str, int *p, t_flags *f)
 	int		i;
 	char	cont;
 
-	f->space = 0;
-	f->hash = 0;
-	f->plus = 0;
-	f->minus = 0;
-	f->zero = 0;
+	zero_flags(f);
 	i = 0;
 	cont = 1;
 	while (cont)
@@ -59,7 +55,10 @@ void		get_flags(char *str, int *p, t_flags *f)
 		else if (str[i] == ' ')
 			f->space = 1;
 		else
+		{
+			i--;
 			cont = 0;
+		}
 		i++;
 	}
 	*p = *p + i;
