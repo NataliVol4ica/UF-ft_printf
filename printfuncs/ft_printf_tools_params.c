@@ -15,23 +15,41 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_params	*read_params(char *fmt, size_t *pos, va_list *ap)
+
+void		read_params(t_params *at, char *fmt, size_t *pos, va_list *ap)
+{
+	int			i;
+
+	i = *pos;
+	at->n = get_n(&fmt[i], &i);
+	get_flags(&fmt[i], &i, at->flags);
+	at->width = get_width(&fmt[i], &i, ap);
+	at->precision = get_precision(&fmt[i], &i, ap);
+	at->length = get_length(&fmt[i], &i);
+	*pos = i;
+}
+
+t_params	*init_params(void)
 {
 	t_params	*at;
-	int			i;
 
 	if ((at = (t_params*)malloc(sizeof(t_params))))
 	{
-		i = *pos;
-		at->n = get_n(&fmt[i], &i);
-		at->flags = get_flags(&fmt[i], &i);
-		at->width = get_width(&fmt[i], &i, ap);
-		at->precision = get_precision(&fmt[i], &i, ap);
-		at->length = get_length(&fmt[i]);
-		i += ft_strlen(at->length);
-		*pos = i;
+		if ((at->flags = (t_flags*)malloc(sizeof(t_flags))))
+		{
+			at->n = 0;
+			at->flags->space = 0;
+			at->flags->hash = 0;
+			at->flags->plus = 0;
+			at->flags->minus = 0;
+			at->flags->zero = 0;
+			at->width = 0;
+			at->precision = 0;
+			at->length = EMPTY;
+		}
+		else
+			free(at);
 	}
-	(void)fmt;
 	return (at);
 }
 
@@ -41,8 +59,7 @@ void		del_params(t_params **at)
 	{
 		if (*at)
 		{
-			ft_strdel(&((*at)->length));
-			ft_strdel(&((*at)->flags));
+			free((*at)->flags);
 			free(*at);
 		}
 		*at = NULL;

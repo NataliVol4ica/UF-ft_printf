@@ -22,11 +22,11 @@
 	return (0);
 }*/
 
-size_t	react_on_flags_di(intmax_t num, char *flags)
+size_t	react_on_flags_di(intmax_t num, t_flags *flags)
 {
-	if ((ft_memchr(flags, '+', ft_strlen(flags))) && num > 0)
+	if (flags->plus && num > 0)
 		return (ft_putchar('+'));
-	else if ((ft_memchr(flags, ' ', ft_strlen(flags))) && num > 0)
+	else if (flags->space && num > 0)
 		return (ft_putchar(' '));
 	return (0);
 }

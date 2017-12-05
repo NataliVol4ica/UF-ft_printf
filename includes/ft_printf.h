@@ -19,19 +19,33 @@
 
 #include <stdio.h>
 
+typedef enum	e_length
+{
+	EMPTY = 0, L = 2, LL, H, HH, J, Z, T, BL
+}				t_length;
+
+typedef struct	s_flags
+{
+	_Bool	space;
+	_Bool	hash;
+	_Bool	plus;
+	_Bool	minus;
+	_Bool	zero;
+}				t_flags;
+
 typedef struct	s_params
 {
-	size_t	n;
-	char	*flags;
-	size_t	width;
-	size_t	precision;
-	char	*length;
+	size_t		n;
+	t_flags		*flags;
+	size_t		width;
+	size_t		precision;
+	t_length	length;
 }				t_params;
 
-size_t			react_on_flags_di(intmax_t num, char *flags);
-size_t			react_on_flags_obo(char *flags);
-size_t			react_on_flags_x(char *flags);
-size_t			react_on_flags_bx(char *flags);
+size_t			react_on_flags_di(intmax_t num, t_flags *flags);
+size_t			react_on_flags_obo(t_flags *flags);
+size_t			react_on_flags_x(t_flags *flags);
+size_t			react_on_flags_bx(t_flags *flags);
 
 int				convert_numeric_signed(intmax_t *n, t_params *at);
 int				convert_numeric_unsigned(uintmax_t *n, t_params *at);
@@ -40,16 +54,16 @@ int				print_signed_num(va_list *ap, t_params *at);
 int				print_unsigned_num(va_list *ap, t_params *at);
 int				print_oct_hex(va_list *ap, t_params *at, char sys);
 
-t_params		*read_params(char *fmt, size_t *pos, va_list *ap);
+t_params		*init_params(void);
+void			read_params(t_params *at, char *fmt, size_t *pos, va_list *ap);
 void			del_params(t_params **at);
 
 size_t			get_n(char *str, int *p);
-char			*get_flags(char *str, int *p);
+void			get_flags(char *str, int *p, t_flags *f);
 size_t			get_width(char *str, int *p, va_list *ap);
 size_t			get_precision(char *str, int *p, va_list *ap);
-char			*get_length(char *str);
+t_length		get_length(char *str, int *i);
 
-char			is_flag(char c);
 uintmax_t		printf_atoi(char *str, int *p);
 
 void			type_n(va_list *ap, int ret);

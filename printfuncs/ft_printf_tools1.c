@@ -15,13 +15,6 @@
 #include <stdarg.h>
 #include <stdint.h>
 
-char		is_flag(char c)
-{
-	if (c == '-' || c == '+' || c == ' ' || c == '0' || c == '#')
-		return (c);
-	return (0);
-}
-
 uintmax_t	printf_atoi(char *str, int *p)
 {
 	uintmax_t	ans;

@@ -45,7 +45,6 @@ size_t		type_di(va_list *ap, t_params *p)
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
-	//printf("\n====\\\nGot a number %jd\n", num);
 	/*if (!(convert_numeric_signed(&num, p)))
 		return (print_signed_num_other_len(ap, p));*/
 	ret = 0;
@@ -121,38 +120,40 @@ void		type_n(va_list *ap, int ret)
 
 int			ft_printf(char *fmt, ...)
 {
-	va_list 	ap;
-	size_t		i;
-	size_t		j;
-	size_t		ret;
-	size_t		fret;
-	t_params	*at;
+	va_list 		ap;
+	size_t			i;
+	size_t			j;
+	size_t			ret;
+	size_t			fret;
+	static t_params	*at = NULL;
 
+	if (!at)
+		at = init_params();
 	va_start(ap, fmt);
 	i = -1;
 	ret = 0;
 	if (!fmt)
 		return (ret);
 	while (fmt[++i])
-		if (fmt[i] == '%')
+		if (fmt[i++] == '%')
 		{
-			i++;
-			at = read_params(fmt, &i, &ap);
+			read_params(at, fmt, &i, &ap);
 			j = -1;
 			fret = 0;
 			while (++j < 13)
 			{
-				if (fmt[i] == *type_funcs[j].c)
-					fret += type_funcs[j].func(&ap, at);
+				if (fmt[i] == g_type_funcs[j].c)
+					fret += g_type_funcs[j].func(&ap, at);
 			}
 			ret += fret;
 			if (fret == 0)
 				if (fmt[i] == 'n')
 					type_n(&ap, ret);
-			del_params(&at);
+			//del_params(&at);
 		}
 		else
-			ret += ft_putchar(fmt[i]);
+			ret += ft_putchar(fmt[--i]);
 	va_end(ap);
+
 	return (ret);
 }

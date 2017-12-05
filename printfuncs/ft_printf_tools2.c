@@ -15,23 +15,23 @@
 #include <stdarg.h>
 #include <stdint.h>
 
-size_t	react_on_flags_obo(char *flags)
+size_t	react_on_flags_obo(t_flags *flags)
 {
-	if ((ft_memchr(flags, '#', ft_strlen(flags))))
+	if (flags->hash)
 		return (ft_putchar('0'));
 	return (0);
 }
 
-size_t	react_on_flags_x(char *flags)
+size_t	react_on_flags_x(t_flags *flags)
 {
-	if ((ft_memchr(flags, '#', ft_strlen(flags))))
+	if (flags->hash)
 		return (ft_putstr("0x"));
 	return (0);
 }
 
-size_t	react_on_flags_bx(char *flags)
+size_t	react_on_flags_bx(t_flags *flags)
 {
-	if ((ft_memchr(flags, '#', ft_strlen(flags))))
+	if (flags->hash)
 		return (ft_putstr("0X"));
 	return (0);
 }

@@ -34,23 +34,35 @@ size_t		get_n(char *str, int *p)
 	}
 	return (0);
 }
-
-char		*get_flags(char *str, int *p)
+void		get_flags(char *str, int *p, t_flags *f)
 {
-	char	*ans;
-	char	c;
 	int		i;
+	char	cont;
 
+	f->space = 0;
+	f->hash = 0;
+	f->plus = 0;
+	f->minus = 0;
+	f->zero = 0;
 	i = 0;
-	while (is_flag(str[i]))
+	cont = 1;
+	while (cont)
+	{
+		if (str[i] == '+')
+			f->plus = 1;
+		else if (str[i] == '-')
+			f->minus = 1;
+		else if (str[i] == '0')
+			f->zero = 1;
+		else if (str[i] == '#')
+			f->hash = 1;
+		else if (str[i] == ' ')
+			f->space = 1;
+		else
+			cont = 0;
 		i++;
+	}
 	*p = *p + i;
-	ans = ft_strnew(i);
-	i = 0;
-	while ((c = is_flag(str[i])))
-		ans[i++] = c;
-	ans = ft_rmdupsymb(ans);
-	return (ans);
 }
 
 size_t		get_width(char *str, int *p, va_list *ap)
@@ -78,23 +90,31 @@ size_t		get_precision(char *str, int *p, va_list *ap)
 	return (printf_atoi(&str[1], p));
 }
 
-char		*get_length(char *str)
+t_length	get_length(char *str, int *i)
 {
+	*i = *i + 1;
 	if (str[0] == 'h')
 		if (str[1] == 'h')
-			return (ft_strdup("hh"));
+		{
+			*i = *i + 1;
+			return (HH);
+		}
 		else
-			return (ft_strdup("h"));
+			return (H);
 	else if (str[0] == 'l')
 		if (str[1] == 'l')
-			return (ft_strdup("ll"));
+		{
+			*i = *i + 1;
+			return (LL);
+		}
 		else
-			return (ft_strdup("l"));
+			return (L);
 	else if (str[0] == 'j')
-		return (ft_strdup("j"));
+		return (J);
 	else if (str[0] == 'z')
-		return (ft_strdup("z"));
+		return (Z);
 	else if (str[0] == 'L')
-		return (ft_strdup("L"));
-	return (ft_strnew(0));
+		return (BL);
+	*i = *i - 1;
+	return (EMPTY);
 }

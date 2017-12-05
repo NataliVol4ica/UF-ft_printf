@@ -12,6 +12,7 @@
 
 NAME = libftprintf.a
 HEADNAMES = libft list get_next_line
+PRINTF_HEADERS = ./includes/ft_printf.h ./includes/ft_printf_funcs.h
 INCDIR = ./includes
 HEADERS = $(patsubst %, $(INCDIR)/%.h, $(HEADNAMES))
 PRINTFUNCS = ft_putchar \
@@ -190,7 +191,7 @@ re: fclean all
 norm:
 	@clear
 	@echo ${RED}[Checking the $(NAME) NORM]${NC}
-	@norminette $(CFILES) $(HEADERS)
+	@norminette $(CFILES) $(HEADERS) $(PRINTF_HEADERS)
 
 main: $(NAME)
 	gcc -o e -I $(INCDIR) -L. -lftprintf main.c
