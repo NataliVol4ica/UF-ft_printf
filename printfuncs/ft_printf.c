@@ -16,6 +16,23 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
+static t_funcs	type_funcs[] = 
+{
+	{'%', &type_percent},
+	{'c', &type_cbc},
+	{'C', &type_cbc},
+	{'s', &type_s},
+	{'d', &type_di},
+	{'i', &type_di},
+	{'D', &type_bdubu},
+	{'u', &type_bdubu},
+	{'U', &type_bdubu},
+	{'o', &type_obo},
+	{'O', &type_obo},
+	{'x', &type_x},
+	{'X', &type_bx}
+};
+
 size_t		type_percent(va_list *ap, t_params *p)
 {
 	(void)ap;
