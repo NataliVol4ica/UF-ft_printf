@@ -21,14 +21,14 @@ size_t		type_percent(va_list *ap, t_params *p)
 {
 	(void)ap;
 	printf_putchar('%', p);
-	final_putstr(p->output);
+	check_width_str(p);
 	return (p->output->len);
 }
 
 size_t		type_cbc(va_list *ap, t_params *p)
 {
 	printf_putchar((char)va_arg(*ap, int), p);
-	final_putstr(p->output);
+	check_width_str(p);
 	return (p->output->len);
 }
 
@@ -45,7 +45,7 @@ size_t		type_s(va_list *ap, t_params *p)
 	}
 	else
 		p->output->len = ft_strlen(p->output->str);
-	final_putstr(p->output);
+	check_width_str(p);
 	p->output->str = temp;
 	return (p->output->len);
 }
@@ -69,8 +69,8 @@ size_t		type_di(va_list *ap, t_params *p)
 	n = num < 0 ? -num : num;
 	n = num < 0 && (intmax_t)(num - 1) > 0 ? n + 1 : n;
 	printf_putnbr_uns(n, p);
-	check_width(p);
-	return (p->output->len);
+	check_width_numeric(p);
+	return (p->output->len + p->prefix->len);
 }
 
 size_t		type_bdubu(va_list *ap, t_params *p)
@@ -80,7 +80,7 @@ size_t		type_bdubu(va_list *ap, t_params *p)
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);	
 	printf_putnbr_uns(num, p);
-	check_width(p);
+	check_width_numeric(p);
 	return (p->output->len);
 }
 
@@ -93,7 +93,7 @@ size_t		type_obo(va_list *ap, t_params *p)
 	if (p->flags->hash && num != 0)
 		p->prefix->str[p->prefix->len++] = '0';
 	printf_convert_oboxbx(num, 8, p, '0');
-	check_width(p);
+	check_width_numeric(p);
 	return (p->output->len + p->prefix->len);
 }
 
@@ -109,7 +109,7 @@ size_t		type_x(va_list *ap, t_params *p)
 		p->prefix->str[p->prefix->len++] = 'x';
 	}
 	printf_convert_oboxbx(num, 16, p, 'a');
-	check_width(p);
+	check_width_numeric(p);
 	return (p->output->len + p->prefix->len);
 }
 
@@ -125,7 +125,7 @@ size_t		type_bx(va_list *ap, t_params *p)
 		p->prefix->str[p->prefix->len++] = 'X';
 	}
 	printf_convert_oboxbx(num, 16, p, 'A');
-	check_width(p);
+	check_width_numeric(p);
 	return (p->output->len + p->prefix->len);
 }
 

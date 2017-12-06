@@ -25,12 +25,20 @@ int		main(void)
 	intmax_t r;
 
 	t = 7835;
+	/*
 	printf("% 010d\n", 27);
 	ft_printf("% 010d\n", 27);
 	printf("%- 010d\n", 27);
 	ft_printf("%- 010d\n", 27);
 	printf("% 010d\n", -27);
 	ft_printf("% 010d\n", -27);
+	*/
+	ft_printf("|%5%|\n");
+	printf("|%5%|\n");
+	ft_printf("|%010c|\n", 'r');
+	printf("|%010c|\n", 'r');
+	ft_printf("|%010s|\n", "r");
+	printf("|%010s|\n", "r");
 	/*for (int i = 0; i < 13; i++)
 		printf("symb[%d] = \'%c\'\n", i, *type_funcs[i].c);
 	printf("\n=================\n");*/

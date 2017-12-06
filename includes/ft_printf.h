@@ -32,7 +32,8 @@
 int				convert_numeric_signed(intmax_t *n, t_params *p);
 int				convert_numeric_unsigned(uintmax_t *n, t_params *p);
 uintmax_t		printf_atoi(char *str, int *p);
-void			check_width(t_params *p);
+void			check_width_str(t_params *p);
+void			check_width_numeric(t_params *p);
 void			rev_str(char *from, size_t n);
 /*
 ** PRINTERS

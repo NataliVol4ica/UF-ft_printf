@@ -47,7 +47,20 @@ void		rev_str(char *from, size_t n)
 	}
 }
 
-void		check_width(t_params *p)
+void		check_width_str(t_params *p)
+{
+	p->width -= p->width <= p->output->len ? p->width : p->output->len;
+	if (p->flags->minus)
+	{
+		final_putstr(p->output);
+		print_width(' ', p->width);
+		return ;
+	}
+	print_width(' ', p->width);
+	final_putstr(p->output);
+}
+
+void		check_width_numeric(t_params *p)
 {
 	p->width -= p->width <= p->prefix->len + p->output->len ? p->width :
 				p->prefix->len + p->output->len;
