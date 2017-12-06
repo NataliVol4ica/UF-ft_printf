@@ -39,7 +39,7 @@ void			rev_str(char *from, size_t n);
 ** PRINTERS
 */
 
-void			final_putstr(t_output *output);
+void			final_putstr(char *str, size_t len);
 void			print_width(char c, size_t num);
 void			printf_putchar(char c, t_params *p);
 void			printf_putnbr_uns(uintmax_t n, t_params *p);
@@ -81,6 +81,7 @@ size_t			type_bdubu(va_list *ap, t_params *p);
 size_t			type_obo(va_list *ap, t_params *p);
 size_t			type_x(va_list *ap, t_params *p);
 size_t			type_bx(va_list *ap, t_params *p);
+size_t			type_p(va_list *ap, t_params *p);
 void			type_n(va_list *ap, int ret);
 
 /*

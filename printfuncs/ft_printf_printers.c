@@ -16,9 +16,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-void	final_putstr(t_output *output)
+void	final_putstr(char *str, size_t len)
 {
-	write(1, output->str, output->len);
+	write(1, str, len);
 }
 
 void	print_width(char c, size_t num)

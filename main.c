@@ -26,8 +26,24 @@ int		main(void)
 	intmax_t r;
 
 
-	ft_printf("%#O\n", 1);
-	printf("%#O\n", 1);
+	char	*str3 = "some str";
+	printf("%p\n", str3);
+	ft_printf("%p\n", str3);
+	/*
+	unsigned int strange = 4294967296;
+
+	printf("%U\n", 4294967296);
+	printf("%U\n", strange);
+	*/
+	//	ft_printf("%U\n", 4294967296);
+	/*
+	ft_printf("%jd\n", -9223372036854775808);
+	printf("%jd\n", -9223372036854775808
+	*/
+	/*
+	ft_printf("%+d\n", 0);
+	printf("%+d\n", 0);
+	*/
 	/*
 	printf("|%5%|\n");
 	ft_printf("|%5%|\n");

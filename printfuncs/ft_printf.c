@@ -22,14 +22,14 @@ size_t		type_percent(va_list *ap, t_params *p)
 	(void)ap;
 	printf_putchar('%', p);
 	check_width_str(p);
-	return (p->output->len);
+	return (p->output->len + p->width);
 }
 
 size_t		type_cbc(va_list *ap, t_params *p)
 {
 	printf_putchar((char)va_arg(*ap, int), p);
 	check_width_str(p);
-	return (p->output->len);
+	return (p->output->len + p->width);
 }
 
 size_t		type_s(va_list *ap, t_params *p)
@@ -47,7 +47,7 @@ size_t		type_s(va_list *ap, t_params *p)
 		p->output->len = ft_strlen(p->output->str);
 	check_width_str(p);
 	p->output->str = temp;
-	return (p->output->len);
+	return (p->output->len + p->width);
 }
 
 size_t		type_di(va_list *ap, t_params *p)
@@ -57,7 +57,7 @@ size_t		type_di(va_list *ap, t_params *p)
 
 	num = va_arg(*ap, intmax_t);
 	convert_numeric_signed(&num, p);
-	if (num > 0)
+	if (num >= 0)
 	{
 		if (p->flags->plus)
 			p->prefix->str[p->prefix->len++] = '+';
@@ -67,10 +67,9 @@ size_t		type_di(va_list *ap, t_params *p)
 	else if (num < 0)
 		p->prefix->str[p->prefix->len++] = '-';
 	n = num < 0 ? -num : num;
-	n = num < 0 && (intmax_t)(num - 1) > 0 ? n + 1 : n;
 	printf_putnbr_uns(n, p);
 	check_width_numeric(p);
-	return (p->output->len + p->prefix->len);
+	return (p->output->len + p->prefix->len + p->width);
 }
 
 size_t		type_bdubu(va_list *ap, t_params *p)
@@ -78,10 +77,12 @@ size_t		type_bdubu(va_list *ap, t_params *p)
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	convert_numeric_unsigned(&num, p);	
+	printf("%zu\n", num);
+	convert_numeric_unsigned(&num, p);
+	printf("%zu\n", num);
 	printf_putnbr_uns(num, p);
 	check_width_numeric(p);
-	return (p->output->len);
+	return (p->output->len + p->width);
 }
 
 size_t		type_obo(va_list *ap, t_params *p)
@@ -94,7 +95,7 @@ size_t		type_obo(va_list *ap, t_params *p)
 		p->prefix->str[p->prefix->len++] = '0';
 	printf_convert_oboxbx(num, 8, p, '0');
 	check_width_numeric(p);
-	return (p->output->len + p->prefix->len);
+	return (p->output->len + p->prefix->len + p->width);
 }
 
 size_t		type_x(va_list *ap, t_params *p)
@@ -110,7 +111,7 @@ size_t		type_x(va_list *ap, t_params *p)
 	}
 	printf_convert_oboxbx(num, 16, p, 'a');
 	check_width_numeric(p);
-	return (p->output->len + p->prefix->len);
+	return (p->output->len + p->prefix->len + p->width);
 }
 
 size_t		type_bx(va_list *ap, t_params *p)
@@ -126,7 +127,22 @@ size_t		type_bx(va_list *ap, t_params *p)
 	}
 	printf_convert_oboxbx(num, 16, p, 'A');
 	check_width_numeric(p);
-	return (p->output->len + p->prefix->len);
+	return (p->output->len + p->prefix->len + p->width);
+}
+
+size_t		type_p(va_list *ap, t_params *p)
+{
+	uintmax_t	num;
+
+	num = va_arg(*ap, uintmax_t);
+	convert_numeric_unsigned(&num, p);
+	p->prefix->str[p->prefix->len++] = '0';
+	p->prefix->str[p->prefix->len++] = 'x';
+	p->prefix->str[p->prefix->len++] = '1';
+	p->prefix->str[p->prefix->len++] = '0';
+	printf_convert_oboxbx(num, 16, p, 'a');
+	check_width_numeric(p);
+	return (p->output->len + p->prefix->len + p->width);
 }
 
 void		type_n(va_list *ap, int ret)
@@ -144,6 +160,7 @@ int			ft_printf(char *fmt, ...)
 	size_t			j;
 	size_t			ret;
 	size_t			fret;
+	size_t			save_pos;
 	static t_params	*p = NULL;
 
 	p = p ? p : init_params();
@@ -155,6 +172,7 @@ int			ft_printf(char *fmt, ...)
 	while (fmt[++i])
 		if (fmt[i++] == '%')
 		{
+			save_pos = i;
 			read_params(p, fmt, &i, &ap);
 			j = -1;
 			fret = 0;
@@ -165,8 +183,12 @@ int			ft_printf(char *fmt, ...)
 			}
 			ret += fret;
 			if (fret == 0)
+			{
 				if (fmt[i] == 'n')
 					type_n(&ap, ret);
+				else
+					final_putstr(&fmt[save_pos], i - save_pos);
+			}
 		}
 		else
 			ret += ft_putchar(fmt[--i]);
