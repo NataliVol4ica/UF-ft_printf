@@ -43,6 +43,7 @@ typedef struct	s_params
 	size_t		precision;
 	t_length	length;
 	t_output	*output;
+	t_output	*prefix;
 }				t_params;
 
 typedef size_t	(*t_f)(va_list*, t_params*);

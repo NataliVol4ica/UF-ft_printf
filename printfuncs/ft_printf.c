@@ -20,17 +20,15 @@
 size_t		type_percent(va_list *ap, t_params *p)
 {
 	(void)ap;
-	(void)p;
 	printf_putchar('%', p);
-	final_putstr(p);
+	final_putstr(p->output);
 	return (p->output->len);
 }
 
 size_t		type_cbc(va_list *ap, t_params *p)
 {
-	(void)p;
 	printf_putchar((char)va_arg(*ap, int), p);
-	final_putstr(p);
+	final_putstr(p->output);
 	return (p->output->len);
 }
 
@@ -40,8 +38,14 @@ size_t		type_s(va_list *ap, t_params *p)
 
 	temp = p->output->str;
 	p->output->str = va_arg(*ap, char*);
-	p->output->len = ft_strlen(p->output->str);
-	final_putstr(p);
+	if (p->output->str == NULL)
+	{
+		p->output->str = "(null)";
+		p->output->len = 6;
+	}
+	else
+		p->output->len = ft_strlen(p->output->str);
+	final_putstr(p->output);
 	p->output->str = temp;
 	return (p->output->len);
 }
@@ -51,14 +55,16 @@ size_t		type_di(va_list *ap, t_params *p)
 	intmax_t	num;
 
 	num = va_arg(*ap, intmax_t);
-	//printf("\n=======\n");
-	//printf("Going to print num = %jd\n", num);
-	/*if (!(convert_numeric_signed(&num, p)))
-		return (print_signed_num_other_len(ap, p));*/
 	convert_numeric_signed(&num, p);
-	//react_on_flags_di(num, p->flags);
+	if (num > 0)
+	{
+		if (p->flags->plus)
+			printf_putchar('+', p);
+		else if (p->flags->space)
+			printf_putchar(' ', p);
+	}
 	printf_putnbr(num, p);
-	final_putstr(p);
+	check_width(p);
 	return (p->output->len);
 }
 
@@ -67,11 +73,9 @@ size_t		type_bdubu(va_list *ap, t_params *p)
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	/*if (!(convert_numeric_unsigned(&num, p)))
-		return (print_unsigned_num_other_len(ap, p));*/
 	convert_numeric_unsigned(&num, p);	
 	printf_putnbr_uns(num, p);
-	final_putstr(p);
+	check_width(p);
 	return (p->output->len);
 }
 
@@ -81,9 +85,11 @@ size_t		type_obo(va_list *ap, t_params *p)
 
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);
+	if (p->flags->hash && num != 0)
+		p->prefix->str[p->prefix->len++] = '0';
 	printf_convert_oboxbx(num, 8, p, '0');
-	final_putstr(p);
-	return (p->output->len);
+	check_width(p);
+	return (p->output->len + p->prefix->len);
 }
 
 size_t		type_x(va_list *ap, t_params *p)
@@ -92,9 +98,14 @@ size_t		type_x(va_list *ap, t_params *p)
 
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);
+	if (p->flags->hash && num != 0)
+	{
+		p->prefix->str[p->prefix->len++] = '0';
+		p->prefix->str[p->prefix->len++] = 'x';
+	}
 	printf_convert_oboxbx(num, 16, p, 'a');
-	final_putstr(p);
-	return (p->output->len);
+	check_width(p);
+	return (p->output->len + p->prefix->len);
 }
 
 size_t		type_bx(va_list *ap, t_params *p)
@@ -103,9 +114,14 @@ size_t		type_bx(va_list *ap, t_params *p)
 
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);
+	if (p->flags->hash && num != 0)
+	{
+		p->prefix->str[p->prefix->len++] = '0';
+		p->prefix->str[p->prefix->len++] = 'X';
+	}
 	printf_convert_oboxbx(num, 16, p, 'A');
-	final_putstr(p);
-	return (p->output->len);
+	check_width(p);
+	return (p->output->len + p->prefix->len);
 }
 
 void		type_n(va_list *ap, int ret)
@@ -123,10 +139,9 @@ int			ft_printf(char *fmt, ...)
 	size_t			j;
 	size_t			ret;
 	size_t			fret;
-	static t_params	*at = NULL;
+	static t_params	*p = NULL;
 
-	if (!at)
-		at = init_params();
+	p = p ? p : init_params();
 	va_start(ap, fmt);
 	i = -1;
 	ret = 0;
@@ -135,19 +150,18 @@ int			ft_printf(char *fmt, ...)
 	while (fmt[++i])
 		if (fmt[i++] == '%')
 		{
-			read_params(at, fmt, &i, &ap);
+			read_params(p, fmt, &i, &ap);
 			j = -1;
 			fret = 0;
-			while (++j < 13)
+			while (++j < NOFFUNCS)
 			{
 				if (fmt[i] == g_type_funcs[j].c)
-					fret += g_type_funcs[j].func(&ap, at);
+					fret += g_type_funcs[j].func(&ap, p);
 			}
 			ret += fret;
 			if (fret == 0)
 				if (fmt[i] == 'n')
 					type_n(&ap, ret);
-			//del_params(&at);
 		}
 		else
 			ret += ft_putchar(fmt[--i]);

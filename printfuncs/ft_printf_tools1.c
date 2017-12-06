@@ -44,3 +44,34 @@ void		rev_str(char *from, char *until)
 		until--;
 	}
 }
+
+void		check_width(t_params *p)
+{
+	if (!p->width)
+		return ;
+	p->width -= p->width <= p->prefix->len + p->output->len ? p->width :
+				p->prefix->len + p->output->len;
+	if (p->flags->minus)
+	{
+		print_width(' ', p->width);
+		if (p->prefix->len > 0)
+			final_putstr(p->prefix);
+		final_putstr(p->output);
+	}
+	else
+	{
+		if (p->flags->zero && !p->precision)
+		{
+			if (p->prefix->len > 0)
+				final_putstr(p->prefix);
+			print_width('0', p->width);
+		}
+		else
+		{
+			print_width(' ', p->width);
+			if (p->prefix->len > 0)
+				final_putstr(p->prefix);
+		}
+		final_putstr(p->output);
+	}
+}

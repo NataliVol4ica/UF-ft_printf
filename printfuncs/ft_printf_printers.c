@@ -14,22 +14,31 @@
 #include "libft.h"
 #include <unistd.h>
 #include <stdint.h>
+#include <stdlib.h>
 
-void	final_putstr(t_params *p)
+void	final_putstr(t_output *output)
 {
-	write(1, p->output->str, p->output->len);
+	write(1, output->str, output->len);
 }
 
 void	print_width(char c, size_t num)
 {
-	while (num-- > 0)
-		write(1, &c, 1);
+	char	*str;
+	size_t	i;
+
+	if (num == 0)
+		return ;
+	str = (char*)malloc(sizeof(char) * num);
+	i = num;
+	while (i-- > 0)
+		str[i] = c;
+	write(1, str, num);
+	free(str);
 }
 
 void	printf_putchar(char c, t_params *p)
 {
 	p->output->str[p->output->len++] = c;
-	p->output->str[p->output->len] = '\0';
 }
 
 void	printf_putnbr(intmax_t n, t_params *p)
@@ -52,7 +61,6 @@ void	printf_putnbr(intmax_t n, t_params *p)
 		p->output->str[p->output->len++] = num % 10 + '0';
 		num /= 10;
 	}
-	p->output->str[p->output->len] = '\0';
 	rev_str(from, &p->output->str[p->output->len - 1]);
 }
 
@@ -71,6 +79,5 @@ void	printf_putnbr_uns(uintmax_t n, t_params *p)
 		p->output->str[p->output->len++] = n % 10 + '0';
 		n /= 10;
 	}
-	p->output->str[p->output->len] = '\0';
 	rev_str(from, &p->output->str[p->output->len - 1]);
 }

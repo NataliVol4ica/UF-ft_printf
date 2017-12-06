@@ -15,58 +15,61 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void		read_params(t_params *at, char *fmt, size_t *pos, va_list *ap)
+void		read_params(t_params *p, char *fmt, size_t *pos, va_list *ap)
 {
 	int			i;
 
 	i = *pos;
-	at->n = get_n(&fmt[i], &i);
-	zero_flags_str(at->flags, at->output);
-	get_flags(&fmt[i], &i, at->flags);
-	at->width = get_width(&fmt[i], &i, ap);
-	at->precision = get_precision(&fmt[i], &i, ap);
-	at->length = get_length(&fmt[i], &i);
+	p->n = get_n(&fmt[i], &i);
+	zero_params(p);
+	get_flags(&fmt[i], &i, p->flags);
+	p->flags->zero = p->flags->minus ? 0 : p->flags->zero;
+	p->width = get_width(&fmt[i], &i, ap);
+	p->precision = get_precision(&fmt[i], &i, ap);
+	p->length = get_length(&fmt[i], &i);
 	*pos = i;
 }
 
 t_params	*init_params(void)
 {
-	t_params	*at;
+	t_params	*p;
 
-	at = (t_params*)malloc(sizeof(t_params));
-	at->flags = (t_flags*)malloc(sizeof(t_flags));
-	at->output = (t_output*)malloc(sizeof(t_output));
-	at->n = 0;
-	at->width = 0;
-	at->precision = 0;
-	at->length = EMPTY;
-	at->output->str = ft_strnew(MAX_STR);
-	zero_flags_str(at->flags, at->output);
-	return (at);
+	p = (t_params*)malloc(sizeof(t_params));
+	p->flags = (t_flags*)malloc(sizeof(t_flags));
+	p->output = (t_output*)malloc(sizeof(t_output));
+	p->prefix = (t_output*)malloc(sizeof(t_output));
+	p->n = 0;
+	p->width = 0;
+	p->precision = 0;
+	p->length = EMPTY;
+	p->output->str = ft_strnew(MAX_STR);
+	p->prefix->str = ft_strnew(2);
+	zero_params(p);
+	return (p);
 }
 
-void		del_params(t_params **at)
+void		del_params(t_params **p)
 {
-	if (at)
+	if (p)
 	{
-		if (*at)
+		if (*p)
 		{
-			free((*at)->flags);
-			free(*at);
+			free((*p)->flags);
+			free(*p);
 		}
-		*at = NULL;
+		*p = NULL;
 	}
 }
 
-void		zero_flags_str(t_flags *f, t_output *outp)
+void		zero_params(t_params *p)
 {
-	f->space = 0;
-	f->hash = 0;
-	f->plus = 0;
-	f->minus = 0;
-	f->zero = 0;
-	outp->str[0] = '\0';
-	outp->len = 0;
+	p->flags->space = 0;
+	p->flags->hash = 0;
+	p->flags->plus = 0;
+	p->flags->minus = 0;
+	p->flags->zero = 0;
+	p->output->len = 0;
+	p->prefix->len = 0;
 }
 
 /*
