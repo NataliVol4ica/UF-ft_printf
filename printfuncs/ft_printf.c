@@ -62,15 +62,16 @@ size_t		type_di(va_list *ap, t_params *p)
 	return (p->output->len);
 }
 
-size_t		type_bdubu(va_list *ap, t_params *at)
+size_t		type_bdubu(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	/*if (!(convert_numeric_unsigned(&num, at)))
-		return (print_unsigned_num_other_len(ap, at));*/
-	convert_numeric_unsigned(&num, at);
-	return (ft_putnbr_uns(num));
+	/*if (!(convert_numeric_unsigned(&num, p)))
+		return (print_unsigned_num_other_len(ap, p));*/
+	printf_putnbr_uns(num, p);
+	final_putstr(p);
+	return (p->output->len);
 }
 
 size_t		type_obo(va_list *ap, t_params *p)

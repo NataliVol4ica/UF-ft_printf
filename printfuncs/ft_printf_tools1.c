@@ -31,7 +31,7 @@ uintmax_t	printf_atoi(char *str, int *p)
 	return (ans);
 }
 
-void	rev_str(char *from, char *until)
+void		rev_str(char *from, char *until)
 {
 	char		c;
 

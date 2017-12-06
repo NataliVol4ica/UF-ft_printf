@@ -43,6 +43,7 @@ void			final_putstr(t_params *p);
 void			print_width(char c, size_t num);
 void			printf_putchar(char c, t_params *p);
 void			printf_putnbr(intmax_t n, t_params *p);
+void			printf_putnbr_uns(uintmax_t n, t_params *p);
 
 int				print_signed_num(va_list *ap, t_params *at);
 int				print_unsigned_num(va_list *ap, t_params *at);
