@@ -33,5 +33,5 @@ void	printf_convert_oboxbx(uintmax_t n, size_t base, t_params *p, char c)
 		p->output->len++;
 	}
 	p->output->str[p->output->len] = '\0';
-	rev_str(from, &p->output->str[p->output->len - 1]);
+	rev_str(p->output->str, p->output->len - 1);
 }
