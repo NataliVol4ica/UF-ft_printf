@@ -27,16 +27,18 @@ PRINTFUNCS = ft_putchar \
 			ft_print_word_tab \
 			ft_print_num_tab \
 			ft_log \
-			ft_printf \
-			ft_printf_tools1 \
-			ft_printf_printers \
-			ft_printf_converters \
-			ft_printf_params_init \
-			ft_printf_tools_recogn \
 			ft_putnbr_uns_fd \
-			ft_putnbr_uns 
+			ft_putnbr_uns
 PRINTFUNCDIR = ./printfuncs
 DPRINTFUNCS = $(patsubst %, $(PRINTFUNCDIR)/%, $(PRINTFUNCS))
+PRINTF =	ft_printf \
+			converters \
+			params_set \
+			params_tools \
+			printers \
+			tools1
+PRNTFDIR = $(PRINTFUNCDIR)/ft_printf
+DPRNTF = $(patsubst %, $(PRNTFDIR)/%, $(PRINTF))
 STRFUNCS =	ft_strlen \
 			ft_strcat \
 			ft_strncat \
@@ -127,13 +129,12 @@ FILENAMES = $(DSTRFUNCS) \
 			$(DLISTFUNCS) \
 			$(DMEMFUNCS) \
 			$(DCALCFUNCS) \
-			$(DCHARFUNCS)
+			$(DCHARFUNCS) \
+			$(DPRNTF)
 ODIR = ./obj
 CFILES = $(patsubst %, %.c, $(FILENAMES))
 OFILES = $(patsubst %, $(ODIR)/%.o, $(FILENAMES))
 FLAGS = -Wall -Wextra -Werror
-
-PRRINTFO = $(ODIR)/ft_printf/ft_printf.o
 
 BLACK = '\033[0;30m'
 RED = '\033[0;31m'
@@ -155,7 +156,7 @@ NC = '\033[0m' # No Color
 
 all: $(NAME)
 
-$(NAME): $(ODIR) $(OFILES) $(PRINTFO) $(HEADERS)
+$(NAME): $(ODIR) $(OFILES) $(HEADERS)
 	@echo ${CYAN}[Compiling $(NAME)]${NC}
 	@ar rc $(NAME) $(OFILES)
 	@ranlib $(NAME)
@@ -163,9 +164,6 @@ $(NAME): $(ODIR) $(OFILES) $(PRINTFO) $(HEADERS)
 
 $(ODIR)/%.o: %.c $(HEADERS)
 	gcc $(FLAGS) -o $@ -c $< -I$(INCDIR)
-
-$(PRINTFO):
-	make -C ft_printf/
 
 $(ODIR):
 	@mkdir -p $(ODIR)
@@ -175,7 +173,7 @@ $(ODIR):
 	@mkdir -p $(ODIR)/$(MEMFDIR)
 	@mkdir -p $(ODIR)/$(CALCFDIR)
 	@mkdir -p $(ODIR)/$(CHARFDIR)
-	@mkdir -p $(ODIR)/ft_printf
+	@mkdir -p $(ODIR)/$(PRNTFDIR)
 
 clean:
 	@echo ${RED}[Removing $(NAME) *.o files]${NC}

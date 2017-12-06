@@ -13,8 +13,8 @@
 #include <stdarg.h>
 #include "libft.h"
 #include <stdint.h>
-#include "../includes/ft_printf.h"
-#include "../includes/ft_printf_funcs.h"
+#include "../../includes/ft_printf.h"
+#include "../../includes/ft_printf_funcs.h"
 #include <stdio.h>
 
 size_t		type_percent(va_list *ap, t_params *p)
