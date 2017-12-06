@@ -72,14 +72,22 @@ size_t		type_di(va_list *ap, t_params *p)
 	return (p->output->len + p->prefix->len + p->width);
 }
 
-size_t		type_bdubu(va_list *ap, t_params *p)
+size_t		type_bdu(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	printf("%zu\n", num);
 	convert_numeric_unsigned(&num, p);
-	printf("%zu\n", num);
+	printf_putnbr_uns(num, p);
+	check_width_numeric(p);
+	return (p->output->len + p->width);
+}
+
+size_t		type_bu(va_list *ap, t_params *p)
+{
+	uintmax_t	num;
+
+	num = va_arg(*ap, unsigned long);
 	printf_putnbr_uns(num, p);
 	check_width_numeric(p);
 	return (p->output->len + p->width);

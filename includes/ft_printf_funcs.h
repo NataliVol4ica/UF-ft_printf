@@ -21,9 +21,9 @@ static t_funcs	g_type_funcs[] =
 {
 	{'d', &type_di},
 	{'i', &type_di},
-	{'D', &type_bdubu},
-	{'u', &type_bdubu},
-	{'U', &type_bdubu},
+	{'D', &type_bdu},
+	{'u', &type_bdu},
+	{'U', &type_bu},
 	{'c', &type_cbc},
 	{'C', &type_cbc},
 	{'s', &type_s},

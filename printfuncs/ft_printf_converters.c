@@ -36,24 +36,24 @@ void	printf_convert_oboxbx(uintmax_t n, size_t base, t_params *p, char c)
 	rev_str(p->output->str, p->output->len - 1);
 }
 
-int			convert_numeric_signed(intmax_t *n, t_params *at)
+int			convert_numeric_signed(intmax_t *n, t_params *p)
 {
 	intmax_t	num;
 
 	num = *n;
-	if (at->length == EMPTY)
+	if (p->length == EMPTY)
 		num = (int)num;
-	else if (at->length == HH)
+	else if (p->length == HH)
 		num = (char)num;
-	else if (at->length == H)
+	else if (p->length == H)
 		num = (short)num;
-	else if (at->length == LL)
+	else if (p->length == LL)
 		num = (long long)num;
-	else if (at->length == L)
+	else if (p->length == L)
 		num = (long)num;
-	else if (at->length == J)
+	else if (p->length == J)
 		num = (intmax_t)num;
-	else if (at->length == Z)
+	else if (p->length == Z)
 		num = (size_t)num;
 	else
 	{		
@@ -64,24 +64,24 @@ int			convert_numeric_signed(intmax_t *n, t_params *at)
 	return (1);
 }
 
-int			convert_numeric_unsigned(uintmax_t *n, t_params *at)
+int			convert_numeric_unsigned(uintmax_t *n, t_params *p)
 {
 	uintmax_t	num;
 
 	num = *n;
-	if (at->length == EMPTY)
+	if (p->length == EMPTY)
 		num = (unsigned int)num;
-	else if (at->length == HH)
+	else if (p->length == HH)
 		num = (unsigned char)num;
-	else if (at->length == H)
+	else if (p->length == H)
 		num = (unsigned short int)num;
-	else if (at->length == LL)
+	else if (p->length == LL)
 		num = (unsigned long long int)num;
-	else if (at->length == L)
+	else if (p->length == L)
 		num = (unsigned long int)num;
-	else if (at->length == J)
+	else if (p->length == J)
 		num = (uintmax_t)num;
-	else if (at->length == Z)
+	else if (p->length == Z)
 		num = (size_t)num;
 	else
 	{

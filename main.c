@@ -26,14 +26,14 @@ int		main(void)
 	intmax_t r;
 
 
+	/*
 	char	*str3 = "some str";
 	printf("%p\n", str3);
 	ft_printf("%p\n", str3);
+	*/
 	/*
-	unsigned int strange = 4294967296;
-
-	printf("%U\n", 4294967296);
-	printf("%U\n", strange);
+	printf("%hhU\n", 4294967296);
+	ft_printf("%hhU\n", 4294967296);
 	*/
 	//	ft_printf("%U\n", 4294967296);
 	/*
