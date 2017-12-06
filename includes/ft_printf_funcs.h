@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 
 # define NOFFUNCS 13
+
 static t_funcs	g_type_funcs[] =
 {
 	{'d', &type_di},
