@@ -51,10 +51,10 @@ void		check_width(t_params *p)
 				p->prefix->len + p->output->len;
 	if (p->flags->minus)
 	{
-		print_width(' ', p->width);
 		if (p->prefix->len > 0)
 			final_putstr(p->prefix);
 		final_putstr(p->output);
+		print_width(' ', p->width);
 		return ;
 	}
 	if (p->flags->zero && !p->precision)

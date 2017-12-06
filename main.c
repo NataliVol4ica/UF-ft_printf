@@ -44,9 +44,9 @@ int		main(void)
 	ft_printf("aaaaa %++d bbbb\n", t);*/
 	//printf("aaaaa %+6d bbbb\n", t);
 	//printf("aaaaa %#*o bbbb %#*x\n", 10, t, 10, t);
-	ft_printf("aaaaa |%0#*o| bbbb |%0#*x| cccc |%0#*X|\n", 10, t, 9, t, 8, t);
+	/*ft_printf("aaaaa |%0#*o| bbbb |%0#*x| cccc |%0#*X|\n", 10, t, 9, t, 8, t);
 	printf("aaaaa |%0#*o| bbbb |%0#*x| cccc |%0#*X|\n", 10, t, 9, t, 8, t);
-	printf("|%020s|\n", "test string");
+	printf("|%020s|\n", "test string");*/
 	//printf("% +d\n", 25);
 	//printf("uns %U\n", (unsigned int)2147483648);
 	/*ft_printf("uns %u\n", (unsigned int)2147483648);*/
@@ -78,13 +78,13 @@ int		main(void)
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");*/
-	/*ft_printf("%%-i 42 == %-i\n", 42);
+	ft_printf("%%-i 42 == %-i\n", 42);
 	ft_printf("%%-d 42 == %-d\n", -2147483648);
 	ft_printf("%%-i -42 == %-i\n", -42);
 	ft_printf("%%-4d 42 == |%-4d|\n", 42);
 	ft_printf("%%-5d -42 == |%-5d|\n", -42);
 	ft_printf("|%3i|%-3i|\n", 42, 42);
-	ft_printf("%%-4i 42 == |%-4i|\n", 42);*/
+	ft_printf("%%-4i 42 == |%-4i|\n", 42);
 	//ft_printf("%llu\n", n);
 	/*int k;
 	ft_printf("LALALALALAL\n%n",&k);
