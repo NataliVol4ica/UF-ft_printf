@@ -29,7 +29,6 @@ PRINTFUNCS = ft_putchar \
 			ft_log \
 			ft_printf \
 			ft_printf_tools1 \
-			ft_printf_tools2 \
 			ft_printf_printers \
 			ft_printf_converters \
 			ft_printf_params_init \

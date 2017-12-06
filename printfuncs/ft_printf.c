@@ -53,17 +53,22 @@ size_t		type_s(va_list *ap, t_params *p)
 size_t		type_di(va_list *ap, t_params *p)
 {
 	intmax_t	num;
+	uintmax_t	n;
 
 	num = va_arg(*ap, intmax_t);
 	convert_numeric_signed(&num, p);
 	if (num > 0)
 	{
 		if (p->flags->plus)
-			printf_putchar('+', p);
+			p->prefix->str[p->prefix->len++] = '+';
 		else if (p->flags->space)
-			printf_putchar(' ', p);
+			p->prefix->str[p->prefix->len++] = ' ';
 	}
-	printf_putnbr(num, p);
+	else
+		p->prefix->str[p->prefix->len++] = '-';
+	n = num < 0 ? -num : num;
+	n = num < 0 && (intmax_t)(num - 1) > 0 ? n + 1 : n;
+	printf_putnbr_uns(n, p);
 	check_width(p);
 	return (p->output->len);
 }

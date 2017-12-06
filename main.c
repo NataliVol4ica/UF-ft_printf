@@ -25,6 +25,12 @@ int		main(void)
 	intmax_t r;
 
 	t = 7835;
+	printf("% 010d\n", 27);
+	ft_printf("% 010d\n", 27);
+	printf("%- 010d\n", 27);
+	ft_printf("%- 010d\n", 27);
+	printf("% 010d\n", -27);
+	ft_printf("% 010d\n", -27);
 	/*for (int i = 0; i < 13; i++)
 		printf("symb[%d] = \'%c\'\n", i, *type_funcs[i].c);
 	printf("\n=================\n");*/
@@ -78,13 +84,13 @@ int		main(void)
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");*/
-	ft_printf("%%-i 42 == %-i\n", 42);
+	/*ft_printf("%%-i 42 == %-i\n", 42);
 	ft_printf("%%-d 42 == %-d\n", -2147483648);
 	ft_printf("%%-i -42 == %-i\n", -42);
 	ft_printf("%%-4d 42 == |%-4d|\n", 42);
 	ft_printf("%%-5d -42 == |%-5d|\n", -42);
 	ft_printf("|%3i|%-3i|\n", 42, 42);
-	ft_printf("%%-4i 42 == |%-4i|\n", 42);
+	ft_printf("%%-4i 42 == |%-4i|\n", 42);*/
 	//ft_printf("%llu\n", n);
 	/*int k;
 	ft_printf("LALALALALAL\n%n",&k);

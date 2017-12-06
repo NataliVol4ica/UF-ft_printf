@@ -31,10 +31,12 @@ uintmax_t	printf_atoi(char *str, int *p)
 	return (ans);
 }
 
-void		rev_str(char *from, char *until)
+void		rev_str(char *from, size_t n)
 {
-	char		c;
+	char	c;
+	char	*until;
 
+	until = &from[n];
 	while (from < until)
 	{
 		c = *from;

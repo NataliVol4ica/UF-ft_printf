@@ -29,16 +29,11 @@
 ** FLAG PARSING
 */
 
-/*size_t			react_on_flags_di(intmax_t num, t_flags *flags);
-size_t			react_on_flags_obo(t_flags *flags);
-size_t			react_on_flags_x(t_flags *flags);
-size_t			react_on_flags_bx(t_flags *flags);*/
-
 int				convert_numeric_signed(intmax_t *n, t_params *p);
 int				convert_numeric_unsigned(uintmax_t *n, t_params *p);
 uintmax_t		printf_atoi(char *str, int *p);
 void			check_width(t_params *p);
-void			rev_str(char *from, char *until);
+void			rev_str(char *from, size_t n);
 /*
 ** PRINTERS
 */
@@ -46,7 +41,6 @@ void			rev_str(char *from, char *until);
 void			final_putstr(t_output *output);
 void			print_width(char c, size_t num);
 void			printf_putchar(char c, t_params *p);
-void			printf_putnbr(intmax_t n, t_params *p);
 void			printf_putnbr_uns(uintmax_t n, t_params *p);
 void			printf_convert_oboxbx(uintmax_t n, size_t base,
 										t_params *p, char c);

@@ -41,29 +41,6 @@ void	printf_putchar(char c, t_params *p)
 	p->output->str[p->output->len++] = c;
 }
 
-void	printf_putnbr(intmax_t n, t_params *p)
-{
-	uintmax_t	num;
-	char		*from;
-
-	if (n == 0)
-	{
-		printf_putchar('0', p);
-		return ;
-	}
-	if (n < 0)
-		p->output->str[p->output->len++] = '-';
-	num = n < 0 ? -n : n;
-	num = n < 0 && (intmax_t)(n - 1) > 0 ? num + 1 : num;
-	from = &p->output->str[p->output->len];
-	while (num != 0)
-	{
-		p->output->str[p->output->len++] = num % 10 + '0';
-		num /= 10;
-	}
-	rev_str(from, &p->output->str[p->output->len - 1]);
-}
-
 void	printf_putnbr_uns(uintmax_t n, t_params *p)
 {
 	char		*from;
@@ -79,5 +56,5 @@ void	printf_putnbr_uns(uintmax_t n, t_params *p)
 		p->output->str[p->output->len++] = n % 10 + '0';
 		n /= 10;
 	}
-	rev_str(from, &p->output->str[p->output->len - 1]);
+	rev_str(p->output->str, p->output->len - 1);
 }
