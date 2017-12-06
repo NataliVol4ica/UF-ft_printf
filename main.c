@@ -24,7 +24,7 @@ int		main(void)
 	short	t;
 	intmax_t r;
 
-	t = 7825;
+	t = 7835;
 	/*for (int i = 0; i < 13; i++)
 		printf("symb[%d] = \'%c\'\n", i, *type_funcs[i].c);
 	printf("\n=================\n");*/
@@ -42,9 +42,10 @@ int		main(void)
 	ft_printf("aaaaa %+ d bbbb\n", t);
 	ft_printf("aaaaa % d bbbb\n", t);
 	ft_printf("aaaaa %++d bbbb\n", t);*/
-	/*printf("aaaaa %+6d bbbb\n", t);
-	printf("aaaaa %#*o bbbb %#*o\n", 10, t, 10, t);
-	printf("uns %U\n", (unsigned int)2147483648);*/
+	//printf("aaaaa %+6d bbbb\n", t);
+	//printf("aaaaa %#*o bbbb %#*x\n", 10, t, 10, t);
+	ft_printf("aaaaa %#*o bbbb %#*x\n", 10, t, 10, t);
+	//printf("uns %U\n", (unsigned int)2147483648);
 	/*ft_printf("uns %u\n", (unsigned int)2147483648);*/
 	//printf("%O\n", -300);
 	//printf("Number %zd\n", -2147483648);
@@ -53,7 +54,7 @@ int		main(void)
 	/*r = -8000;
 	printf("R = %jd\n", r);*/
 	//ft_printf("%d", 42);
-	ft_printf("Kashim a %d histoires à raconter", 1001);
+	/*ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
 	ft_printf("%d", 0);
@@ -67,7 +68,7 @@ int		main(void)
 	ft_printf("%%d 	 == |%d|", 9);
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
-	ft_printf("\n");
+	ft_printf("\n");*/
 	/*ft_printf("%%d 0000042 == |%d|", 34);
 	ft_printf("\n");
 	ft_printf("%%d 	 == |%d|", 9);

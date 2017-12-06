@@ -69,6 +69,7 @@ size_t		type_bdubu(va_list *ap, t_params *p)
 	num = va_arg(*ap, uintmax_t);
 	/*if (!(convert_numeric_unsigned(&num, p)))
 		return (print_unsigned_num_other_len(ap, p));*/
+	convert_numeric_unsigned(&num, p);	
 	printf_putnbr_uns(num, p);
 	final_putstr(p);
 	return (p->output->len);
@@ -76,47 +77,35 @@ size_t		type_bdubu(va_list *ap, t_params *p)
 
 size_t		type_obo(va_list *ap, t_params *p)
 {
-	size_t		ret;
-	char		*str;
 	uintmax_t	num;
 
-	ret = 0;
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);
-	str = ft_itoa_base_uns(num, 8);
-	ret += react_on_flags_obo(p->flags);
-	ret += ft_putstr(str);
-	return (ret);
+	printf_convert_oboxbx(num, 8, p, '0');
+	final_putstr(p);
+	return (p->output->len);
 }
 
 size_t		type_x(va_list *ap, t_params *p)
 {
-	size_t		ret;
-	char		*str;
 	uintmax_t	num;
 
-	ret = 0;
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);
-	str = ft_itoa_base_uns(num, 16);
-	ret += react_on_flags_x(p->flags);
-	ret += ft_putstr(str);
-	return (ret);
+	printf_convert_oboxbx(num, 16, p, 'a');
+	final_putstr(p);
+	return (p->output->len);
 }
 
 size_t		type_bx(va_list *ap, t_params *p)
 {
-	size_t		ret;
-	char		*str;
 	uintmax_t	num;
 
-	ret = 0;
 	num = va_arg(*ap, uintmax_t);
 	convert_numeric_unsigned(&num, p);
-	str = ft_itoa_base_uns(num, 16);
-	ret += react_on_flags_bx(p->flags);
-	ret += ft_putstr(str);
-	return (ret);
+	printf_convert_oboxbx(num, 16, p, 'A');
+	final_putstr(p);
+	return (p->output->len);
 }
 
 void		type_n(va_list *ap, int ret)

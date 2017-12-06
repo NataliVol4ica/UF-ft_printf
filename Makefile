@@ -31,6 +31,7 @@ PRINTFUNCS = ft_putchar \
 			ft_printf_tools1 \
 			ft_printf_tools2 \
 			ft_printf_printers \
+			ft_printf_converters \
 			ft_printf_params_init \
 			ft_printf_tools_recogn \
 			ft_printf_tools_intnum \
