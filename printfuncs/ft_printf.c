@@ -135,11 +135,8 @@ size_t		type_p(va_list *ap, t_params *p)
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	convert_numeric_unsigned(&num, p);
 	p->prefix->str[p->prefix->len++] = '0';
 	p->prefix->str[p->prefix->len++] = 'x';
-	p->prefix->str[p->prefix->len++] = '1';
-	p->prefix->str[p->prefix->len++] = '0';
 	printf_convert_oboxbx(num, 16, p, 'a');
 	check_width_numeric(p);
 	return (p->output->len + p->prefix->len + p->width);
