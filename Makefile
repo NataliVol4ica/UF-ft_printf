@@ -179,7 +179,7 @@ $(ODIR):
 	@mkdir -p $(ODIR)/ft_printf
 
 clean:
-	echo ${RED}[Removing $(NAME) *.o files]${NC}
+	@echo ${RED}[Removing $(NAME) *.o files]${NC}
 	@/bin/rm -rf $(ODIR)
 
 fclean: clean

@@ -15,16 +15,23 @@
 #include <stdint.h>
 #include "../includes/ft_printf_funcs.h"
 #include <stdlib.h>
+#include <limits.h>
 
 int		main(void)
 {
 	unsigned long long n = 123;
 	char	*str = "hi_word";
 	char	*str2 = "2 string";
-	short	t;
+	short	t = 7835;
 	intmax_t r;
 
-	t = 7835;
+
+	ft_printf("%#O\n", 1);
+	printf("%#O\n", 1);
+	/*
+	printf("|%5%|\n");
+	ft_printf("|%5%|\n");
+	*/
 	/*
 	printf("% 010d\n", 27);
 	ft_printf("% 010d\n", 27);
@@ -33,12 +40,14 @@ int		main(void)
 	printf("% 010d\n", -27);
 	ft_printf("% 010d\n", -27);
 	*/
+	/*
 	ft_printf("|%5%|\n");
 	printf("|%5%|\n");
 	ft_printf("|%010c|\n", 'r');
 	printf("|%010c|\n", 'r');
 	ft_printf("|%010s|\n", "r");
 	printf("|%010s|\n", "r");
+	*/
 	/*for (int i = 0; i < 13; i++)
 		printf("symb[%d] = \'%c\'\n", i, *type_funcs[i].c);
 	printf("\n=================\n");*/
