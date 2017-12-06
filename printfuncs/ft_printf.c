@@ -64,7 +64,7 @@ size_t		type_di(va_list *ap, t_params *p)
 		else if (p->flags->space)
 			p->prefix->str[p->prefix->len++] = ' ';
 	}
-	else
+	else if (num < 0)
 		p->prefix->str[p->prefix->len++] = '-';
 	n = num < 0 ? -num : num;
 	n = num < 0 && (intmax_t)(num - 1) > 0 ? n + 1 : n;
