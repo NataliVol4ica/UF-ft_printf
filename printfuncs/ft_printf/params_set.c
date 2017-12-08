@@ -81,7 +81,7 @@ size_t		get_width(char *str, int *p, va_list *ap)
 intmax_t	get_precision(char *str, int *p, va_list *ap)
 {
 	if (str[0] != '.')
-		return (0);
+		return (-1);
 	*p = *p + 1;
 	if (str[1] == '*')
 	{

@@ -63,6 +63,7 @@ t_params	*init_params(void);
 void		read_params(t_params *p, char *fmt, size_t *pos, va_list *ap);
 void		del_params(t_params **p);
 void		zero_params(t_params *p);
+void		print_params(t_params *t);
 
 /*
 ** READING PARAMETERS

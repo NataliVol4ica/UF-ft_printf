@@ -24,7 +24,9 @@ size_t		type_o(va_list *ap, t_params *p)
 	if (p->flags->hash && num != 0)
 		p->prefix->str[p->prefix->len++] = '0';
 	printf_convert_base(num, 8, p, '0');
-	p->flags->zero = p->precision ? 0 : p->flags->zero;
+	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
+	if (p->precision > 0 && p->output->len > (uintmax_t)p->precision)
+		p->output->len = (uintmax_t)p->precision;
 	check_width(p);
 	return (p->output->len + p->prefix->len + p->width);
 }
@@ -53,7 +55,7 @@ size_t		type_x(va_list *ap, t_params *p)
 		p->prefix->str[p->prefix->len++] = 'x';
 	}
 	printf_convert_base(num, 16, p, 'a');
-	p->flags->zero = p->precision ? 0 : p->flags->zero;
+	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
 	check_width(p);
 	return (p->output->len + p->prefix->len + p->width);
 }
@@ -70,7 +72,9 @@ size_t		type_bx(va_list *ap, t_params *p)
 		p->prefix->str[p->prefix->len++] = 'X';
 	}
 	printf_convert_base(num, 16, p, 'A');
-	p->flags->zero = p->precision ? 0 : p->flags->zero;
+	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
+	if (p->precision > 0 && p->output->len > (uintmax_t)p->precision)
+		p->output->len = (uintmax_t)p->precision;
 	check_width(p);
 	return (p->output->len + p->prefix->len + p->width);
 }

@@ -69,16 +69,14 @@ void		zero_params(t_params *p)
 	p->prefix->len = 0;
 }
 
-/*
-** void		print_params(t_params *t)
-** {
-** 	printf("\n=======\n");
-** 	printf("n = %zu\n", t->n);
-** 	printf("Flags = %d%d%d%d%d\n", t->flags->space, t->flags->hash,
-**	t->flags->plus, t->flags->minus, t->flags->zero);
-** 	printf("Width = %zu\n", t->width);
-** 	printf("Precision = %zu\n", t->precision);
-** 	printf("Length = %u\n", t->length);
-** 	printf("fi\n");
-** }
-*/
+void		print_params(t_params *t)
+{
+	printf("\n=======\n");
+ 	printf("n = %zu\n", t->n);
+ 	printf("Flags = %d%d%d%d%d\n", t->flags->space, t->flags->hash,
+	t->flags->plus, t->flags->minus, t->flags->zero);
+ 	printf("Width = %zu\n", t->width);
+ 	printf("Precision = %zu\n", t->precision);
+ 	printf("Length = %u\n", t->length);
+ 	printf("fi\n");
+}

@@ -57,23 +57,21 @@ void		check_width(t_params *p)
 				p->prefix->len + p->output->len;
 	if (p->flags->minus)
 	{
-		if (p->prefix->len > 0)
-			final_putstr(p->prefix->str, p->prefix->len);
+		final_putstr(p->prefix->str, p->prefix->len);
 		final_putstr(p->output->str, p->output->len);
 		print_width(' ', p->width);
 		return ;
 	}
 	if (p->flags->zero)
 	{
-		if (p->prefix->len > 0)
-			final_putstr( p->prefix->str, p->prefix->len);
+		final_putstr(p->prefix->str, p->prefix->len);
 		print_width('0', p->width);
 	}
 	else
 	{
 		print_width(' ', p->width);
-		if (p->prefix->len > 0)
-			final_putstr(p->prefix->str, p->prefix->len);
+		final_putstr(p->prefix->str, p->prefix->len);
 	}
 	final_putstr(p->output->str, p->output->len);
+
 }

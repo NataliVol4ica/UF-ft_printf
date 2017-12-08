@@ -21,7 +21,7 @@ int			ft_printf(char *fmt, ...)
 	size_t			i;
 	size_t			j;
 	size_t			ret;
-	size_t			fret;
+	intmax_t		fret;
 	size_t			save_pos;
 	static t_params	*p = NULL;
 
@@ -37,14 +37,17 @@ int			ft_printf(char *fmt, ...)
 			save_pos = i;
 			read_params(p, fmt, &i, &ap);
 			j = -1;
-			fret = 0;
+			fret = -1;
 			while (++j < NOFFUNCS)
 			{
 				if (fmt[i] == g_type_funcs[j].c)
+				{
+					fret += fret == -1 ? 1 : 0;
 					fret += g_type_funcs[j].func(&ap, p);
+				}
 			}
-			ret += fret;
-			if (fret == 0)
+			ret += fret > 0 ? fret : 0;
+			if (fret == -1)
 			{
 				if (fmt[i] == 'n')
 					type_n(&ap, p, ret);

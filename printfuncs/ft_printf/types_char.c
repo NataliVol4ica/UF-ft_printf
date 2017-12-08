@@ -59,6 +59,8 @@ size_t		type_s(va_list *ap, t_params *p)
 	}
 	else
 		p->output->len = ft_strlen(p->output->str);
+	if (p->precision > -1 && p->output->len > (uintmax_t)p->precision)
+		p->output->len = (uintmax_t)p->precision;
 	check_width(p);
 	p->output->str = temp;
 	return (p->output->len + p->width);

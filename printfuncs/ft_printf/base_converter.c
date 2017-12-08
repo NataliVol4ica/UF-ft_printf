@@ -19,7 +19,8 @@ void	printf_convert_base(uintmax_t n, size_t base, t_params *p, char c)
 
 	if (n == 0)
 	{
-		printf_putchar('0', p);
+		if (p->precision != 0)
+			printf_putchar('0', p);
 		return ;
 	}
 	from = &p->output->str[p->output->len];
@@ -31,6 +32,8 @@ void	printf_convert_base(uintmax_t n, size_t base, t_params *p, char c)
 		n /= base;
 		p->output->len++;
 	}
-	p->output->str[p->output->len] = '\0';
+	if (p->precision > 0)
+	while (p->output->len < (size_t)p->precision)
+		p->output->str[p->output->len++] = '0';
 	rev_str(p->output->str, p->output->len - 1);
 }

@@ -27,12 +27,47 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	ft_printf("%-5.10o\n", 2500);
+	printf("%-5.10o\n", 2500);
+	/*
+	float f1 = -100;
+	float f2 = 0;
+	printf("%f\n", f1/f2);
+	*/
+	/*
+	ft_printf("%.0d\n", 0);
+	printf("%.0d\n", 0);
+	*/
+	/*
+	ft_printf("|%.2x|\n", 5427);
+	printf("|%.2x|\n", 5427);
+	*/
+	/*
+	ft_printf("|%010x|\n", 542);
+	printf("|%010x|\n", 542);
+	*/
+	/*
+	ft_printf("|%#.x %#.0x|\n", 1, 1);
+	printf("|%#.x %#.0x|\n", 1, 1);
+	ft_printf("|%#.x %#.1x|\n", 1, 1);
+	printf("|%#.x %#.1x|\n", 1, 1);
+	ft_printf("|%#.x %#.0x|\n", 0, 0);
+	printf("|%#.x %#.0x|\n", 0, 0);
+	ft_printf("|%#.x %#.1x|\n", 0, 0);
+	printf("|%#.x %#.1x|\n", 0, 0);
+	*/
+	/*
+	ft_printf("|%.0%|\n");
+	printf("|%.0%|\n");
+	*/
+	/*
 	printf("|%.10d|\n", -42);
 	ft_printf("|%.10d|\n", -42);
 	printf("|%-15.10d|\n", -42);
 	ft_printf("|%-15.10d|\n", -42);
 	printf("|%- 15.10d|\n", 42);
 	ft_printf("|%- 15.10d|\n", 42);
+	*/
 	/*
 	printf("L  = %ld\n", INT_MAX);
 	printf("H  = %hd\n", INT_MAX);
