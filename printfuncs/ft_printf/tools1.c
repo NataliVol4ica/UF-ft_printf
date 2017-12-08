@@ -15,20 +15,24 @@
 #include <stdarg.h>
 #include <stdint.h>
 
-uintmax_t	printf_atoi(char *str, int *p)
+intmax_t	printf_atoi(char *str, int *p)
 {
 	uintmax_t	ans;
+	int			sign;
 	int			i;
 
 	i = 0;
 	ans = 0;
+	sign = str[i] == '-' ? -1 : 1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		ans = ans * 10 + str[i] - '0';
 		i++;
 	}
 	*p = *p + i;
-	return (ans);
+	return (ans * sign);
 }
 
 void		rev_str(char *from, size_t n)

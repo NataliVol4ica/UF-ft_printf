@@ -27,11 +27,20 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
-	ft_printf("%lhd\n", INT_MAX);
+	printf("|%.10d|\n", -42);
+	ft_printf("|%.10d|\n", -42);
+	printf("|%-15.10d|\n", -42);
+	ft_printf("|%-15.10d|\n", -42);
+	printf("|%- 15.10d|\n", 42);
+	ft_printf("|%- 15.10d|\n", 42);
+	/*
 	printf("L  = %ld\n", INT_MAX);
 	printf("H  = %hd\n", INT_MAX);
 	printf("LH = %lhd\n", INT_MAX);
+	ft_printf("F LH = %lhd\n", INT_MAX);
 	printf("HL = %hld\n", INT_MAX);
+	ft_printf("F HL = %hld\n", INT_MAX);
+	*/
 	/*
 	printf("|% h|\n");
 	ft_printf("|% h|\n");

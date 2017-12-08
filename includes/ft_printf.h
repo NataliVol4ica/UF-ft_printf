@@ -38,7 +38,7 @@ void		convert_ouxbx(uintmax_t *n, t_params *p);
 ** TOOLS
 */
 
-uintmax_t	printf_atoi(char *str, int *p);
+intmax_t	printf_atoi(char *str, int *p);
 void		check_width(t_params *p);
 void		rev_str(char *from, size_t n);
 
@@ -71,7 +71,7 @@ void		zero_params(t_params *p);
 size_t		get_n(char *str, int *p);
 void		get_flags(char *str, int *p, t_flags *f);
 size_t		get_width(char *str, int *p, va_list *ap);
-size_t		get_precision(char *str, int *p, va_list *ap);
+intmax_t	get_precision(char *str, int *p, va_list *ap);
 t_length	get_length(char *str, int *i);
 
 /*

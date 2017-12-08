@@ -43,7 +43,8 @@ void	printf_putchar(char c, t_params *p)
 
 void	printf_putnbr_uns(uintmax_t n, t_params *p)
 {
-	char		*from;
+	char	*from;
+	//size_t	diff;
 
 	if (n == 0)
 	{
@@ -56,5 +57,9 @@ void	printf_putnbr_uns(uintmax_t n, t_params *p)
 		p->output->str[p->output->len++] = n % 10 + '0';
 		n /= 10;
 	}
+	if (p->precision < 0)
+		return ;
+	while (p->output->len < (uintmax_t)p->precision)
+		p->output->str[p->output->len++] = '0';
 	rev_str(p->output->str, p->output->len - 1);
 }

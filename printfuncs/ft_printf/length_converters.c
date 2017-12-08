@@ -14,28 +14,6 @@
 #include "libft.h"
 #include <stdint.h>
 
-void	printf_convert_oboxbx(uintmax_t n, size_t base, t_params *p, char c)
-{
-	char		*from;
-
-	if (n == 0)
-	{
-		printf_putchar('0', p);
-		return ;
-	}
-	from = &p->output->str[p->output->len];
-	while (n != 0)
-	{
-		p->output->str[p->output->len] = n % base;
-		p->output->str[p->output->len] +=
-			p->output->str[p->output->len] > 9 ? -10 + c : '0';
-		n /= base;
-		p->output->len++;
-	}
-	p->output->str[p->output->len] = '\0';
-	rev_str(p->output->str, p->output->len - 1);
-}
-
 void	convert_di(intmax_t *n, t_params *p)
 {
 	intmax_t	num;
