@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   converters.c                                       :+:      :+:    :+:   */
+/*   length_converters.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -36,15 +36,13 @@ void	printf_convert_oboxbx(uintmax_t n, size_t base, t_params *p, char c)
 	rev_str(p->output->str, p->output->len - 1);
 }
 
-int			convert_numeric_signed(intmax_t *n, t_params *p)
+void	convert_di(intmax_t *n, t_params *p)
 {
 	intmax_t	num;
 
 	num = *n;
-	if (p->length == EMPTY)
-		num = (int)num;
-	else if (p->length == HH)
-		num = (char)num;
+	if (p->length == HH)
+		num = (signed char)num;
 	else if (p->length == H)
 		num = (short)num;
 	else if (p->length == LL)
@@ -55,28 +53,22 @@ int			convert_numeric_signed(intmax_t *n, t_params *p)
 		num = (intmax_t)num;
 	else if (p->length == Z)
 		num = (size_t)num;
-	else
-	{		
+	else	
 		num = (int)num;
-		return (0);
-	}
 	*n = num;
-	return (1);
 }
 
-int			convert_numeric_unsigned(uintmax_t *n, t_params *p)
+void	convert_ouxbx(uintmax_t *n, t_params *p)
 {
 	uintmax_t	num;
 
 	num = *n;
-	if (p->length == EMPTY)
-		num = (unsigned int)num;
-	else if (p->length == HH)
+	if (p->length == HH)
 		num = (unsigned char)num;
 	else if (p->length == H)
-		num = (unsigned short int)num;
+		num = (unsigned short)num;
 	else if (p->length == LL)
-		num = (unsigned long long int)num;
+		num = (unsigned long long)num;
 	else if (p->length == L)
 		num = (unsigned long int)num;
 	else if (p->length == J)
@@ -84,10 +76,6 @@ int			convert_numeric_unsigned(uintmax_t *n, t_params *p)
 	else if (p->length == Z)
 		num = (size_t)num;
 	else
-	{
 		num = (unsigned int)num;
-		return (0);
-	}
 	*n = num;
-	return (1);
 }

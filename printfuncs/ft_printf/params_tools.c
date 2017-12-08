@@ -23,10 +23,10 @@ void		read_params(t_params *p, char *fmt, size_t *pos, va_list *ap)
 	p->n = get_n(&fmt[i], &i);
 	zero_params(p);
 	get_flags(&fmt[i], &i, p->flags);
-	p->flags->zero = p->flags->minus ? 0 : p->flags->zero;
 	p->width = get_width(&fmt[i], &i, ap);
 	p->precision = get_precision(&fmt[i], &i, ap);
 	p->length = get_length(&fmt[i], &i);
+	p->flags->zero = p->flags->minus ? 0 : p->flags->zero;
 	*pos = i;
 }
 
@@ -38,10 +38,6 @@ t_params	*init_params(void)
 	p->flags = (t_flags*)malloc(sizeof(t_flags));
 	p->output = (t_output*)malloc(sizeof(t_output));
 	p->prefix = (t_output*)malloc(sizeof(t_output));
-	p->n = 0;
-	p->width = 0;
-	p->precision = 0;
-	p->length = EMPTY;
 	p->output->str = ft_strnew(MAX_STR);
 	p->prefix->str = ft_strnew(2);
 	zero_params(p);
@@ -68,6 +64,7 @@ void		zero_params(t_params *p)
 	p->flags->plus = 0;
 	p->flags->minus = 0;
 	p->flags->zero = 0;
+	p->flags->apostrophe = 0;
 	p->output->len = 0;
 	p->prefix->len = 0;
 }

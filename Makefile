@@ -32,10 +32,15 @@ PRINTFUNCS = ft_putchar \
 PRINTFUNCDIR = ./printfuncs
 DPRINTFUNCS = $(patsubst %, $(PRINTFUNCDIR)/%, $(PRINTFUNCS))
 PRINTF =	ft_printf \
-			converters \
+			length_converters \
+			base_converter \
 			params_set \
 			params_tools \
 			printers \
+			types_char \
+			types_numeric \
+			types_octhex \
+			types_extra \
 			tools1
 PRNTFDIR = $(PRINTFUNCDIR)/ft_printf
 DPRNTF = $(patsubst %, $(PRNTFDIR)/%, $(PRINTF))

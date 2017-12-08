@@ -17,7 +17,7 @@
 
 typedef enum	e_length
 {
-	EMPTY = 0, L = 2, LL, H, HH, J, Z, T, BL
+	EMPTY = 0, HH = 2, H, L, LL, J, T, Z, BL
 }				t_length;
 
 typedef struct	s_output
@@ -33,6 +33,7 @@ typedef struct	s_flags
 	_Bool	plus;
 	_Bool	minus;
 	_Bool	zero;
+	_Bool	apostrophe;
 }				t_flags;
 
 typedef struct	s_params

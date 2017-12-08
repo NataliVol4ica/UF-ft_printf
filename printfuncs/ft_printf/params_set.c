@@ -54,6 +54,8 @@ void		get_flags(char *str, int *p, t_flags *f)
 			f->hash = 1;
 		else if (str[i] == ' ')
 			f->space = 1;
+		else if (str[i] == '\'')
+			f->apostrophe = 1;
 		else
 		{
 			i--;
@@ -91,29 +93,44 @@ size_t		get_precision(char *str, int *p, va_list *ap)
 
 t_length	get_length(char *str, int *i)
 {
-	*i = *i + 1;
-	if (str[0] == 'h')
-		if (str[1] == 'h')
-		{
-			*i = *i + 1;
-			return (HH);
-		}
+	t_length l;
+	size_t ind;
+
+	l = EMPTY;
+	ind = 0;
+	while (1)
+	{
+		*i = *i + 1;
+		if (str[ind] == 'h')
+			if (str[ind + 1] == 'h')
+			{
+				*i = *i + 1;
+				ind++;
+				l = l < HH ? HH : l;
+			}
+			else
+				l = l < H ? H : l;
+		else if (str[ind] == 'l')
+			if (str[ind + 1] == 'l')
+			{
+				*i = *i + 1;
+				ind++;
+				l = l < LL ? LL : l;
+			}
+			else
+				l = l < L ? L : l;
+		else if (str[ind] == 'j')
+			l = l < J ? J : l;
+		else if (str[ind] == 'z')
+			l = l < Z ? Z : l;
+		else if (str[ind] == 'L')
+			l = l < BL ? BL : l;
 		else
-			return (H);
-	else if (str[0] == 'l')
-		if (str[1] == 'l')
 		{
-			*i = *i + 1;
-			return (LL);
+			*i = *i - 1;
+			break;
 		}
-		else
-			return (L);
-	else if (str[0] == 'j')
-		return (J);
-	else if (str[0] == 'z')
-		return (Z);
-	else if (str[0] == 'L')
-		return (BL);
-	*i = *i - 1;
-	return (EMPTY);
+		ind++;
+	}
+	return (l);
 }

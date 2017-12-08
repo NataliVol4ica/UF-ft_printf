@@ -16,6 +16,8 @@
 #include "../includes/ft_printf_funcs.h"
 #include <stdlib.h>
 #include <limits.h>
+#include <locale.h>
+#include <math.h>
 
 int		main(void)
 {
@@ -25,7 +27,35 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
-
+	ft_printf("%lhd\n", INT_MAX);
+	printf("L  = %ld\n", INT_MAX);
+	printf("H  = %hd\n", INT_MAX);
+	printf("LH = %lhd\n", INT_MAX);
+	printf("HL = %hld\n", INT_MAX);
+	/*
+	printf("|% h|\n");
+	ft_printf("|% h|\n");
+	*/
+	/*
+	float f = 643867256.46327f;
+	printf("%.10a\n", f);
+	*/
+	/*
+	double d = 10;
+	printf("|%.0e|\n", d);
+	*/
+	/*
+	struct lconv *loc;
+	setlocale(LC_ALL, "en_US.UTF-8");
+	loc = localeconv();
+	printf("Thousands Separator: \"%s\"\n", loc->thousands_sep);
+	printf("Thousands Separator: \"%d\"\n", loc->thousands_sep[0]);
+	printf("%'d\n", 1123456789);
+	*/
+	/*
+	printf("%#x\n", 0);
+	ft_printf("%#x\n", 0);
+	*/
 	/*
 	char	*str3 = "some str";
 	printf("%p\n", str3);
