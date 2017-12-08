@@ -37,30 +37,3 @@ void	print_width(char c, size_t num)
 	write(1, str, num);
 	free(str);
 }
-
-void	printf_putchar(char c, t_params *p)
-{
-	p->output->str[p->output->len++] = c;
-}
-
-void	printf_putnbr_uns(uintmax_t n, t_params *p)
-{
-	char	*from;
-
-	if (n == 0)
-	{
-		if (p->precision != 0)
-			printf_putchar('0', p);
-		return ;
-	}
-	from = &p->output->str[p->output->len];
-	while (n != 0)
-	{
-		p->output->str[p->output->len++] = n % 10 + '0';
-		n /= 10;
-	}
-	if (p->precision >= 0)
-		while (p->output->len < (uintmax_t)p->precision)
-			p->output->str[p->output->len++] = '0';
-	rev_str(p->output->str, p->output->len - 1);
-}
