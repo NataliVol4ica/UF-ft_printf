@@ -22,25 +22,25 @@ void	printf_putwchar(wchar_t c, t_params *p)
 	size_t	b;
 
 	b = count_bits(c);
-	if (c == 1)
+	if (b < 8)
 		p->output->str[p->output->len++] = c;
-	else if (c == 2)
+	else if (b < 12)
 	{
-		p->output->str[p->output->len++] = (c >> 6) | 0xC0;
-		p->output->str[p->output->len++] = (c & 0x3F) | 0x80;
+		p->output->str[p->output->len++] = (c >> 6) + 0xC0;
+		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
-	else if (c == 3)
+	else if (b < 17)
 	{
-		p->output->str[p->output->len++] = (chr >> 12) | 0xE0;
-		p->output->str[p->output->len++] = ((chr >> 6) & 0x3F) | 0x80;
-		p->output->str[p->output->len++] = (chr & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = (c >> 12) + 0xE0;
+		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
 	else
 	{
-		p->output->str[p->output->len++] = (chr >> 18) + 0xF0;
-		p->output->str[p->output->len++] = ((chr >> 12) & 0x3F) + 0x80;
-		p->output->str[p->output->len++] = ((chr >> 6) & 0x3F) + 0x80;
-		p->output->str[p->output->len++] = (chr & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = (c >> 18) + 0xF0;
+		p->output->str[p->output->len++] = ((c >> 12) & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
 }
 

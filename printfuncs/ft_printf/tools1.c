@@ -13,12 +13,24 @@
 #include "../../includes/ft_printf.h"
 #include "libft.h"
 
-size_t		count_bits(wchat_t k)
+size_t		ft_wstrlen(const wchar_t *str)
+{
+	size_t i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+size_t		count_bits(wchar_t k)
 {
 	size_t	wn;
 
 	wn = 1;
-	while (k1 >>= 1)
+	while (k >>= 1)
 		wn++;
 	return (wn);
 }

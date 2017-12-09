@@ -77,6 +77,11 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	setlocale(LC_ALL, "en_US.UTF-8");
+	printf("%S\n", L"Привет!");
+	ft_printf("%S\n", L"Привет!");
+	printf("%C\n", L'α');
+	ft_printf("%C\n", L'α');
 	//get_chars(945);
 	/*
 	char c, c2;
@@ -95,7 +100,9 @@ int		main(void)
 	while (k1 >>= 1)
 		wn++;
 	printf("Bits: %zu\n", wn);
-	*/setlocale(LC_ALL, "en_US.UTF-8");
+	*/
+	/*
+	setlocale(LC_ALL, "en_US.UTF-8");
     int tr = printf("%C", 945);
     printf("\n%d\n", tr);
     char *strr = ft_strnew(3);
@@ -103,6 +110,7 @@ int		main(void)
     strr[1] = 177;
     printf("|%s|\n", strr);
 	//printf("%s\n", );
+	*/
 	/*
 	setlocale(LC_ALL, "en_US.UTF-8");
     printf("{%30S}", L"我是一只猫。");

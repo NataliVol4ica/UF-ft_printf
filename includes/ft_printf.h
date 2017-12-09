@@ -20,7 +20,7 @@
 
 #include <stdio.h>
 
-# define MOULINETTE 1
+# define MOULINETTE 0
 
 # define MAX_STR 32
 
@@ -41,7 +41,8 @@ void		convert_ouxbx(uintmax_t *n, t_params *p);
 intmax_t	printf_atoi(char *str, int *p);
 void		check_width(t_params *p);
 void		rev_str(char *from, size_t n);
-size_t		count_bits(wchat_t k);
+size_t		count_bits(wchar_t k);
+size_t		ft_wstrlen(const wchar_t *str);
 
 /*
 ** PRINTERS
