@@ -41,6 +41,7 @@ PRINTF =	ft_printf \
 			types_numeric \
 			types_octhex \
 			types_extra \
+			types_float \
 			tools1
 PRNTFDIR = $(PRINTFUNCDIR)/ft_printf
 DPRNTF = $(patsubst %, $(PRNTFDIR)/%, $(PRINTF))

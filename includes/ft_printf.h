@@ -97,6 +97,7 @@ size_t		type_bo(va_list *ap, t_params *p);
 size_t		type_x(va_list *ap, t_params *p);
 size_t		type_bx(va_list *ap, t_params *p);
 size_t		type_p(va_list *ap, t_params *p);
+size_t		type_fbf(va_list *ap, t_params *p);
 void		type_n(va_list *ap, t_params *p, size_t ret);
 
 /*
