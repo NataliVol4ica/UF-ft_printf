@@ -77,9 +77,15 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
-
+	int ret1, ret2;
+	setlocale(LC_ALL, "en_US.UTF-8");
+	ret1 = printf("%.3S\n", L"αα");
+	ret2 = ft_printf("%.3S\n", L"αα");
+	printf("Ret1 %d Ret2 %d\n", ret1, ret2);
+	/*
 	printf("|%D|\n", LONG_MIN);
 	ft_printf("|%D|\n", LONG_MIN);
+	*/
 	/*
 	long l = 4294959296;
 	printf("%D\n", l);

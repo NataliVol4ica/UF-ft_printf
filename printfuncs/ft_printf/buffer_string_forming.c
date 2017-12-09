@@ -17,11 +17,12 @@ void	printf_putchar(char c, t_params *p)
 	p->output->str[p->output->len++] = c;
 }
 
-void	printf_putwchar(wchar_t c, t_params *p)
+int		printf_putwchar(wchar_t c, t_params *p)
 {
 	size_t	b;
 
-	b = count_bits(c);
+	if (!check_bits(&b, c, p))
+		return (1);
 	if (b < 8)
 		p->output->str[p->output->len++] = c;
 	else if (b < 12)
@@ -42,6 +43,7 @@ void	printf_putwchar(wchar_t c, t_params *p)
 		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
 		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
+	return (0);
 }
 
 void	printf_putnbr_uns(uintmax_t n, t_params *p)

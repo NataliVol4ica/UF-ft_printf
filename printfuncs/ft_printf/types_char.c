@@ -88,7 +88,8 @@ size_t		type_bs(va_list *ap, t_params *p)
 		p->output->str = ft_strnew(ft_wstrlen(str) * 4);
 		i = -1;
 		while (str[++i])
-			printf_putwchar(str[i], p);
+			if ((printf_putwchar(str[i], p)))
+				break;
 		check_width(p);
 		free(p->output->str);
 		p->output->str = temp;

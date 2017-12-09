@@ -43,6 +43,7 @@ void		check_width(t_params *p);
 void		rev_str(char *from, size_t n);
 size_t		count_bits(wchar_t k);
 size_t		ft_wstrlen(const wchar_t *str);
+int			check_bits(size_t *b, wchar_t c, t_params *p);
 
 /*
 ** PRINTERS
@@ -51,7 +52,7 @@ size_t		ft_wstrlen(const wchar_t *str);
 void		final_putstr(char *str, size_t len);
 void		print_width(char c, size_t num);
 void		printf_putchar(char c, t_params *p);
-void		printf_putwchar(wchar_t c, t_params *p);
+int			printf_putwchar(wchar_t c, t_params *p);
 void		printf_putnbr_uns(uintmax_t n, t_params *p);
 void		printf_convert_base(uintmax_t n, size_t base, t_params *p, char c);
 int			print_signed_num(va_list *ap, t_params *p);
