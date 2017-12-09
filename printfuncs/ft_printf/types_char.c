@@ -24,6 +24,8 @@ size_t		type_percent(va_list *ap, t_params *p)
 
 size_t		type_c(va_list *ap, t_params *p)
 {
+	if (p->length >= L)
+		return (type_bc(ap, p));
 	printf_putchar((char)va_arg(*ap, int), p);
 	check_width(p);
 	return (p->output->len + p->width);
@@ -49,6 +51,8 @@ size_t		type_s(va_list *ap, t_params *p)
 {
 	char	*temp;
 
+	if (p->length >= L)
+		return (type_bs(ap, p));
 	temp = p->output->str;
 	p->output->str = va_arg(*ap, char*);
 	if (p->output->str == NULL)
