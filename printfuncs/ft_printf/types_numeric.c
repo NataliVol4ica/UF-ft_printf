@@ -47,7 +47,6 @@ size_t		type_bd(va_list *ap, t_params *p)
 	uintmax_t	n;
 
 	num = va_arg(*ap, long int);
-	convert_di(&num, p);
 	set_sign(p, num);
 	n = num < 0 ? -num : num;
 	printf_putnbr_uns(n, p);

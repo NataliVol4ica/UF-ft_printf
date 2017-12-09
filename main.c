@@ -77,12 +77,17 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	long l = 4294959296;
+	printf("%D\n", l);
+	ft_printf("%D\n", l);
+	/*
 	setlocale(LC_ALL, "en_US.UTF-8");
 	printf("%S\n", L"Привет!");
 	ft_printf("%S\n", L"Привет!");
 	printf("%C\n", L'α');
 	ft_printf("%C\n", L'α');
 	//get_chars(945);
+	*/
 	/*
 	char c, c2;
 	c = 'A' + 128;
