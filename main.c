@@ -94,6 +94,9 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	int or = 1;
+	printf(   "ORIG>\t[%-20+p]\n", &or);
+
 	/*
 	int r1, r2;
 	r1 = printf("|%lp|\n", 42);
@@ -327,7 +330,7 @@ int		main(void)
 	printf("R = %jd\n", r);
 	*/
 	//ft_printf("%d", 42);
-	
+	/*
 	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
@@ -343,7 +346,7 @@ int		main(void)
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");
-	
+	*/
 	/*
 	ft_printf("%%d 0000042 == |%d|", 34);
 	ft_printf("\n");

@@ -35,7 +35,6 @@ int			ft_printf(char *fmt, ...)
 		{
 			save_pos = i;
 			read_params(p, fmt, &i, &ap);
-			
 			j = -1;
 			fret = -1;
 			while (++j < NOFFUNCS)

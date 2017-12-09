@@ -121,6 +121,8 @@ t_length	get_length(char *str, int *i)
 			l = l < Z ? Z : l;
 		else if (*str == 'L')
 			l = l < BL ? BL : l;
+		else if (*str == 't')
+			l = l < T ? T : l;
 		else
 		{
 			*i = *i - 1;
