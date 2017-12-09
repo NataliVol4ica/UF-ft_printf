@@ -11,11 +11,37 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include <stdint.h>
 
 void	printf_putchar(char c, t_params *p)
 {
 	p->output->str[p->output->len++] = c;
+}
+
+void	printf_putwchar(wchar_t c, t_params *p)
+{
+	size_t	b;
+
+	b = count_bits(c);
+	if (c == 1)
+		p->output->str[p->output->len++] = c;
+	else if (c == 2)
+	{
+		p->output->str[p->output->len++] = (c >> 6) | 0xC0;
+		p->output->str[p->output->len++] = (c & 0x3F) | 0x80;
+	}
+	else if (c == 3)
+	{
+		p->output->str[p->output->len++] = (chr >> 12) | 0xE0;
+		p->output->str[p->output->len++] = ((chr >> 6) & 0x3F) | 0x80;
+		p->output->str[p->output->len++] = (chr & 0x3F) + 0x80;
+	}
+	else
+	{
+		p->output->str[p->output->len++] = (chr >> 18) + 0xF0;
+		p->output->str[p->output->len++] = ((chr >> 12) & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = ((chr >> 6) & 0x3F) + 0x80;
+		p->output->str[p->output->len++] = (chr & 0x3F) + 0x80;
+	}
 }
 
 void	printf_putnbr_uns(uintmax_t n, t_params *p)

@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include <stdarg.h>
-#include <stdint.h>
 
 size_t		type_o(va_list *ap, t_params *p)
 {

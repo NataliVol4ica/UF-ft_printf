@@ -13,7 +13,6 @@
 #include "../../includes/ft_printf.h"
 #include "libft.h"
 #include <unistd.h>
-#include <stdint.h>
 #include <stdlib.h>
 
 void	final_putstr(char *str, size_t len)

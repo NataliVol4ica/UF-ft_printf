@@ -18,6 +18,56 @@
 #include <limits.h>
 #include <locale.h>
 #include <math.h>
+#include <wchar.h>
+#include <unistd.h>
+
+void	print_bits(wchar_t t)
+{
+	char mass[16];
+	int i;
+
+	i = 0;
+	mass[0] = '0';
+	while (t > 0)
+	{
+		mass[i++] = t % 2 + '0';
+		t /= 2;
+	}
+	while (--i > -1)
+		write(1, &mass[i], 1);
+	write(1, "\n", 1);
+}
+
+size_t	get_chars(wchar_t n)
+{
+	wchar_t temp;
+	char c;
+	size_t ret;
+	size_t sdvig;
+
+	ret = 0;
+	if (n <= 0x7F)
+	{
+		c = (char)n;
+		write(1, &c, 1);
+		return (1);
+	}
+	sdvig = 18;
+	while (sdvig != 0)
+	{
+		temp = n >> sdvig;
+		if (temp != 0)
+		{
+			ret++;
+			c = (char)temp;
+			write(1, &c, 1);
+		}
+		temp <<= sdvig;
+		n -=temp;
+		sdvig -= 6;
+	}
+	return (ret);
+}
 
 int		main(void)
 {
@@ -27,10 +77,42 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	//get_chars(945);
+	/*
+	char c, c2;
+	c = 'A' + 128;
+	c2 = c & 127;
+	printf("|%d & 127 = %d|\n", c, c2);
+	printf("sizeof(char) %lu sizeof(wchar_t) %lu\n", sizeof(char), sizeof(wchar_t));
+	*/
+	/*
+	wchar_t k, k1 = 945;
+	size_t wn;
+	
+	k = k1;
+	wn = 1;
+	print_bits(k);
+	while (k1 >>= 1)
+		wn++;
+	printf("Bits: %zu\n", wn);
+	*/setlocale(LC_ALL, "en_US.UTF-8");
+    int tr = printf("%C", 945);
+    printf("\n%d\n", tr);
+    char *strr = ft_strnew(3);
+    strr[0] = 206;
+    strr[1] = 177;
+    printf("|%s|\n", strr);
+	//printf("%s\n", );
+	/*
+	setlocale(LC_ALL, "en_US.UTF-8");
+    printf("{%30S}", L"我是一只猫。");
+    */
+	/*
 	ft_printf("|%03.2d|\n", 0);
 	printf("|%03.2d|\n", 0);
 	ft_printf("|%07.5o|\n", 0);
 	printf("|%07.5o|\n", 0);
+	*/
 	/*
 	ft_printf("|%.0d|\n", 0);
 	printf("|%.0d|\n", 0);

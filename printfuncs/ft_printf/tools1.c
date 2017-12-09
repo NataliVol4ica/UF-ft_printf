@@ -12,8 +12,16 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include <stdarg.h>
-#include <stdint.h>
+
+size_t		count_bits(wchat_t k)
+{
+	size_t	wn;
+
+	wn = 1;
+	while (k1 >>= 1)
+		wn++;
+	return (wn);
+}
 
 intmax_t	printf_atoi(char *str, int *p)
 {

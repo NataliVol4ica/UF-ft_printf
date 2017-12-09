@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft.h"
 #include "../../includes/ft_printf.h"
 #include "../../includes/ft_printf_funcs.h"

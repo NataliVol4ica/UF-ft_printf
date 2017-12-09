@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include <stdarg.h>
-#include <stdint.h>
 
 static void	set_sign(t_params *p, intmax_t num)
 {

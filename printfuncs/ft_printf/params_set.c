@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include <stdint.h>
-#include <stdio.h>
 
 /*
 ** % [param] [flags] [width]  [precision] [length]    [type]

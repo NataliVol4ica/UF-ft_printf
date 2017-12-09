@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 # include <stdint.h>
-# include <string.h>
+# include <wchar.h>
 # include "ft_printf_structs.h"
 
 #include <stdio.h>
@@ -41,6 +41,7 @@ void		convert_ouxbx(uintmax_t *n, t_params *p);
 intmax_t	printf_atoi(char *str, int *p);
 void		check_width(t_params *p);
 void		rev_str(char *from, size_t n);
+size_t		count_bits(wchat_t k);
 
 /*
 ** PRINTERS
@@ -49,6 +50,7 @@ void		rev_str(char *from, size_t n);
 void		final_putstr(char *str, size_t len);
 void		print_width(char c, size_t num);
 void		printf_putchar(char c, t_params *p);
+void		printf_putwchar(wchar_t c, t_params *p);
 void		printf_putnbr_uns(uintmax_t n, t_params *p);
 void		printf_convert_base(uintmax_t n, size_t base, t_params *p, char c);
 int			print_signed_num(va_list *ap, t_params *p);

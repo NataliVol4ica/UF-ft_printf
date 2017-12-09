@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include <stdarg.h>
-#include <wchar.h>
 
 size_t		type_percent(va_list *ap, t_params *p)
 {
@@ -40,7 +38,7 @@ size_t		type_bc(va_list *ap, t_params *p)
 #else
 size_t		type_bc(va_list *ap, t_params *p)
 {
-	printf_putchar((char)va_arg(*ap, wchar_t), p);
+	printf_putwchar((char)va_arg(*ap, wchar_t), p);
 	check_width(p);
 	return (p->output->len + p->width);
 }

@@ -12,7 +12,6 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include <stdint.h>
 
 void	convert_di(intmax_t *n, t_params *p)
 {
