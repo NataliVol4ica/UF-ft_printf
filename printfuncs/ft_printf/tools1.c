@@ -44,7 +44,7 @@ int		check_bits(size_t *b, wchar_t c, t_params *p)
 		f = 1;
 	else if (*b < 12)
 		f = 2;
-	else if (*b < 12)
+	else if (*b < 17)
 		f = 3;
 	else
 		f = 4;

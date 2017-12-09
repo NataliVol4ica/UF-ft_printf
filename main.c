@@ -21,6 +21,23 @@
 #include <wchar.h>
 #include <unistd.h>
 
+size_t	count_bits2(wchar_t c)
+{
+	size_t f;
+	size_t b;
+
+	b = count_bits(c);
+	if (b < 8)
+		f = 1;
+	else if (b < 12)
+		f = 2;
+	else if (b < 17)
+		f = 3;
+	else
+		f = 4;
+	return (f);
+}
+
 void	print_bits(wchar_t t)
 {
 	char mass[16];
@@ -77,11 +94,27 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	setlocale(LC_ALL, "en_US.UTF-8");
+	size_t bt = 0;
+	bt += count_bits2(L'我');
+	bt += count_bits2(L'是');
+	bt += count_bits2(L'一');
+	bt += count_bits2(L'只');
+	bt += count_bits2(L'猫');
+	bt += count_bits2(L'。');
+	printf("Bits : %zu\n", bt);
+	printf("|%4.15S|\n", L"我是一只猫。");
+	ft_printf("|%4.15S|\n", L"我是一只猫。");
+	printf("|%4.3S|\n", L"αα");
+	ft_printf("|%4.3S|\n", L"αα");
+	/*
+	//undefined behaviour
 	int ret1, ret2;
 	setlocale(LC_ALL, "en_US.UTF-8");
 	ret1 = printf("%.3S\n", L"αα");
 	ret2 = ft_printf("%.3S\n", L"αα");
 	printf("Ret1 %d Ret2 %d\n", ret1, ret2);
+	*/
 	/*
 	printf("|%D|\n", LONG_MIN);
 	ft_printf("|%D|\n", LONG_MIN);
