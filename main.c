@@ -94,8 +94,10 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
-	int or = 1;
-	printf(   "ORIG>\t[%-20+p]\n", &or);
+	int r1, r2;
+	r1 = ft_printf("[%*d]\n", -10, 999);
+	r2 = printf("[%*d]\n", -10, 999);
+	printf("Ret1 = %d Ret2 = %d\n", r1, r2);
 
 	/*
 	int r1, r2;

@@ -71,7 +71,7 @@ intmax_t	get_width(char *str, int *p, va_list *ap)
 	if (str[0] == '*')
 	{
 		*p = *p + 1;
-		return (va_arg(*ap, size_t));
+		return (va_arg(*ap, int));
 	}
 	return (0);
 }
