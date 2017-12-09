@@ -73,8 +73,8 @@ void		rev_str(char *from, size_t n)
 
 void		check_width(t_params *p)
 {
-	p->width -= p->width <= p->prefix->len + p->output->len ? p->width :
-				p->prefix->len + p->output->len;
+	p->width -= p->prefix->len + p->output->len;
+	p->width = p->width < 0 ? 0 : p->width;
 	if (p->flags->minus)
 	{
 		final_putstr(p->prefix->str, p->prefix->len);

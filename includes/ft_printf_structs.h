@@ -40,7 +40,7 @@ typedef struct	s_params
 {
 	size_t		n;
 	t_flags		*flags;
-	size_t		width;
+	intmax_t	width;
 	intmax_t	precision;
 	t_length	length;
 	t_output	*output;

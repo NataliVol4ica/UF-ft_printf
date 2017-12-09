@@ -25,6 +25,8 @@ void		read_params(t_params *p, char *fmt, size_t *pos, va_list *ap)
 	p->width = get_width(&fmt[i], &i, ap);
 	p->precision = get_precision(&fmt[i], &i, ap);
 	p->length = get_length(&fmt[i], &i);
+	p->flags->minus = p->width < 0 ? 1 : p->flags->minus;
+	p->width = p->width < 0 ? -p->width : p->width;
 	p->flags->zero = p->flags->minus ? 0 : p->flags->zero;
 	*pos = i;
 }

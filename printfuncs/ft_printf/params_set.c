@@ -64,7 +64,7 @@ void		get_flags(char *str, int *p, t_flags *f)
 	*p = *p + i;
 }
 
-size_t		get_width(char *str, int *p, va_list *ap)
+intmax_t	get_width(char *str, int *p, va_list *ap)
 {
 	if (ft_isdigit(str[0]))
 		return (printf_atoi(str, p));
