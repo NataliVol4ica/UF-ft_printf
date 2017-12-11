@@ -40,7 +40,7 @@ size_t		met_percent(va_list *ap, t_params *p, char c, size_t *ret)
 	return (0);
 }
 
-int			ft_printf(char *fmt, ...)
+int			ft_printf(const char *fmt, ...)
 {
 	va_list			ap;
 	size_t			i;
@@ -56,7 +56,7 @@ int			ft_printf(char *fmt, ...)
 	while (fmt[++i])
 		if (fmt[i++] == '%')
 		{
-			read_params(p, fmt, &i, &ap);
+			read_params(p, (char*)fmt, &i, &ap);
 			i -= met_percent(&ap, p, fmt[i], &ret);
 		}
 		else

@@ -87,7 +87,7 @@ char	*ft_strnew(size_t size);
 void	ft_log(char l, char *str, void (*f)(char *));
 void	ft_print_num_tab(int **tab, int size);
 void	ft_print_word_tab(char **tab);
-int		ft_printf(char *fmt, ...);
+int		ft_printf(const char *fmt, ...);
 size_t	ft_putchar_fd(char c, int fd);
 size_t	ft_putchar(char c);
 size_t	ft_putendl_fd(char *str, int fd);
