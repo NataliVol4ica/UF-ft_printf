@@ -59,8 +59,9 @@ int			ft_printf(const char *fmt, ...)
 		{
 			read_params(p, (char*)fmt, &i, &ap);
 			temp = met_percent(&ap, p, fmt[i], &ret);
-			if (temp)
-				type_empty(p, fmt[i]);
+			if (temp && fmt[i])
+				ret += type_empty(p, fmt[i++]);
+			i -= temp;
 		}
 		else
 			ret += ft_putchar(fmt[--i]);

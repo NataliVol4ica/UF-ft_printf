@@ -105,8 +105,14 @@ size_t	get_chars(wchar_t n)
 
 int		main(void)
 {
-	printf("|%-3llrwww|\n");
-	ft_printf("|%-3llrwww|\n");
+	int ret1, ret2;
+
+	ret1 = printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
+	printf("\n\n\n\n\n\n");
+	ret2 = ft_printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+
+
 	/*
 	int ret1, ret2;
 
