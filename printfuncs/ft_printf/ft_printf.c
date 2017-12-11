@@ -16,24 +16,22 @@
 
 int			ft_printf(char *fmt, ...)
 {
-	va_list 		ap;
+	va_list			ap;
 	size_t			i;
 	size_t			j;
 	size_t			ret;
 	intmax_t		fret;
-	size_t			save_pos;
 	static t_params	*p = NULL;
 
 	p = p ? p : init_params();
+	if (!fmt)
+		return (-1);
 	va_start(ap, fmt);
 	i = -1;
 	ret = 0;
-	if (!fmt)
-		return (ret);
 	while (fmt[++i])
 		if (fmt[i++] == '%')
 		{
-			save_pos = i;
 			read_params(p, fmt, &i, &ap);
 			j = -1;
 			fret = -1;
@@ -52,7 +50,6 @@ int			ft_printf(char *fmt, ...)
 					type_n(&ap, p, ret);
 				else
 					i--;
-					//final_putstr(&fmt[save_pos], i-- - save_pos);
 			}
 		}
 		else

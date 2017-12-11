@@ -76,7 +76,7 @@ size_t		type_bs(va_list *ap, t_params *p)
 		i = -1;
 		while (str[++i])
 			if ((printf_putwchar(str[i], p)))
-				break;
+				break ;
 		check_width(p);
 		free(p->output->str);
 		p->output->str = temp;

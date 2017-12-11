@@ -30,7 +30,7 @@ void	convert_di(intmax_t *n, t_params *p)
 		num = (intmax_t)num;
 	else if (p->length == Z)
 		num = (size_t)num;
-	else	
+	else
 		num = (int)num;
 	*n = num;
 }

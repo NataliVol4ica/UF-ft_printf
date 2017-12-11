@@ -69,19 +69,3 @@ void		zero_params(t_params *p)
 	p->output->len = 0;
 	p->prefix->len = 0;
 }
-
-void		print_params(t_params *p)
-{
-	printf("\n=======\n");
- 	printf("n = %zu\n", p->n);
- 	printf("Flags = %d%d%d%d%d\n", p->flags->space, p->flags->hash,
-	p->flags->plus, p->flags->minus, p->flags->zero);
- 	printf("Width = %zu\n", p->width);
- 	printf("Precision = %zu\n", p->precision);
- 	printf("Length = %u\n", p->length);
- 	p->output->str[p->output->len] = '\0';
- 	p->prefix->str[p->prefix->len] = '\0';
- 	printf("Prefix \"%s\" of len %zu\n", p->prefix->str, p->prefix->len);
- 	printf("Output \"%s\" of len %zu\n", p->output->str, p->output->len);
- 	printf("fi\n");
-}

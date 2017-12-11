@@ -126,7 +126,7 @@ t_length	get_length(char *str, int *i)
 		else
 		{
 			*i = *i - 1;
-			break;
+			break ;
 		}
 		str++;
 	}
