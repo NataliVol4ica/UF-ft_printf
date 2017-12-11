@@ -42,3 +42,10 @@ void		type_n(va_list *ap, t_params *p, size_t ret)
 	else
 		*(va_arg(*ap, int*)) = (int)ret;
 }
+
+size_t		type_empty(t_params *p, char c)
+{
+	printf_putchar(c, p);
+	check_width(p);
+	return (p->output->len + p->width);
+}

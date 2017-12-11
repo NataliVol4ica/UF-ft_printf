@@ -105,12 +105,22 @@ size_t	get_chars(wchar_t n)
 
 int		main(void)
 {
+	printf("|%-3llrwww|\n");
+	ft_printf("|%-3llrwww|\n");
+	/*
+	int ret1, ret2;
+
+	ret1 = printf("|%D|\n", -1L);
+	ret2 = ft_printf("|%D|\n", -1L);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	*/
+	/*
 	unsigned long long n = 123;
 	char	*str = "hi_word";
 	char	*str2 = "2 string";
 	short	t = 7835;
 	intmax_t r;
-
+	*/
 	/*
 	printf("1|%S|\n", L"我是一只猫。");
 	printf("2|%S|\n", L"我是一只猫。");
@@ -375,7 +385,7 @@ int		main(void)
 	printf("R = %jd\n", r);
 	*/
 	//ft_printf("%d", 42);
-	
+	/*
 	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
@@ -391,7 +401,7 @@ int		main(void)
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");
-	
+	*/
 	/*
 	ft_printf("%%d 0000042 == |%d|", 34);
 	ft_printf("\n");

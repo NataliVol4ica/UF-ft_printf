@@ -45,6 +45,7 @@ int			ft_printf(const char *fmt, ...)
 	va_list			ap;
 	size_t			i;
 	size_t			ret;
+	size_t			temp;
 	static t_params	*p = NULL;
 
 	p = p ? p : init_params();
@@ -57,7 +58,9 @@ int			ft_printf(const char *fmt, ...)
 		if (fmt[i++] == '%')
 		{
 			read_params(p, (char*)fmt, &i, &ap);
-			i -= met_percent(&ap, p, fmt[i], &ret);
+			temp = met_percent(&ap, p, fmt[i], &ret);
+			if (temp)
+				type_empty(p, fmt[i]);
 		}
 		else
 			ret += ft_putchar(fmt[--i]);

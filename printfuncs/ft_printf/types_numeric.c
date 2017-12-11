@@ -51,7 +51,7 @@ size_t		type_bd(va_list *ap, t_params *p)
 	n = num < 0 ? -num : num;
 	printf_putnbr_uns(n, p);
 	check_width(p);
-	return (p->output->len + p->width);
+	return (p->output->len + p->prefix->len + p->width);
 }
 
 size_t		type_u(va_list *ap, t_params *p)
