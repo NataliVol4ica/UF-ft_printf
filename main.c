@@ -138,7 +138,7 @@ int		main(void)
 	R[3] = ft_printf("|%S|\n", L"αα");
 	printf("%d %d %d %d\n", R[0], R[1], R[2], R[3]);
 	*/
-
+/*
 	int R[4];
 	
 	R[0] = printf("|%C|\n", L'我');
@@ -147,7 +147,7 @@ int		main(void)
 	R[2] = printf("|%C|\n", L'α');
 	R[3] = ft_printf("|%C|\n", L'α');
 	printf("%d %d %d %d\n", R[0], R[1], R[2], R[3]);
-
+*/
 	/*
 	setlocale(LC_ALL, "en_US.UTF-8");
 	printf("|%4.15S|\n", L"我是一只猫。");
@@ -375,7 +375,7 @@ int		main(void)
 	printf("R = %jd\n", r);
 	*/
 	//ft_printf("%d", 42);
-	/*
+	
 	ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
@@ -391,7 +391,7 @@ int		main(void)
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
 	ft_printf("\n");
-	*/
+	
 	/*
 	ft_printf("%%d 0000042 == |%d|", 34);
 	ft_printf("\n");

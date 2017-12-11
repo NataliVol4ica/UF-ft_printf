@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
-#include <stdlib.h>
 
 void		set_null_string(t_params *p)
 {

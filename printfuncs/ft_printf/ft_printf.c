@@ -14,13 +14,37 @@
 #include "../../includes/ft_printf.h"
 #include "../../includes/ft_printf_funcs.h"
 
+size_t		met_percent(va_list *ap, t_params *p, char c, size_t *ret)
+{
+	size_t	j;
+	int		fret;
+
+	j = -1;
+	fret = -1;
+	while (++j < NOFFUNCS)
+	{
+		if (c == g_type_funcs[j].c)
+		{
+			fret += fret == -1 ? 1 : 0;
+			fret += g_type_funcs[j].func(ap, p);
+		}
+	}
+	if (fret == -1)
+	{
+		if (c == 'n')
+			type_n(ap, p, *ret);
+		else
+			return (1);
+	}
+	*ret += fret > 0 ? fret : 0;
+	return (0);
+}
+
 int			ft_printf(char *fmt, ...)
 {
 	va_list			ap;
 	size_t			i;
-	size_t			j;
 	size_t			ret;
-	intmax_t		fret;
 	static t_params	*p = NULL;
 
 	p = p ? p : init_params();
@@ -33,24 +57,7 @@ int			ft_printf(char *fmt, ...)
 		if (fmt[i++] == '%')
 		{
 			read_params(p, fmt, &i, &ap);
-			j = -1;
-			fret = -1;
-			while (++j < NOFFUNCS)
-			{
-				if (fmt[i] == g_type_funcs[j].c)
-				{
-					fret += fret == -1 ? 1 : 0;
-					fret += g_type_funcs[j].func(&ap, p);
-				}
-			}
-			ret += fret > 0 ? fret : 0;
-			if (fret == -1)
-			{
-				if (fmt[i] == 'n')
-					type_n(&ap, p, ret);
-				else
-					i--;
-			}
+			i -= met_percent(&ap, p, fmt[i], &ret);
 		}
 		else
 			ret += ft_putchar(fmt[--i]);

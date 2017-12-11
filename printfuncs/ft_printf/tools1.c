@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
-#include <stdlib.h>
 
 intmax_t	printf_atoi(char *str, int *p)
 {
@@ -72,4 +70,29 @@ void		check_width(t_params *p)
 		final_putstr(p->prefix->str, p->prefix->len);
 	}
 	final_putstr(p->output->str, p->output->len);
+}
+
+size_t		get_next_length(char *str, t_length *l)
+{
+	if (str[0] == 'h')
+		if (str[1] == 'h')
+			*l = *l < HH ? HH : *l;
+		else
+			*l = *l < H ? H : *l;
+	else if (str[0] == 'l')
+		if (str[1] == 'l')
+			*l = *l < LL ? LL : *l;
+		else
+			*l = *l < L ? L : *l;
+	else if (str[0] == 'j')
+		*l = *l < J ? J : *l;
+	else if (str[0] == 'z')
+		*l = *l < Z ? Z : *l;
+	else if (str[0] == 'L')
+		*l = *l < BL ? BL : *l;
+	else if (str[0] == 't')
+		*l = *l < T ? T : *l;
+	else
+		return (0);
+	return (*l == HH || *l == LL ? 2 : 1);
 }

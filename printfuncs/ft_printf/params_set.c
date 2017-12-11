@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 
 /*
 ** % [param] [flags] [width]  [precision] [length]    [type]
@@ -23,7 +22,7 @@ size_t		get_n(char *str, int *p)
 	int		i;
 
 	i = 0;
-	while (ft_isdigit(str[i]))
+	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] == '$')
 	{
@@ -36,11 +35,9 @@ size_t		get_n(char *str, int *p)
 void		get_flags(char *str, int *p, t_flags *f)
 {
 	int		i;
-	char	cont;
 
 	i = 0;
-	cont = 1;
-	while (cont)
+	while (1)
 	{
 		if (str[i] == '+')
 			f->plus = 1;
@@ -55,10 +52,7 @@ void		get_flags(char *str, int *p, t_flags *f)
 		else if (str[i] == '\'')
 			f->apostrophe = 1;
 		else
-		{
-			i--;
-			cont = 0;
-		}
+			break ;
 		i++;
 	}
 	*p = *p + i;
@@ -66,7 +60,7 @@ void		get_flags(char *str, int *p, t_flags *f)
 
 intmax_t	get_width(char *str, int *p, va_list *ap)
 {
-	if (ft_isdigit(str[0]))
+	if (str[0] >= '0' && str[0] <= '9')
 		return (printf_atoi(str, p));
 	if (str[0] == '*')
 	{
@@ -91,44 +85,14 @@ intmax_t	get_precision(char *str, int *p, va_list *ap)
 
 t_length	get_length(char *str, int *i)
 {
-	t_length l;
+	t_length	l;
+	size_t		c;
 
 	l = EMPTY;
-	while (1)
+	while ((c = get_next_length(str, &l)))
 	{
-		*i = *i + 1;
-		if (*str == 'h')
-			if (*(str + 1) == 'h')
-			{
-				str++;
-				*i = *i + 1;
-				l = l < HH ? HH : l;
-			}
-			else
-				l = l < H ? H : l;
-		else if (*str == 'l')
-			if (*(str + 1) == 'l')
-			{
-				*i = *i + 1;
-				str++;
-				l = l < LL ? LL : l;
-			}
-			else
-				l = l < L ? L : l;
-		else if (*str == 'j')
-			l = l < J ? J : l;
-		else if (*str == 'z')
-			l = l < Z ? Z : l;
-		else if (*str == 'L')
-			l = l < BL ? BL : l;
-		else if (*str == 't')
-			l = l < T ? T : l;
-		else
-		{
-			*i = *i - 1;
-			break ;
-		}
-		str++;
+		str += c;
+		*i = *i + c;
 	}
 	return (l);
 }

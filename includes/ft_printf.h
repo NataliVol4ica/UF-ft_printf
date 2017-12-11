@@ -18,8 +18,6 @@
 # include <wchar.h>
 # include "ft_printf_structs.h"
 
-#include <stdio.h>
-
 # define MAX_STR 32
 
 # define XSTR "abcdef"
@@ -43,6 +41,7 @@ size_t		count_bits(wchar_t k);
 size_t		ft_wstrlen(const wchar_t *str);
 int			check_bits(size_t *b, wchar_t c, t_params *p);
 void		set_null_string(t_params *p);
+size_t		get_next_length(char *str, t_length *ll);
 
 /*
 ** PRINTERS
