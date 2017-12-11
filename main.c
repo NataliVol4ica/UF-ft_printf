@@ -20,6 +20,7 @@
 #include <math.h>
 #include <wchar.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 size_t	count_bits2(wchar_t c)
 {
@@ -94,17 +95,43 @@ int		main(void)
 	short	t = 7835;
 	intmax_t r;
 
+	/*
+	printf("1|%S|\n", L"我是一只猫。");
+	printf("2|%S|\n", L"我是一只猫。");
+    printf("LC_ALL:   %s\n", setlocale(LC_ALL, NULL));
+    printf("LC_CTYPE: %s\n", setlocale(LC_CTYPE, NULL));
+    */
+	/*
 	int r1, r2;
 	r1 = ft_printf("[%*d]\n", -10, 999);
 	r2 = printf("[%*d]\n", -10, 999);
 	printf("Ret1 = %d Ret2 = %d\n", r1, r2);
-
+	*/
 	/*
 	int r1, r2;
 	r1 = printf("|%lp|\n", 42);
 	r2 = ft_printf("|%lp|\n", 42);
 	printf("Ret1 = %d Ret2 = %d\n", r1, r2);
 	*/
+	
+	/*
+	int R[4];
+	R[0] = printf("|%S|\n", L"我是一只猫。");
+	R[1] = ft_printf("|%S|\n", L"我是一只猫。");
+	R[2] = printf("|%S|\n", L"αα");
+	R[3] = ft_printf("|%S|\n", L"αα");
+	printf("%d %d %d %d\n", R[0], R[1], R[2], R[3]);
+	*/
+
+	int R[4];
+	
+	R[0] = printf("|%C|\n", L'我');
+	R[1] = ft_printf("|%C|\n", L'我');
+	setlocale(LC_CTYPE, "en_US.UTF-8");
+	R[2] = printf("|%C|\n", L'α');
+	R[3] = ft_printf("|%C|\n", L'α');
+	printf("%d %d %d %d\n", R[0], R[1], R[2], R[3]);
+
 	/*
 	setlocale(LC_ALL, "en_US.UTF-8");
 	printf("|%4.15S|\n", L"我是一只猫。");

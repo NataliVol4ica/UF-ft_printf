@@ -20,8 +20,6 @@
 
 #include <stdio.h>
 
-# define MOULINETTE 0
-
 # define MAX_STR 32
 
 # define XSTR "abcdef"
@@ -44,6 +42,7 @@ void		rev_str(char *from, size_t n);
 size_t		count_bits(wchar_t k);
 size_t		ft_wstrlen(const wchar_t *str);
 int			check_bits(size_t *b, wchar_t c, t_params *p);
+void		set_null_string(t_params *p);
 
 /*
 ** PRINTERS

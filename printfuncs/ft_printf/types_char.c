@@ -31,21 +31,12 @@ size_t		type_c(va_list *ap, t_params *p)
 	return (p->output->len + p->width);
 }
 
-#if MOULINETTE == 1
-size_t		type_bc(va_list *ap, t_params *p)
-{
-	printf_putchar((char)va_arg(*ap, int), p);
-	check_width(p);
-	return (p->output->len + p->width);
-}
-#else
 size_t		type_bc(va_list *ap, t_params *p)
 {
 	printf_putwchar((wchar_t)va_arg(*ap, wchar_t), p);
 	check_width(p);
 	return (p->output->len + p->width);
 }
-#endif
 
 size_t		type_s(va_list *ap, t_params *p)
 {
@@ -56,10 +47,7 @@ size_t		type_s(va_list *ap, t_params *p)
 	temp = p->output->str;
 	p->output->str = va_arg(*ap, char*);
 	if (p->output->str == NULL)
-	{
-		p->output->str = "(null)";
-		p->output->len = 6;
-	}
+		set_null_string(p);
 	else
 		p->output->len = ft_strlen(p->output->str);
 	if (p->precision > -1 && p->output->len > (uintmax_t)p->precision)
@@ -78,8 +66,7 @@ size_t		type_bs(va_list *ap, t_params *p)
 	str = va_arg(*ap, wchar_t*);
 	if (str == NULL)
 	{
-		p->output->str = "(null)";
-		p->output->len = 6;
+		set_null_string(p);
 		check_width(p);
 	}
 	else
