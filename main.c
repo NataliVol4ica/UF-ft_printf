@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+/*
 void		print_params(t_params *p)
 {
 	printf("\n=======\n");
@@ -37,6 +38,7 @@ void		print_params(t_params *p)
  	printf("Output \"%s\" of len %zu\n", p->output->str, p->output->len);
  	printf("fi\n");
 }
+*/
 
 size_t	count_bits2(wchar_t c)
 {
@@ -105,14 +107,30 @@ size_t	get_chars(wchar_t n)
 
 int		main(void)
 {
+	int width = 0;
+	int precision = -1;
+	int number = 0;
+
 	int ret1, ret2;
 
+	printf("Test #0000\n");
+	ret1 = printf("|%*.*d|", width, precision, number);
+	ret2 = ft_printf("|%*.*d|", width, precision, number);
+	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
+	
+	/*
+	int ret1, ret2;
+
+	ret1 = printf("|%lc|\n", '\0');
+	ret2 = ft_printf("|%lc|\n", '\0');
+	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
+	*/
+	/*
 	ret1 = printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
 	printf("\n\n\n\n\n\n");
 	ret2 = ft_printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
-
-
+	*/
 	/*
 	int ret1, ret2;
 

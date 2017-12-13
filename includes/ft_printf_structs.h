@@ -41,7 +41,7 @@ typedef struct	s_params
 	size_t		n;
 	t_flags		*flags;
 	intmax_t	width;
-	intmax_t	precision;
+	int			precision;
 	t_length	length;
 	t_output	*output;
 	t_output	*prefix;

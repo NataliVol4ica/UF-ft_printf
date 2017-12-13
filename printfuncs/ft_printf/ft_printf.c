@@ -14,7 +14,7 @@
 #include "../../includes/ft_printf.h"
 #include "../../includes/ft_printf_funcs.h"
 
-size_t		met_percent(va_list *ap, t_params *p, char c, size_t *ret)
+static size_t	met_percent(va_list *ap, t_params *p, char c, size_t *ret)
 {
 	size_t	j;
 	int		fret;
@@ -40,7 +40,7 @@ size_t		met_percent(va_list *ap, t_params *p, char c, size_t *ret)
 	return (0);
 }
 
-int			ft_printf(const char *fmt, ...)
+int				ft_printf(const char *fmt, ...)
 {
 	va_list			ap;
 	size_t			i;

@@ -78,7 +78,7 @@ intmax_t	get_precision(char *str, int *p, va_list *ap)
 	if (str[1] == '*')
 	{
 		*p = *p + 1;
-		return (va_arg(*ap, intmax_t));
+		return (va_arg(*ap, int));
 	}
 	return (printf_atoi(&str[1], p));
 }
