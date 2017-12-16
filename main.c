@@ -20,7 +20,6 @@
 #include <math.h>
 #include <wchar.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 /*
 void		print_params(t_params *p)
@@ -107,15 +106,16 @@ size_t	get_chars(wchar_t n)
 
 int		main(void)
 {
-	int width = 0;
-	int precision = -1;
-	int number = 0;
+	int width = 5;
+	int precision = 3;
+	signed long long int number = -25;
 
 	int ret1, ret2;
 
+	printf("Number = %lld\n", number);
 	printf("Test #0000\n");
-	ret1 = printf("|%*.*d|", width, precision, number);
-	ret2 = ft_printf("|%*.*d|", width, precision, number);
+	ret1 = printf("|%#*.*o|\n", width, precision, number);
+	ret2 = ft_printf("|%#*.*o|\n", width, precision, number);
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
 	
 	/*

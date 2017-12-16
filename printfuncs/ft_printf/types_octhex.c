@@ -20,7 +20,10 @@ size_t		type_o(va_list *ap, t_params *p)
 	num = va_arg(*ap, uintmax_t);
 	convert_ouxbx(&num, p);
 	if (p->flags->hash && num != 0)
+	{
 		p->prefix->str[p->prefix->len++] = '0';
+		p->precision -= 1;
+	}
 	printf_convert_base(num, 8, p, '0');
 	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
 	if (p->precision > 0 && p->output->len > (uintmax_t)p->precision)

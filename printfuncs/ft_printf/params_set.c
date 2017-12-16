@@ -58,7 +58,7 @@ void		get_flags(char *str, int *p, t_flags *f)
 	*p = *p + i;
 }
 
-intmax_t	get_width(char *str, int *p, va_list *ap)
+int			get_width(char *str, int *p, va_list *ap)
 {
 	if (str[0] >= '0' && str[0] <= '9')
 		return (printf_atoi(str, p));
@@ -70,7 +70,7 @@ intmax_t	get_width(char *str, int *p, va_list *ap)
 	return (0);
 }
 
-intmax_t	get_precision(char *str, int *p, va_list *ap)
+int			get_precision(char *str, int *p, va_list *ap)
 {
 	if (str[0] != '.')
 		return (-1);

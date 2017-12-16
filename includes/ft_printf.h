@@ -73,8 +73,8 @@ void		print_params(t_params *t);
 
 size_t		get_n(char *str, int *p);
 void		get_flags(char *str, int *p, t_flags *f);
-intmax_t	get_width(char *str, int *p, va_list *ap);
-intmax_t	get_precision(char *str, int *p, va_list *ap);
+int			get_width(char *str, int *p, va_list *ap);
+int			get_precision(char *str, int *p, va_list *ap);
 t_length	get_length(char *str, int *i);
 
 /*
