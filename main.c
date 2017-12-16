@@ -108,8 +108,8 @@ int		main(void)
 {
 	int ret1, ret2;
 
-	ret1 = printf("|%*.*o|\n", 5, 3, 4294967271);
-	ret2 = ft_printf("|%*.*o|\n", 5, 3, 4294967271);
+	ret1 = printf("|%0#*.*o|\n", 5, 0, 25);
+	ret2 = ft_printf("|%0#*.*o|\n", 5, 0, 25);
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
 	
 	/*
