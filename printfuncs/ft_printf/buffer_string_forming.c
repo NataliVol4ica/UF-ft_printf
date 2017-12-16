@@ -61,7 +61,7 @@ void	printf_putnbr_uns(uintmax_t n, t_params *p)
 			p->output->str[p->output->len++] = '0';
 	rev_str(p->output->str, p->output->len - 1);
 }
-
+#include <unistd.h>
 void	printf_convert_base(uintmax_t n, size_t base, t_params *p, char c)
 {
 	if (n == 0)
