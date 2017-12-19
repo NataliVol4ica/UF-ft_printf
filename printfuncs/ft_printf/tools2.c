@@ -53,7 +53,7 @@ int			check_bits(size_t *b, wchar_t c, t_params *p)
 		f = 3;
 	else
 		f = 4;
-	if (p->precision >= 0 && f + p->output->len > (size_t)p->precision)
+	if (p->precision > 0 && f + p->output->len > (size_t)p->precision)
 		return (0);
 	return (1);
 }
