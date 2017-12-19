@@ -108,12 +108,11 @@ int		main(void)
 {
 	int ret1, ret2;
 	
+	printf("CHAR BYTES %d\n", MB_CUR_MAX);
 	setlocale(LC_ALL, "");
-	ret1 = printf("|%*.*lc|\n", 0, 0, 'v');
-	ret2 = ft_printf("|%*.*lc|\n", 0, 0, 'v');
-	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
-	ret1 = printf("|%*.*lc|\n", 0, 1, L'我');
-	ret2 = ft_printf("|%*.*lc|\n", 0, 1, L'我');
+	printf("CHAR BYTES %d\n", MB_CUR_MAX);
+	ret1 = printf("|%.5S|\n", L"我是一只猫。");
+	ret2 = ft_printf("|%.5S|\n", L"我是一只猫。");
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
 	
 	/*

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
+#include <stdlib.h>
 
 void	printf_putchar(char c, t_params *p)
 {
@@ -23,20 +24,20 @@ int		printf_putwchar(wchar_t c, t_params *p)
 
 	if (!check_bits(&b, c, p))
 		return (1);
-	if (b < 8)
+	if (b < 8 && MB_CUR_MAX >= 1)
 		p->output->str[p->output->len++] = c;
-	else if (b < 12)
+	else if (b < 12 && MB_CUR_MAX >= 2)
 	{
 		p->output->str[p->output->len++] = (c >> 6) + 0xC0;
 		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
-	else if (b < 17)
+	else if (b < 17 && MB_CUR_MAX >= 3)
 	{
 		p->output->str[p->output->len++] = (c >> 12) + 0xE0;
 		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
 		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
-	else
+	else if (MB_CUR_MAX >= 4)
 	{
 		p->output->str[p->output->len++] = (c >> 18) + 0xF0;
 		p->output->str[p->output->len++] = ((c >> 12) & 0x3F) + 0x80;
