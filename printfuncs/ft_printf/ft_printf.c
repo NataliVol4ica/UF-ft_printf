@@ -13,11 +13,12 @@
 #include "libft.h"
 #include "../../includes/ft_printf.h"
 #include "../../includes/ft_printf_funcs.h"
+#include <locale.h>
 
 static size_t	met_percent(va_list *ap, t_params *p, char c, size_t *ret)
 {
-	size_t	j;
-	int		fret;
+	size_t			j;
+	int				fret;
 
 	j = -1;
 	fret = -1;
