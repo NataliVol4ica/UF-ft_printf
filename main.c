@@ -109,8 +109,11 @@ int		main(void)
 	int ret1, ret2;
 	
 	setlocale(LC_ALL, "");
-	ret1 = printf("|%*.*ls|\n", 10, 0, L"casual string");
-	ret2 = ft_printf("|%*.*ls|\n", 10, 0, L"casual string");
+	ret1 = printf("|%*.*lc|\n", 0, 0, 'v');
+	ret2 = ft_printf("|%*.*lc|\n", 0, 0, 'v');
+	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
+	ret1 = printf("|%*.*lc|\n", 0, 1, L'我');
+	ret2 = ft_printf("|%*.*lc|\n", 0, 1, L'我');
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
 	
 	/*

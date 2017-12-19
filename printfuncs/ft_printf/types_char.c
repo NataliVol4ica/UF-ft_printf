@@ -33,7 +33,12 @@ size_t		type_c(va_list *ap, t_params *p)
 
 size_t		type_bc(va_list *ap, t_params *p)
 {
+	int	temp_prec;
+
+	temp_prec = p->precision;
+	p->precision = 4;
 	printf_putwchar((wchar_t)va_arg(*ap, wchar_t), p);
+	p->precision = temp_prec;
 	check_width(p);
 	return (p->output->len + p->width);
 }
