@@ -24,14 +24,14 @@ int		printf_putwchar(wchar_t c, t_params *p)
 
 	if (!check_bits(&b, c, p))
 		return (1);
-	if (b < 8 && MB_CUR_MAX >= 1)
+	if (b < 8 || MB_CUR_MAX == 1)
 		p->output->str[p->output->len++] = c;
-	else if (b < 12 && MB_CUR_MAX >= 2)
+	else if (b < 12 && MB_CUR_MAX >= 4)
 	{
 		p->output->str[p->output->len++] = (c >> 6) + 0xC0;
 		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
 	}
-	else if (b < 17 && MB_CUR_MAX >= 3)
+	else if (b < 17 && MB_CUR_MAX >= 4)
 	{
 		p->output->str[p->output->len++] = (c >> 12) + 0xE0;
 		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
