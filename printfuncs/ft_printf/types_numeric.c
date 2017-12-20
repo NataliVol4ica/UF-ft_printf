@@ -50,6 +50,7 @@ size_t		type_bd(va_list *ap, t_params *p)
 	set_sign(p, num);
 	n = num < 0 ? -num : num;
 	printf_putnbr_uns(n, p);
+	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
 	check_width(p);
 	return (p->output->len + p->prefix->len + p->width);
 }
@@ -72,6 +73,7 @@ size_t		type_bu(va_list *ap, t_params *p)
 
 	num = va_arg(*ap, unsigned long);
 	printf_putnbr_uns(num, p);
+	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
 	check_width(p);
 	return (p->output->len + p->width);
 }

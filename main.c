@@ -107,14 +107,11 @@ size_t	get_chars(wchar_t n)
 int		main(void)
 {
 	int ret1, ret2;
-	
-	printf("CHAR BYTES %d\n", MB_CUR_MAX);
-	setlocale(LC_ALL, "");
-	printf("CHAR BYTES %d\n", MB_CUR_MAX);
-	ret1 = printf("|%.5S|\n", L"我是一只猫。");
-	ret2 = ft_printf("|%.5S|\n", L"我是一只猫。");
+
+	ret1 = printf("|%0*.*U|\n", 5, 3, 25);
+	ret2 = ft_printf("|%0*.*U|\n", 5, 3, 25);
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
-	
+
 	/*
 	int ret1, ret2;
 
