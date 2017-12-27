@@ -45,7 +45,7 @@ size_t		get_next_length(char *str, t_length *ll);
 */
 
 void		print_symbol(t_params *p, char c);
-void		print_str(t_params *p, char *str);
+void		print_str(t_params *p, char *str, _Bool ignore_prec);
 int			printf_putwchar(wchar_t c, t_params *p);
 void		print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_params*));
 

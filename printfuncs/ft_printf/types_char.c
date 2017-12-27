@@ -104,7 +104,7 @@ void	type_s(va_list *ap, t_params *p)
 	o.str = &p->toprint->str[p->toprint->len];
 	o.len = p->toprint->len;
 	str = va_arg(*ap, char*);
-	print_str(p, str);
+	print_str(p, str, 0);
 	filler = p->flags->zero ? '0' : ' ';
 	if (p->flags->minus)
 	{
@@ -134,7 +134,7 @@ void	type_bs(va_list *ap, t_params *p)
 	str = va_arg(*ap, wchar_t*);
 	sum = -1;
 	if (!str)
-		print_str(p, NULL);
+		print_str(p, NULL, 0);
 	else
 	{
 		p->precision += p->precision >= 0 ? o.len : 0;

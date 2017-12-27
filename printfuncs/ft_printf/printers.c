@@ -22,17 +22,17 @@ void	print_symbol(t_params *p, char c)
 	p->toprint->str[p->toprint->len++] = c;
 }
 
-void	print_str(t_params *p, char *str)
+void	print_str(t_params *p, char *str, _Bool ignore_prec)
 {
 	int	i;
 
 	if (!str)
 	{
-		print_str(p, "(null)");
+		print_str(p, "(null)", ignore_prec);
 		return ;
 	}
 	i = 0;
-	while ((p->precision < 0 || i < p->precision) && *str)
+	while ((ignore_prec || p->precision < 0 || i < p->precision) && *str)
 	{
 		print_symbol(p, *str);
 		str++;

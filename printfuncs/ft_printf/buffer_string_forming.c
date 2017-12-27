@@ -12,6 +12,7 @@
 
 #include "../../includes/ft_printf.h"
 #include <stdlib.h>
+#include <locale.h>
 
 int		printf_putwchar(wchar_t c, t_params *p)
 {
@@ -44,11 +45,15 @@ int		printf_putwchar(wchar_t c, t_params *p)
 
 void	print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_params*))
 {
-	t_output	o;
-	size_t		sum;
+	t_output		o;
+	size_t			sum;
+	size_t			i;
+	struct lconv	*loc;
 
 	o.str = &p->toprint->str[p->toprint->len];
 	o.len = p->toprint->len;
+	i = 0;
+	loc = localeconv();
 	if (n == 0 && p->precision != 0)
 		print_symbol(p, '0');
 	else
@@ -56,6 +61,8 @@ void	print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_para
 		{
 			print_symbol(p, p->alphabet[n % base]);
 			n /= base;
+			if (p->flags->apostrophe && ++i % 3 == 0 && n != 0)
+				print_str(p, loc->thousands_sep, 1);
 		}
 	sum = o.len + (size_t)p->precision;
 	if (p->precision >= 0)
