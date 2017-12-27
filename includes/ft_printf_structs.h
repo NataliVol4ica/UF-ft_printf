@@ -20,6 +20,13 @@ typedef enum	e_length
 	EMPTY = 0, HH = 2, H, L, LL, J, T, Z, BL
 }				t_length;
 
+typedef struct	s_print_str
+{
+	char	*str;
+	size_t	len;
+	size_t	size;
+}				t_print_str;
+
 typedef struct	s_output
 {
 	char	*str;
@@ -45,9 +52,13 @@ typedef struct	s_params
 	t_length	length;
 	t_output	*output;
 	t_output	*prefix;
+	t_print_str	*toprint;
+	size_t		pref_len;
+	_Bool		isnegative;
+	char		*alphabet;
 }				t_params;
 
-typedef size_t	(*t_f)(va_list*, t_params*);
+typedef void	(*t_f)(va_list*, t_params*);
 typedef struct	s_funcs
 {
 	char	c;

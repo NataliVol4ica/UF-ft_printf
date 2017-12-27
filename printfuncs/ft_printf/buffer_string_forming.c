@@ -13,11 +13,6 @@
 #include "../../includes/ft_printf.h"
 #include <stdlib.h>
 
-void	printf_putchar(char c, t_params *p)
-{
-	p->output->str[p->output->len++] = c;
-}
-
 int		printf_putwchar(wchar_t c, t_params *p)
 {
 	size_t	b;
@@ -25,63 +20,70 @@ int		printf_putwchar(wchar_t c, t_params *p)
 	if (!check_bits(&b, c, p))
 		return (1);
 	if (b < 8 || MB_CUR_MAX == 1)
-		p->output->str[p->output->len++] = c;
+		print_symbol(p, c);
 	else if ((b < 12 && MB_CUR_MAX > 2) || MB_CUR_MAX == 2)
 	{
-		p->output->str[p->output->len++] = (c >> 6) + 0xC0;
-		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
+		print_symbol(p, (c >> 6) + 0xC0);
+		print_symbol(p, (c & 0x3F) + 0x80);
 	}
 	else if ((b < 17 && MB_CUR_MAX > 3) || MB_CUR_MAX == 3)
 	{
-		p->output->str[p->output->len++] = (c >> 12) + 0xE0;
-		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
-		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
+		print_symbol(p, (c >> 12) + 0xE0);
+		print_symbol(p, ((c >> 6) & 0x3F) + 0x80);
+		print_symbol(p, (c & 0x3F) + 0x80);
 	}
 	else if ((b < 22 && MB_CUR_MAX > 4) || MB_CUR_MAX == 4)
 	{
-		p->output->str[p->output->len++] = (c >> 18) + 0xF0;
-		p->output->str[p->output->len++] = ((c >> 12) & 0x3F) + 0x80;
-		p->output->str[p->output->len++] = ((c >> 6) & 0x3F) + 0x80;
-		p->output->str[p->output->len++] = (c & 0x3F) + 0x80;
+		print_symbol(p, (c >> 18) + 0xF0);
+		print_symbol(p, ((c >> 12) & 0x3F) + 0x80);
+		print_symbol(p, ((c >> 6) & 0x3F) + 0x80);
+		print_symbol(p, (c & 0x3F) + 0x80);
 	}
 	return (0);
 }
 
-void	printf_putnbr_uns(uintmax_t n, t_params *p)
+void	print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_params*))
 {
+	t_output	o;
+	size_t		sum;
+
+	o.str = &p->toprint->str[p->toprint->len];
+	o.len = p->toprint->len;
 	if (n == 0 && p->precision != 0)
-		p->output->str[p->output->len++] = '0';
+		print_symbol(p, '0');
 	else
 		while (n != 0)
 		{
-			p->output->str[p->output->len++] = n % 10 + '0';
-			n /= 10;
+			print_symbol(p, p->alphabet[n % base]);
+			n /= base;
 		}
+	sum = o.len + (size_t)p->precision;
 	if (p->precision >= 0)
-		while (p->output->len < (uintmax_t)p->precision)
-			p->output->str[p->output->len++] = '0';
-	rev_str(p->output->str, p->output->len - 1);
-}
-
-void	printf_convert_base(uintmax_t n, size_t base, t_params *p, char c)
-{
-	if (n == 0)
+		while (p->toprint->len < sum)
+			print_symbol(p, '0');
+	if (p->flags->minus)
 	{
-		if (p->precision != 0)
-			printf_putchar('0', p);
-		else if (p->precision == 0 && c == '0' && p->flags->hash)
-			printf_putchar('0', p);
+		preffunc(p);
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		sum = o.len + (size_t)p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, ' ');
 	}
-	while (n != 0)
+	else if (p->flags->zero)
 	{
-		p->output->str[p->output->len] = n % base;
-		p->output->str[p->output->len] +=
-			p->output->str[p->output->len] > 9 ? -10 + c : '0';
-		n /= base;
-		p->output->len++;
+		if (o.len + (size_t)p->width > p->pref_len)
+			sum = o.len + (size_t)p->width - p->pref_len;
+		while (p->toprint->len < sum)
+			print_symbol(p, '0');
+		preffunc(p);
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
 	}
-	if (p->precision > 0)
-		while (p->output->len < (size_t)p->precision)
-			p->output->str[p->output->len++] = '0';
-	rev_str(p->output->str, p->output->len - 1);
+	else
+	{
+		preffunc(p);
+		sum = o.len + (size_t)p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, ' ');
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+	}
 }

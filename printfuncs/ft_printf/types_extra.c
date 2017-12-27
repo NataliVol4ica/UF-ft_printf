@@ -13,39 +13,49 @@
 #include "../../includes/ft_printf.h"
 #include "libft.h"
 
-size_t		type_p(va_list *ap, t_params *p)
+void	type_p(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
 
 	num = va_arg(*ap, uintmax_t);
-	p->prefix->str[p->prefix->len++] = '0';
-	p->prefix->str[p->prefix->len++] = 'x';
-	printf_convert_base(num, 16, p, 'a');
-	check_width(p);
-	return (p->output->len + p->prefix->len + p->width);
+	p->flags->hash = 1;
+	print_number(num, 16, p, &print_hex_pref);
 }
 
-void		type_n(va_list *ap, t_params *p, size_t ret)
+void	type_n(va_list *ap, t_params *p)
 {
 	if (p->length == HH)
-		*(va_arg(*ap, signed char*)) = (signed char)ret;
+		*(va_arg(*ap, signed char*)) = (signed char)p->toprint->len;
 	else if (p->length == H)
-		*(va_arg(*ap, short*)) = (short)ret;
+		*(va_arg(*ap, short*)) = (short)p->toprint->len;
 	else if (p->length == LL)
-		*(va_arg(*ap, long long*)) = (long long)ret;
+		*(va_arg(*ap, long long*)) = (long long)p->toprint->len;
 	else if (p->length == L)
-		*(va_arg(*ap, long*)) = (long)ret;
+		*(va_arg(*ap, long*)) = (long)p->toprint->len;
 	else if (p->length == J)
-		*(va_arg(*ap, intmax_t*)) = (intmax_t)ret;
+		*(va_arg(*ap, intmax_t*)) = (intmax_t)p->toprint->len;
 	else if (p->length == Z)
-		*(va_arg(*ap, size_t*)) = (size_t)ret;
+		*(va_arg(*ap, size_t*)) = (size_t)p->toprint->len;
 	else
-		*(va_arg(*ap, int*)) = (int)ret;
+		*(va_arg(*ap, int*)) = (int)p->toprint->len;
 }
 
-size_t		type_empty(t_params *p, char c)
+void	type_none(char c, t_params *p)
 {
-	printf_putchar(c, p);
-	check_width(p);
-	return (p->output->len + p->width);
+	int		i;
+	char	filler;
+
+	p->width--;
+	i = -1;
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		print_symbol(p, c);
+		while (++i < p->width)
+			print_symbol(p, ' ');
+		return ;
+	}
+	while (++i < p->width)
+		print_symbol(p, filler);
+	print_symbol(p, c);
 }

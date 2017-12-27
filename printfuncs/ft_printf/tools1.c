@@ -32,12 +32,10 @@ intmax_t	printf_atoi(char *str, int *p)
 	return (ans * sign);
 }
 
-void		rev_str(char *from, size_t n)
+void		rev_str(char *from, char *until)
 {
 	char	c;
-	char	*until;
 
-	until = &from[n];
 	while (from < until)
 	{
 		c = *from;
@@ -46,30 +44,6 @@ void		rev_str(char *from, size_t n)
 		from++;
 		until--;
 	}
-}
-
-void		check_width(t_params *p)
-{
-	p->width -= p->prefix->len + p->output->len;
-	p->width = p->width < 0 ? 0 : p->width;
-	if (p->flags->minus)
-	{
-		final_putstr(p->prefix->str, p->prefix->len);
-		final_putstr(p->output->str, p->output->len);
-		print_width(' ', p->width);
-		return ;
-	}
-	if (p->flags->zero)
-	{
-		final_putstr(p->prefix->str, p->prefix->len);
-		print_width('0', p->width);
-	}
-	else
-	{
-		print_width(' ', p->width);
-		final_putstr(p->prefix->str, p->prefix->len);
-	}
-	final_putstr(p->output->str, p->output->len);
 }
 
 size_t		get_next_length(char *str, t_length *l)

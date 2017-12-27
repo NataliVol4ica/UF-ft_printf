@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printers.c                                         :+:      :+:    :+:   */
+/*   print_prefix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/30 16:24:20 by nkolosov          #+#    #+#             */
-/*   Updated: 2017/11/30 16:24:21 by nkolosov         ###   ########.fr       */
+/*   Created: 2017/12/06 15:12:26 by nkolosov          #+#    #+#             */
+/*   Updated: 2017/12/06 15:12:26 by nkolosov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
 
-void	print_symbol(t_params *p, char c)
+void	print_sign_pref(t_params *p)
 {
-	if (p->toprint->len == p->toprint->size)
-		realloc_toprint(p->toprint);
-	p->toprint->str[p->toprint->len++] = c;
+	if (p->isnegative)
+		print_symbol(p, '-');
+	else if (p->flags->plus)
+		print_symbol(p, '+');
+	else if (p->flags->space)
+		print_symbol(p, ' ');
 }
 
-void	print_str(t_params *p, char *str)
+void	print_oct_pref(t_params *p)
 {
-	int	i;
+	if (p->flags->hash)
+		print_symbol(p, '0');
+}
 
-	if (!str)
-	{
-		print_str(p, "(null)");
+void	print_hex_pref(t_params *p)
+{
+	if (!p->flags->hash)
 		return ;
-	}
-	i = 0;
-	while ((p->precision < 0 || i < p->precision) && *str)
-	{
-		print_symbol(p, *str);
-		str++;
-		i++;
-	}
+	print_symbol(p, p->alphabet[10] == 'a' ? 'x' : 'X');	
+	print_symbol(p, '0');
 }

@@ -36,6 +36,7 @@ PRINTF =	ft_printf \
 			buffer_string_forming \
 			params_set \
 			params_tools \
+			print_prefix \
 			printers \
 			types_char \
 			types_numeric \
@@ -141,7 +142,7 @@ FILENAMES = $(DSTRFUNCS) \
 ODIR = ./obj
 CFILES = $(patsubst %, %.c, $(FILENAMES))
 OFILES = $(patsubst %, $(ODIR)/%.o, $(FILENAMES))
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O3
 
 BLACK = '\033[0;30m'
 RED = '\033[0;31m'

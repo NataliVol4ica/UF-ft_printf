@@ -13,9 +13,8 @@
 #include "../../includes/ft_printf.h"
 #include "libft.h"
 
-size_t		type_fbf(va_list *ap, t_params *p)
+void	type_fbf(va_list *ap, t_params *p)
 {
 	(void)ap;
 	(void)p;
-	return (0);
 }

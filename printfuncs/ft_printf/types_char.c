@@ -14,73 +14,145 @@
 #include "libft.h"
 #include <stdlib.h>
 
-size_t		type_percent(va_list *ap, t_params *p)
+void	type_percent(va_list *ap, t_params *p)
 {
+	int		i;
+	char	filler;
+
 	(void)ap;
-	printf_putchar('%', p);
-	check_width(p);
-	return (p->output->len + p->width);
+	p->width--;
+	i = -1;
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		print_symbol(p, '%');
+		while (++i < p->width)
+			print_symbol(p, ' ');
+		return ;
+	}
+	while (++i < p->width)
+		print_symbol(p, filler);
+	print_symbol(p, '%');
 }
 
-size_t		type_c(va_list *ap, t_params *p)
+void	type_c(va_list *ap, t_params *p)
 {
+	int		i;
+	char	filler;
+	char	c;
+
 	if (p->length == L)
-		return (type_bc(ap, p));
-	printf_putchar((char)va_arg(*ap, int), p);
-	check_width(p);
-	return (p->output->len + p->width);
+	{
+		type_bc(ap, p);
+		return ;
+	}
+	c = (char)va_arg(*ap, int);
+	p->width--;
+	i = -1;
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		print_symbol(p, c);
+		while (++i < p->width)
+			print_symbol(p, ' ');
+		return ;
+	}
+	while (++i < p->width)
+		print_symbol(p, filler);
+	print_symbol(p, c);
 }
 
-size_t		type_bc(va_list *ap, t_params *p)
+void	type_bc(va_list *ap, t_params *p)
 {
+	t_output	o;
+	size_t		sum;
+	char		filler;
+
+	o.str = &p->toprint->str[p->toprint->len];
+	o.len = p->toprint->len;
 	p->precision = -1;
 	printf_putwchar((wchar_t)va_arg(*ap, wchar_t), p);
-	check_width(p);
-	return (p->output->len + p->width);
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		sum = o.len + p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, ' ');
+	}
+	else
+	{
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		sum = o.len + p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, filler);
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+	}
 }
 
-size_t		type_s(va_list *ap, t_params *p)
+void	type_s(va_list *ap, t_params *p)
 {
-	char	*temp;
+	char		*str;
+	t_output	o;
+	size_t		sum;
+	char		filler;
 
 	if (p->length == L)
-		return (type_bs(ap, p));
-	temp = p->output->str;
-	p->output->str = va_arg(*ap, char*);
-	if (p->output->str == NULL)
-		set_null_string(p);
+	{
+		type_bs(ap, p);
+		return ;
+	}
+	o.str = &p->toprint->str[p->toprint->len];
+	o.len = p->toprint->len;
+	str = va_arg(*ap, char*);
+	print_str(p, str);
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		sum = o.len + p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, ' ');
+	}
 	else
-		p->output->len = ft_strlen(p->output->str);
-	if (p->precision > -1 && p->output->len > (uintmax_t)p->precision)
-		p->output->len = (uintmax_t)p->precision;
-	check_width(p);
-	p->output->str = temp;
-	return (p->output->len + p->width);
+	{
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		sum = o.len + p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, filler);
+		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+	}
 }
 
-size_t		type_bs(va_list *ap, t_params *p)
+void	type_bs(va_list *ap, t_params *p)
 {
-	char	*temp;
-	wchar_t	*str;
-	size_t	i;
+	wchar_t		*str;
+	t_output	o;
+	size_t		sum;
+	char		filler;
 
+	o.str = &p->toprint->str[p->toprint->len];
+	o.len = p->toprint->len;
 	str = va_arg(*ap, wchar_t*);
-	if (str == NULL)
-	{
-		set_null_string(p);
-		check_width(p);
-	}
+	sum = -1;
+	if (!str)
+		print_str(p, NULL);
 	else
 	{
-		temp = p->output->str;
-		p->output->str = ft_strnew(ft_wstrlen(str) * 4);
-		i = -1;
-		while (str[++i])
-			if ((printf_putwchar(str[i], p)))
+		p->precision += p->precision >= 0 ? o.len : 0;
+		while (str[++sum])
+			if ((printf_putwchar(str[sum], p)))
 				break ;
-		check_width(p);
-		free(p->output->str);
-		p->output->str = temp;
 	}
-	return (p->output->len + p->width);
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		sum = o.len + p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, ' ');
+		return ;
+	}
+	rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+	sum = o.len + p->width;
+	while (p->toprint->len < sum)
+		print_symbol(p, filler);
+	rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
 }

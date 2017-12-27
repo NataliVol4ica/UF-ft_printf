@@ -12,6 +12,7 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
+#include <stddef.h>
 
 void	convert_di(intmax_t *n, t_params *p)
 {
@@ -30,8 +31,30 @@ void	convert_di(intmax_t *n, t_params *p)
 		num = (intmax_t)num;
 	else if (p->length == Z)
 		num = (size_t)num;
+	else if (p->length == T)
+		num = (ptrdiff_t)num;
 	else
 		num = (int)num;
+	*n = num;
+}
+
+void	convert_ouxbx_t(uintmax_t *n, t_params *p)
+{
+	uintmax_t	num;
+
+	num = *n;
+	if (p->length != T)
+		return ;
+	if (sizeof(unsigned char) == sizeof(ptrdiff_t))
+		num = (unsigned char)num;
+	else if (sizeof(unsigned short) == sizeof(ptrdiff_t))
+		num = (unsigned short)num;
+	else if (sizeof(unsigned long long) == sizeof(ptrdiff_t))
+		num = (unsigned long long)num;
+	else if (sizeof(unsigned long int) == sizeof(ptrdiff_t))
+		num = (unsigned long int)num;
+	else 
+		num = (unsigned int)num;
 	*n = num;
 }
 
@@ -52,6 +75,8 @@ void	convert_ouxbx(uintmax_t *n, t_params *p)
 		num = (uintmax_t)num;
 	else if (p->length == Z)
 		num = (size_t)num;
+	else if (p->length == T)
+		convert_ouxbx_t(n, p);
 	else
 		num = (unsigned int)num;
 	*n = num;

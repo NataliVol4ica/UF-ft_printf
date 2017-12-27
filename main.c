@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.c.:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,6 +20,7 @@
 #include <math.h>
 #include <wchar.h>
 #include <unistd.h>
+#include <stddef.h>
 
 /*
 void		print_params(t_params *p)
@@ -106,12 +107,30 @@ size_t	get_chars(wchar_t n)
 
 int		main(void)
 {
+	int p;
 	int ret1, ret2;
 
-	ret1 = printf("|%0*.*U|\n", 5, 3, 25);
-	ret2 = ft_printf("|%0*.*U|\n", 5, 3, 25);
+	ret1 = printf("|%.4d|\n", 0);
+	ret2 = ft_printf("|%.4d|\n", 0);
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
+	
+	/*
+	int	ret1, ret2;
+	int k = 0;
 
+	ret1 = printf("|%5.4d|%n%d|\n", -25, &k, k);
+	ret2 = ft_printf("|%5.4d|%n%d|\n", -25, &k, k);
+	*/
+	/*
+	int ret1, ret2;
+	
+	int p1 = 2;
+	ptrdiff_t	pdt = &p1;
+
+	ret1 = printf("|% 0.td|\n", pdt);
+	ret2 = ft_printf("|% 0.td|\n", pdt);
+	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
+	*/
 	/*
 	int ret1, ret2;
 
@@ -403,8 +422,10 @@ int		main(void)
 	printf("R = %jd\n", r);
 	*/
 	//ft_printf("%d", 42);
-	/*
-	ft_printf("Kashim a %d histoires à raconter", 1001);
+
+	//ft_printf("LALALA %d lololo \n", 1024);
+
+	/*ft_printf("Kashim a %d histoires à raconter", 1001);
 	ft_printf("Il fait au moins %d", -8000);
 	ft_printf("\n");
 	ft_printf("%d", 0);
@@ -418,8 +439,8 @@ int		main(void)
 	ft_printf("%%d 	 == |%d|", 9);
 	ft_printf("\n");
 	ft_printf("%%d Lydie == |%d|", 503);
-	ft_printf("\n");
-	*/
+	ft_printf("\n");*/
+	
 	/*
 	ft_printf("%%d 0000042 == |%d|", 34);
 	ft_printf("\n");
