@@ -110,8 +110,8 @@ int		main(void)
 	int p;
 	int ret1, ret2;
 
-	ret1 = printf("|%.4d|\n", 0);
-	ret2 = ft_printf("|%.4d|\n", 0);
+	ret1 = printf("|%#.0o|\n", 0);
+	ret2 = ft_printf("|%#.0o|\n", 0);
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
 	
 	/*
