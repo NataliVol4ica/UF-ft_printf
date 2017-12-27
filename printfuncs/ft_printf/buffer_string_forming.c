@@ -73,6 +73,8 @@ void	print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_para
 	{
 		if (o.len + (size_t)p->width > p->pref_len)
 			sum = o.len + (size_t)p->width - p->pref_len;
+		else
+			sum = 0;
 		while (p->toprint->len < sum)
 			print_symbol(p, '0');
 		preffunc(p);
