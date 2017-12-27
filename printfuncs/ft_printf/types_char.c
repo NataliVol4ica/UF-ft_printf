@@ -64,80 +64,77 @@ void	type_c(va_list *ap, t_params *p)
 
 void	type_bc(va_list *ap, t_params *p)
 {
-	t_output	o;
-	size_t		sum;
-	char		filler;
+	size_t	savelen;
+	size_t	sum;
+	char	filler;
 
-	o.str = &p->toprint->str[p->toprint->len];
-	o.len = p->toprint->len;
+	savelen = p->toprint->len;
 	p->precision = -1;
 	printf_putwchar((wchar_t)va_arg(*ap, wchar_t), p);
 	filler = p->flags->zero ? '0' : ' ';
 	if (p->flags->minus)
 	{
-		sum = o.len + p->width;
+		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, ' ');
 	}
 	else
 	{
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
-		sum = o.len + p->width;
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, filler);
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
 	}
 }
 
 void	type_s(va_list *ap, t_params *p)
 {
-	char		*str;
-	t_output	o;
-	size_t		sum;
-	char		filler;
+	char	*str;
+	size_t	savelen;
+	size_t	sum;
+	char	filler;
 
 	if (p->length == L)
 	{
 		type_bs(ap, p);
 		return ;
 	}
-	o.str = &p->toprint->str[p->toprint->len];
-	o.len = p->toprint->len;
+	savelen = p->toprint->len;
 	str = va_arg(*ap, char*);
 	print_str(p, str, 0);
 	filler = p->flags->zero ? '0' : ' ';
 	if (p->flags->minus)
 	{
-		sum = o.len + p->width;
+		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, ' ');
 	}
 	else
 	{
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
-		sum = o.len + p->width;
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, filler);
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
 	}
 }
 
 void	type_bs(va_list *ap, t_params *p)
 {
-	wchar_t		*str;
-	t_output	o;
-	size_t		sum;
-	char		filler;
+	wchar_t	*str;
+	size_t	savelen;
+	size_t	sum;
+	char	filler;
 
-	o.str = &p->toprint->str[p->toprint->len];
-	o.len = p->toprint->len;
+	savelen = p->toprint->len;
 	str = va_arg(*ap, wchar_t*);
 	sum = -1;
 	if (!str)
 		print_str(p, NULL, 0);
 	else
 	{
-		p->precision += p->precision >= 0 ? o.len : 0;
+		p->precision += p->precision >= 0 ? savelen : 0;
 		while (str[++sum])
 			if ((printf_putwchar(str[sum], p)))
 				break ;
@@ -145,14 +142,14 @@ void	type_bs(va_list *ap, t_params *p)
 	filler = p->flags->zero ? '0' : ' ';
 	if (p->flags->minus)
 	{
-		sum = o.len + p->width;
+		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, ' ');
 		return ;
 	}
-	rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
-	sum = o.len + p->width;
+	rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+	sum = savelen + p->width;
 	while (p->toprint->len < sum)
 		print_symbol(p, filler);
-	rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+	rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
 }

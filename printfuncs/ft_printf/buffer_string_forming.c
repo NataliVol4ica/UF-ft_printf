@@ -45,13 +45,12 @@ int		printf_putwchar(wchar_t c, t_params *p)
 
 void	print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_params*))
 {
-	t_output		o;
+	size_t			savelen;
 	size_t			sum;
 	size_t			i;
 	struct lconv	*loc;
 
-	o.str = &p->toprint->str[p->toprint->len];
-	o.len = p->toprint->len;
+	savelen = p->toprint->len;
 	i = 0;
 	loc = localeconv();
 	if (n == 0 && p->precision != 0)
@@ -64,35 +63,36 @@ void	print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_para
 			if (p->flags->apostrophe && ++i % 3 == 0 && n != 0)
 				print_str(p, loc->thousands_sep, 1);
 		}
-	sum = o.len + (size_t)p->precision;
+	sum = savelen + (size_t)p->precision;
 	if (p->precision >= 0)
 		while (p->toprint->len < sum)
 			print_symbol(p, '0');
 	if (p->flags->minus)
 	{
 		preffunc(p);
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
-		sum = o.len + (size_t)p->width;
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		sum = savelen + (size_t)p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, ' ');
 	}
 	else if (p->flags->zero)
 	{
-		if (o.len + (size_t)p->width > p->pref_len)
-			sum = o.len + (size_t)p->width - p->pref_len;
+		if (savelen + (size_t)p->width > p->pref_len)
+			sum = savelen + (size_t)p->width - p->pref_len;
 		else
 			sum = 0;
 		while (p->toprint->len < sum)
 			print_symbol(p, '0');
 		preffunc(p);
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		p->toprint->str[p->toprint->len] = '\0';
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
 	}
 	else
 	{
 		preffunc(p);
-		sum = o.len + (size_t)p->width;
+		sum = savelen + (size_t)p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, ' ');
-		rev_str(o.str, &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
 	}
 }

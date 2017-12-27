@@ -44,8 +44,8 @@ int		main(void)
 	int ret1, ret2;
 
 	setlocale(LC_ALL, "en_US.UTF-8");
-	ret1 = printf("|%'.0d|\n", 123456);
-	ret2 = ft_printf("|%'.0d|\n", 123456);                                 
+	ret1 = printf("|%010000.10000d|\n", 'a');
+	ret2 = ft_printf("|%010000d|\n", 'a');
 	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
 
 	/*

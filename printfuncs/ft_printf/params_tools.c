@@ -83,6 +83,7 @@ void		realloc_toprint(t_print_str *tp)
 	i = -1;
 	while (++i < tp->len)
 		new[i] = tp->str[i];
+	tp->str[tp->len] = '\0';
 	free(tp->str);
 	tp->str = new;
 	tp->size *= 2;
