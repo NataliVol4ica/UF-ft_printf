@@ -22,7 +22,6 @@ int			ft_printf(const char *fmt, ...)
 	size_t			j;
 	static t_params	*p = NULL;
 
-	fflush(stdout);
 	p = p ? p : init_params();
 	p->toprint->len = 0;
 	if (!fmt)
