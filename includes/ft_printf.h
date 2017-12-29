@@ -65,8 +65,8 @@ void		realloc_toprint(t_print_str *tp);
 
 size_t		get_n(char *str, int *p);
 void		get_flags(char *str, int *p, t_flags *f);
-int			get_width(char *str, int *p, va_list *ap);
-int			get_precision(char *str, int *p, va_list *ap);
+int			get_width(char *str, int *p, va_list *ap, _Bool *b);
+int			get_precision(char *str, int *p, va_list *ap, _Bool *b);
 t_length	get_length(char *str, int *i);
 
 /*

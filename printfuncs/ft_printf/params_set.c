@@ -58,19 +58,25 @@ void		get_flags(char *str, int *p, t_flags *f)
 	*p = *p + i;
 }
 
-int			get_width(char *str, int *p, va_list *ap)
+int			get_width(char *str, int *p, va_list *ap, _Bool *b)
 {
 	if (str[0] >= '0' && str[0] <= '9')
 		return (printf_atoi(str, p));
 	if (str[0] == '*')
 	{
 		*p = *p + 1;
+		if (str[1] > '0' && str[1] <= '9')
+		{
+			*p = *p + 1;
+			*b = 1;
+			return (printf_atoi(&str[1], p));
+		}
 		return (va_arg(*ap, int));
 	}
 	return (0);
 }
 
-int			get_precision(char *str, int *p, va_list *ap)
+int			get_precision(char *str, int *p, va_list *ap, _Bool *b)
 {
 	if (str[0] != '.')
 		return (-1);
@@ -78,6 +84,12 @@ int			get_precision(char *str, int *p, va_list *ap)
 	if (str[1] == '*')
 	{
 		*p = *p + 1;
+		if (str[2] > '0' && str[2] <= '9')
+		{
+			*p = *p + 1;
+			*b = 1;
+			return (printf_atoi(&str[2], p));
+		}
 		return (va_arg(*ap, int));
 	}
 	return (printf_atoi(&str[1], p));

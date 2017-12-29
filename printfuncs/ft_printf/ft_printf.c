@@ -36,6 +36,29 @@ int			ft_printf(const char *fmt, ...)
 			read_params(p, (char*)fmt, &i, &ap);
 			if (!fmt[i])
 				continue ;
+			if (p->is_width_subst)
+			{
+				va_end(ap);
+				va_start(ap, fmt);
+				while (--p->width > 0)
+					va_arg(ap, size_t);
+				p->width = va_arg(ap, int);
+			}
+			if (p->is_precision_subst)
+			{
+				va_end(ap);
+				va_start(ap, fmt);
+				while (--p->precision > 0)
+					va_arg(ap, size_t);
+				p->precision = va_arg(ap, int);
+			}
+			if (p->n-- > 0)
+			{
+				va_end(ap);
+				va_start(ap, fmt);
+				while (p->n-- > 0)
+					va_arg(ap, size_t);
+			}
 			j = -1;
 			while (++j < NOFFUNCS)
 				if (fmt[i] == g_type_funcs[j].c)

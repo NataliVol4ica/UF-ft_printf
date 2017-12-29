@@ -49,9 +49,9 @@ typedef struct	s_params
 	t_flags		*flags;
 	int			width;
 	int			precision;
+	_Bool		is_width_subst;
+	_Bool		is_precision_subst;
 	t_length	length;
-	t_output	*output;
-	t_output	*prefix;
 	t_print_str	*toprint;
 	size_t		pref_len;
 	_Bool		isnegative;

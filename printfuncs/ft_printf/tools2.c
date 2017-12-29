@@ -12,12 +12,6 @@
 
 #include "../../includes/ft_printf.h"
 
-void		set_null_string(t_params *p)
-{
-	p->output->str = "(null)";
-	p->output->len = 6;
-}
-
 size_t		ft_wstrlen(const wchar_t *str)
 {
 	size_t i;
