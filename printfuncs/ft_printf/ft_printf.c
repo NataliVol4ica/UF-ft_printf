@@ -34,6 +34,8 @@ int			ft_printf(const char *fmt, ...)
 		{
 			i++;
 			read_params(p, (char*)fmt, &i, &ap);
+			if (!fmt[i])
+				continue ;
 			j = -1;
 			while (++j < NOFFUNCS)
 				if (fmt[i] == g_type_funcs[j].c)

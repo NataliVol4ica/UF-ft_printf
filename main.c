@@ -40,38 +40,11 @@
 
 int		main(void)
 {
-	int p;
-	int ret1, ret2;
-
-	setlocale(LC_ALL, "en_US.UTF-8");
-	ret1 = printf("|%010000.10000d|\n", 'a');
-	ret2 = ft_printf("|%010000d|\n", 'a');
-	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
-
-	/*
 	int	ret1, ret2;
-	int k = 0;
 
-	ret1 = printf("|%5.4d|%n%d|\n", -25, &k, k);
-	ret2 = ft_printf("|%5.4d|%n%d|\n", -25, &k, k);
-	*/
-	/*
-	int ret1, ret2;
+	ret1 = printf("|%0#5x|\n", 0);
+	ret2 = ft_printf("|%0#5x|\n", 0);
 	
-	int p1 = 2;
-	ptrdiff_t	pdt = &p1;
-
-	ret1 = printf("|% 0.td|\n", pdt);
-	ret2 = ft_printf("|% 0.td|\n", pdt);
-	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
-	*/
-	/*
-	int ret1, ret2;
-
-	ret1 = printf("|%lc|\n", '\0');
-	ret2 = ft_printf("|%lc|\n", '\0');
-	printf("Ret1 = %d Ret2 = %d\nRet1 - Ret2 = %d\n", ret1, ret2, ret1 - ret2);
-	*/
 	/*
 	ret1 = printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
 	printf("\n\n\n\n\n\n");
