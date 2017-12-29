@@ -19,6 +19,7 @@ void	type_p(va_list *ap, t_params *p)
 
 	num = va_arg(*ap, uintmax_t);
 	p->flags->hash = 1;
+	p->pref_len = 2;
 	print_number(num, 16, p, &print_hex_pref);
 }
 

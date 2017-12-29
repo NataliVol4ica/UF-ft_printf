@@ -42,8 +42,10 @@ int		main(void)
 {
 	int	ret1, ret2;
 
-	ret1 = printf("|%0#5x|\n", 0);
-	ret2 = ft_printf("|%0#5x|\n", 0);
+	ret1 = printf("1|%05p|\n", 0);
+	ret2 = ft_printf("2|%05p|\n", 0);
+	ret1 = printf("1|%05x|\n", 0);
+	ret2 = ft_printf("2|%05x|\n", 0);
 	
 	/*
 	ret1 = printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
