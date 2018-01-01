@@ -12,7 +12,9 @@
 
 NAME = libftprintf.a
 HEADNAMES = libft list get_next_line
-PRINTF_HEADERS = ./includes/ft_printf.h ./includes/ft_printf_funcs.h
+PRINTF_HEADERS = ./includes/ft_printf.h \
+				./includes/ft_printf_funcs.h \
+				./includes/ft_printf_consts.h
 INCDIR = ./includes
 HEADERS = $(patsubst %, $(INCDIR)/%.h, $(HEADNAMES))
 PRINTFUNCS = ft_putchar \
