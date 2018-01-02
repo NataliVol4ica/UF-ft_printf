@@ -57,7 +57,6 @@ t_params	*init_params(void);
 void		read_params(t_params *p, char *fmt, size_t *pos, va_list *ap);
 void		del_params(t_params **p);
 void		zero_params(t_params *p);
-void		realloc_toprint(t_print_str *tp);
 
 /*
 ** READING PARAMETERS
@@ -81,9 +80,19 @@ void		print_hex_pref(t_params *p);
 ** FLOAT TOOLS
 */
 
-t_float		*init_t_float();
+
+t_float		*init_t_float(void);
+void		zero_t_float(t_float *f);
+t_str		*init_t_str(size_t size);
+void		set_float(t_float *f, double num, t_params *p);
+
+/*
+** REALLOCS
+*/
+
+void		realloc_toprint(t_print_str *tp);
 void		realloc_t_float(t_float *f);
-void		set_float(t_float *f, double num);
+void		realloc_t_str(t_str *tstr);
 
 /*
 ** TYPE FUNCTIONS

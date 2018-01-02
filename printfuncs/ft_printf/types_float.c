@@ -24,5 +24,5 @@ void	type_fbf(va_list *ap, t_params *p)
 	num = va_arg(*ap, double);
 	p->precision = p->precision < 0 ? 6 : p->precision;
 	f = !f ? init_t_float() : f;
-	set_float(f, num);
+	set_float(f, num, p);
 }

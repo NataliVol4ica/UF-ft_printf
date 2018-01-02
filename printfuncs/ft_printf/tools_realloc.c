@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   tools_realloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,35 +17,41 @@
 #include <float.h>
 #include <math.h>
 
-t_float	*init_t_float(void)
+void		realloc_toprint(t_print_str *tp)
 {
-	t_float	*f;
+	char	*new;
 	size_t	i;
 
-	f = (t_float*)malloc(sizeof(t_float));
-	f->is_pos = 1;
-	f->num = (char*)malloc(sizeof(char) * (513));
+	new = (char*)malloc(sizeof(char) * (tp->size * 2 + 1));
 	i = -1;
-	while (++i < 512)
-		f->num[i] = '0';
-	f->num[i] = '\0';
-	f->size = 0;
-	f->point = -1;
-	f->mal_len = 512;
-	return (f);
+	while (++i < tp->len)
+		new[i] = tp->str[i];
+	tp->str[tp->len] = '\0';
+	free(tp->str);
+	tp->str = new;
+	tp->size *= 2;
 }
 
-void	zero_t_float(t_float *f)
+void	realloc_t_float(t_float *f)
 {
-	(void)f;
+	char	*str;
+	size_t	i;
+
+	str = (char*)malloc(sizeof(char) * (f->mal_len * 2 + 1));
+	i = -1;
+	while (++i < f->mal_len)
+		str[i] = f->num[i];
+	i = -1;
+	while (++i < f->mal_len)
+		str[f->mal_len + i] = '\0';
+	str[f->mal_len * 2] = '\0';
+	free(f->num);
+	f->num = str;
 }
 
-t_str	*init_t_str(size_t size)
+void	realloc_t_str(t_str *tstr)
 {
-	t_str	*tstr;
-
-	tstr = (t_str*)malloc(sizeof(t_str));
-	tstr->str = ft_strnew(size + 1);
-	tstr->size = size;
-	return (tstr);
+	free(tstr->str);
+	tstr->str = ft_strnew(tstr->size * 2 + 1);
+	tstr->size = tstr->size * 2;
 }

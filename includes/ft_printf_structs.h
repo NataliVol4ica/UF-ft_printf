@@ -27,11 +27,11 @@ typedef struct	s_print_str
 	size_t	size;
 }				t_print_str;
 
-typedef struct	s_output
+typedef struct	s_str
 {
 	char	*str;
-	size_t	len;
-}				t_output;
+	int		size;
+}				t_str;
 
 typedef struct	s_flags
 {

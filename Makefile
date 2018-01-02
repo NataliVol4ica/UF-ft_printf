@@ -47,7 +47,9 @@ PRINTF =	ft_printf \
 			types_float \
 			tools1 \
 			tools2 \
-			tools_bits 
+			tools_bits \
+			tools_float \
+			tools_realloc
 PRNTFDIR = $(PRINTFUNCDIR)/ft_printf
 DPRNTF = $(patsubst %, $(PRNTFDIR)/%, $(PRINTF))
 STRFUNCS =	ft_strlen \

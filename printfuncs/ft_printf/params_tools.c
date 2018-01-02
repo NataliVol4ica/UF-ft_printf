@@ -69,18 +69,3 @@ void		zero_params(t_params *p)
 	p->is_width_subst = 0;
 	p->is_precision_subst = 0;
 }
-
-void		realloc_toprint(t_print_str *tp)
-{
-	char	*new;
-	size_t	i;
-
-	new = (char*)malloc(sizeof(char) * (tp->size * 2 + 1));
-	i = -1;
-	while (++i < tp->len)
-		new[i] = tp->str[i];
-	tp->str[tp->len] = '\0';
-	free(tp->str);
-	tp->str = new;
-	tp->size *= 2;
-}
