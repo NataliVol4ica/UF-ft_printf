@@ -78,6 +78,14 @@ void		print_oct_pref(t_params *p);
 void		print_hex_pref(t_params *p);
 
 /*
+** FLOAT TOOLS
+*/
+
+t_float		*init_t_float();
+void		realloc_t_float(t_float *f);
+void		set_float(t_float *f, double num);
+
+/*
 ** TYPE FUNCTIONS
 */
 

@@ -65,4 +65,14 @@ typedef struct	s_funcs
 	t_f		func;
 }				t_funcs;
 
+typedef struct	s_float
+{
+	_Bool	is_pos;
+	char	*num;
+	size_t	size;
+	int		point;
+	size_t	mal_len;
+
+}				t_float;
+
 #endif
