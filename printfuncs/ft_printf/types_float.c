@@ -14,10 +14,10 @@
 #include "../../includes/ft_printf_consts.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <float.h>
 
 void	dec_sum(char *to, char *s)
 {
-	//printf("Suming\n%s\n%s\n", to, s);
 	for (int i = 0; i < 201; i++)
 	{
 		to[i] -= '0';
@@ -30,7 +30,16 @@ void	dec_sum(char *to, char *s)
 		to[i] = to[i] % 10;
 		to[i] += '0'; 
 	}
-	//printf("%s\n", to);
+}
+
+void	round_float(char *str, t_params *p, _Bool is_neg)
+{
+	int		i;
+
+	i = p->precision - 1;
+	if ((FLT_ROUNDS == 2 && !is_neg) || (FLT_ROUNDS == 3 && is_neg) || FLT_ROUNDS == 1)
+		while (i >= 0)
+			str[i] += ((str[i + 1] - '0') / 5);
 }
 
 void	type_fbf(va_list *ap, t_params *p)
@@ -38,15 +47,17 @@ void	type_fbf(va_list *ap, t_params *p)
 	double	num;
 	char	*str;
 	size_t	size;
+	_Bool	is_neg;
 
 	num = va_arg(*ap, double);
-	printf("num1 = %.*lf\n", p->precision, num);
+	is_neg = num < 0.0 ? 1 : 0;
+	num = num < 0.0 ? -num : num;
 	p->precision = p->precision < 0 ? 6 : p->precision;
 	size = p->precision > 200 ? p->precision + 1 : 200;
 	str = ft_strnew(size + 1);
 	for (size_t i = 0; i < size; i++)
 		str[i] = '0';
-	for (int i = 0; i < p->precision; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		num *= 2.0;
 		if (num >= 1.0)
@@ -55,5 +66,9 @@ void	type_fbf(va_list *ap, t_params *p)
 			dec_sum(str, g_decs[i]);
 		}
 	}
-	printf("num2 = 0.%.*s\n", p->precision, str);
+	if ((size_t)p->precision < size)
+		round_float(str, p, is_neg);
+	if (is_neg)
+		printf("-");
+	printf("0.%.*s\n", p->precision, str);
 }

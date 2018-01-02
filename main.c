@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <stddef.h>
 #include <float.h>
+#include <fenv.h>
 
 int		main(void)
 {
@@ -30,10 +31,29 @@ int		main(void)
 	double d = 14574393.4567891011;
 	float f = 14574393.4567891011f;
 	//float f = 643867256.46327f;
+	fesetround(FE_DOWNWARD);
 	printf("%d\n", FLT_ROUNDS);
+	ret1 = printf("%.1f\n", 0.48);
+	ret2 = ft_printf("%.1f\n", 0.48);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	
+	/*
+	fesetround(FE_TOWARDZERO);
+	printf("%d\n", FLT_ROUNDS);
+	ret1 = printf("%.1f\n", 0.45);
+	ret2 = ft_printf("%.1f\n", 0.45);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	*/
+	/*
+	ret1 = printf("       %.56f\n", 0.325003495943502362930388471795595251023769378662109375);
+	ret2 = ft_printf("%.56f\n", 0.325003495943502362930388471795595251023769378662109375);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	*/
+	/*
 	ret1 = printf("       %.56f\n", 0.325003495943502362930388471795595251023769378662109376);
 	ret2 = ft_printf("%.56f\n", 0.325003495943502362930388471795595251023769378662109376);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	*/
 	/*
 	ret1 = printf("|%-.10"CNV"|\t|%.-10"CNV"|\t|%-15.-10"CNV"|\t|%15.-10"CNV"|",42,42,42,42);
 	printf("\n\n\n\n\n\n");
