@@ -26,7 +26,7 @@ void	type_fbf(va_list *ap, t_params *p)
 	round_float(f, p);
 	if (!f->is_pos)
 		print_symbol(p, '-');
-	i = -1;
+	i = f->num[0] == '0' && f->point > 1 ? 0 : -1;
 	while (++i < f->point)
 		print_symbol(p, f->num[i]);
 	if (!(!p->flags->hash && f->size == f->point))

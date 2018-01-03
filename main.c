@@ -33,9 +33,14 @@ int		main(void)
 	//float f = 643867256.46327f;
 	//fesetround(FE_DOWNWARD);
 	printf("%d\n", FLT_ROUNDS);
+	ret1 = printf("%f\n", 998.0);
+	ret2 = ft_printf("%f\n", 998.0);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	/*
 	ret1 = printf("%.2f\n", 999.999);
 	ret2 = ft_printf("%.2f\n", 999.999);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	*/
 	/*
 	ret1 = printf("%.10f\n", 647832.48754);
 	ret2 = ft_printf("%.10f\n", 647832.48754);
