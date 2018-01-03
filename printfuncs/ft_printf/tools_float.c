@@ -89,7 +89,7 @@ char	*get_int_str(long double num_int, size_t *len)
 	count = 0;
 	while (num_int > 1.0)
 	{
-		if ((int)fmod(num_int, 2.0) == 1)
+		if ((int)fmodl(num_int, 2.0) == 1)
 		{
 			count++;
 			int_sum(str, g_twos[i]);
