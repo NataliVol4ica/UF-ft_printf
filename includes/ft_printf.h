@@ -84,7 +84,7 @@ void		print_hex_pref(t_params *p);
 t_float		*init_t_float(void);
 void		zero_t_float(t_float *f);
 t_str		*init_t_str(size_t size);
-void		set_float(t_float *f, double num);
+void		set_float(t_float *f, long double num);
 void		round_float(t_float *f, t_params *p);
 
 /*

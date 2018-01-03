@@ -34,7 +34,7 @@ void	dec_sum(char *to, char *s) //200
 	}
 }
 
-char	*get_frac_str(double num_frac)
+char	*get_frac_str(long double num_frac)
 {
 	static t_str	*str = NULL;
 	int				i;
@@ -53,9 +53,6 @@ char	*get_frac_str(double num_frac)
 			dec_sum(str->str, g_decs[i]);
 		}
 	}
-	/*if ((int)p->precision < str->size)
-		round_float(str->str, p, is_pos);
-	str->str[p->precision] = '\0';*/
 	return (str->str);
 }
 
@@ -76,7 +73,7 @@ void	int_sum(char *str, char *s)
 	}
 }
 
-char	*get_int_str(double num_int, size_t *len)
+char	*get_int_str(long double num_int, size_t *len)
 {
 	static char	*str = NULL;
 	size_t		i;
@@ -103,17 +100,17 @@ char	*get_int_str(double num_int, size_t *len)
 	return (&str[i]);
 }
 
-void	set_float(t_float *f, double num)
+void	set_float(t_float *f, long double num)
 {
-	double	num_int;
-	double 	num_frac;
+	long double	num_int;
+	long double	num_frac;
 	char	*s1;
 	char	*s2;
 	size_t	i;
 
 	f->is_pos = num < 0.0 ? 0 : 1;
 	num = num < 0.0 ? -num : num;
-	num_frac = modf(num, &num_int);
+	num_frac = modfl(num, &num_int);
 	s1 = get_int_str(num_int, &f->point);
 	s2 = get_frac_str(num_frac);
 	f->size = f->point + frac_default_size;

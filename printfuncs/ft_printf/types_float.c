@@ -15,11 +15,11 @@
 
 void	type_fbf(va_list *ap, t_params *p)
 {
-	double			num;
+	long double		num;
 	size_t			i;
 	static t_float	*f = NULL;
 	
-	num = va_arg(*ap, double);
+	num = p->length == BL ? va_arg(*ap, long double) : va_arg(*ap, double);
 	p->precision = p->precision < 0 ? 6 : p->precision;
 	f = !f ? init_t_float() : f;
 	set_float(f, num);
