@@ -22,7 +22,6 @@ t_float	*init_t_float(void)
 	size_t	i;
 
 	f = (t_float*)malloc(sizeof(t_float));
-	f->is_pos = 1;
 	f->num = (char*)malloc(sizeof(char) * (513));
 	i = -1;
 	while (++i < 512)
@@ -46,22 +45,34 @@ t_str	*init_t_str(size_t size)
 
 void	round_float(t_float *f, t_params *p)
 {
-	int		i;
+	int		j;
 
 	p->precision += f->point;
 	if ((size_t)p->precision < f->size)
-		if ((FLT_ROUNDS == 2 && f->is_pos) || (FLT_ROUNDS == 3 && !f->is_pos) ||
+		if ((FLT_ROUNDS == 2 && !p->isnegative) || (FLT_ROUNDS == 3 && p->isnegative) ||
 			FLT_ROUNDS == 1)
 		{
-			i = p->precision - 1;
-			f->num[i] += ((f->num[i + 1] - '0') / 5);
-			while (--i >= 0)
+			j = p->precision - 1;
+			if (FLT_ROUNDS == 1)
+				f->num[p->precision - 1] += (size_t)p->precision == f->point ? 0 : ((f->num[p->precision] - '0') / 5);
+			else
+				while (++j < 512)
+					if ((f->num[j] == '4' && f->num[j + 1] < '4') ||
+						(f->num[j] == '0' && (f->num[j + 1] == '0' ||
+						f->num[j + 1] < '4')))
+						break;
+					else if (f->num[j] > '4')
+					{
+						f->num[p->precision - 1] += 1;
+						break;
+					}
+			j = p->precision - 1;
+			while (--j >= 0)
 			{
-				f->num[i + 1] -= '0';
-				f->num[i] += f->num[i + 1] / 10;
-				f->num[i + 1] %= 10;
-				f->num[i + 1] += '0';
+				f->num[j + 1] -= '0';
+				f->num[j] += f->num[j + 1] / 10;
+				f->num[j + 1] %= 10;
+				f->num[j + 1] += '0';
 			}
 		}
-//	f->num[p->precision] = '\0';
 }

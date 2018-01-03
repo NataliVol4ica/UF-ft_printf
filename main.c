@@ -28,13 +28,10 @@ int		main(void)
 {
 	int	ret1, ret2;
 
-	double d = 14574393.4567891011;
-	float f = 14574393.4567891011f;
-	//float f = 643867256.46327f;
-	//fesetround(FE_DOWNWARD);
-	printf("%d\n", FLT_ROUNDS);
-	ret1 = printf("%.2f\n", 999.999);
-	ret2 = ft_printf("%.2f\n", 999.999);
+	//setlocale(LC_ALL, "en_US.UTF-8");
+	//fesetround(FE_UPWARD);
+	ret1 = printf("|%10.f|\n", 1024.5);
+	ret2 = ft_printf("|%10.f|\n", 1024.5);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
 	/*
 	ret1 = printf("%.100Lf\n", 0.11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111L);

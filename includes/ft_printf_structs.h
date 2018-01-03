@@ -67,7 +67,6 @@ typedef struct	s_funcs
 
 typedef struct	s_float
 {
-	_Bool		is_pos;
 	char		*num;
 	size_t		size;
 	size_t		point;

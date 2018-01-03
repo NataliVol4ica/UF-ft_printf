@@ -77,6 +77,7 @@ char	*get_int_str(long double num_int, size_t *len)
 {
 	static char	*str = NULL;
 	size_t		i;
+	size_t		count;
 
 	if (!str)
 		str = (char*)malloc(sizeof(char) * 311);
@@ -85,13 +86,19 @@ char	*get_int_str(long double num_int, size_t *len)
 		str[i] = '0';
 	str[310] = '\0';
 	i = 0;
+	count = 0;
 	while (num_int > 1.0)
 	{
 		if ((int)fmod(num_int, 2.0) == 1)
+		{
+			count++;
 			int_sum(str, g_twos[i]);
+		}
 		num_int /= 2;
 		i++;
 	}
+	if (count == 0 && i > 0)
+		int_sum(str, g_twos[i]);
 	i = 0;
 	if (str[i] == '0')
 		while (str[i + 1] == '0' && str[i + 2])
@@ -108,8 +115,6 @@ void	set_float(t_float *f, long double num)
 	char	*s2;
 	size_t	i;
 
-	f->is_pos = num < 0.0 ? 0 : 1;
-	num = num < 0.0 ? -num : num;
 	num_frac = modfl(num, &num_int);
 	s1 = get_int_str(num_int, &f->point);
 	s2 = get_frac_str(num_frac);
