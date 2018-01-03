@@ -61,17 +61,17 @@ typedef struct	s_params
 typedef void	(*t_f)(va_list*, t_params*);
 typedef struct	s_funcs
 {
-	char	c;
-	t_f		func;
+	char		c;
+	t_f			func;
 }				t_funcs;
 
 typedef struct	s_float
 {
-	_Bool	is_pos;
-	char	*num;
-	size_t	size;
-	int		point;
-	size_t	mal_len;
+	_Bool		is_pos;
+	char		*num;
+	size_t		size;
+	size_t		point;
+	size_t		mal_len;
 
 }				t_float;
 

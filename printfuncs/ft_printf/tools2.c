@@ -15,7 +15,6 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <float.h>
-#include <math.h>
 
 t_float	*init_t_float(void)
 {
@@ -46,6 +45,25 @@ t_str	*init_t_str(size_t size)
 
 	tstr = (t_str*)malloc(sizeof(t_str));
 	tstr->str = ft_strnew(size + 1);
+	tstr->str[size] = '\0';
 	tstr->size = size;
 	return (tstr);
+}
+
+void	round_float(char *str, t_params *p, _Bool is_pos)
+{
+	int		i;
+
+	i = p->precision - 1;
+	if ((FLT_ROUNDS == 2 && is_pos) || (FLT_ROUNDS == 3 && !is_pos) || FLT_ROUNDS == 1)
+		{
+			str[i] += ((str[i + 1] - '0') / 5);
+			while (--i >= 0)
+			{
+				str[i + 1] -= '0';
+				str[i] += str[i + 1] / 10;
+				str[i + 1] %= 10;
+				str[i + 1] += '0';
+			}
+		}
 }

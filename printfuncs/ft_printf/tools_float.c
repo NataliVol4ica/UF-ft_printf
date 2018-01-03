@@ -14,19 +14,18 @@
 #include "../../includes/ft_printf_consts.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <float.h>
 #include <math.h>
 
 #define frac_default_size 200
 
 void	dec_sum(char *to, char *s) //200
 {
-	for (int i = 0; i < 201; i++)
+	for (int i = 0; i < 200; i++)
 	{
 		to[i] -= '0';
 		to[i] += s[i];
 	}
-	for (int i = 200; i > 0; i--)
+	for (int i = 199; i > 0; i--)
 	{
 		to[i] -= '0';
 		to[i - 1] += to[i] / 10;
@@ -35,27 +34,12 @@ void	dec_sum(char *to, char *s) //200
 	}
 }
 
-void	round_float(char *str, t_params *p, _Bool is_pos)
-{
-	int		i;
-
-	i = p->precision - 1;
-	if ((FLT_ROUNDS == 2 && is_pos) || (FLT_ROUNDS == 3 && !is_pos) || FLT_ROUNDS == 1)
-		while (i >= 0)
-		{
-			str[i] += ((str[i + 1] - '0') / 5);
-			i--;
-		}
-}
-
-char	*get_frac_str(double num_frac, t_params *p, _Bool is_pos)
+char	*get_frac_str(double num_frac)
 {
 	static t_str	*str = NULL;
 	int				i;
 
 	str = str ? str : init_t_str(frac_default_size);
-	while (p->precision > str->size)
-		realloc_t_str(str);
 	i = -1;
 	while (++i < str->size)
 		str->str[i] = '0';
@@ -69,9 +53,9 @@ char	*get_frac_str(double num_frac, t_params *p, _Bool is_pos)
 			dec_sum(str->str, g_decs[i]);
 		}
 	}
-	if ((int)p->precision < str->size)
+	/*if ((int)p->precision < str->size)
 		round_float(str->str, p, is_pos);
-	str->str[p->precision] = '\0';
+	str->str[p->precision] = '\0';*/
 	return (str->str);
 }
 
@@ -92,10 +76,10 @@ void	int_sum(char *str, char *s)
 	}
 }
 
-char	*get_int_str(double num_int)
+char	*get_int_str(double num_int, size_t *len)
 {
 	static char	*str = NULL;
-	int			i;
+	size_t		i;
 
 	if (!str)
 		str = (char*)malloc(sizeof(char) * 311);
@@ -114,19 +98,31 @@ char	*get_int_str(double num_int)
 	i = 0;
 	while (str[i] == '0' && str[i + 1])
 		i++;
+	*len = 310 - i;
 	return (&str[i]);
 }
 
-void	set_float(t_float *f, double num, t_params *p)
+void	set_float(t_float *f, double num)
 {
 	double	num_int;
 	double 	num_frac;
 	char	*s1;
 	char	*s2;
+	size_t	i;
 
 	f->is_pos = num < 0.0 ? 0 : 1;
 	num = num < 0.0 ? -num : num;
 	num_frac = modf(num, &num_int);
-	s1 = get_int_str(num_int);
-	s2 = get_frac_str(num_frac, p, f->is_pos);
+	s1 = get_int_str(num_int, &f->point);
+	s2 = get_frac_str(num_frac);
+	f->size = f->point + frac_default_size;
+	while (f->size > f->mal_len)
+		realloc_t_float(f);
+	i = -1;
+	while (++i < f->point)
+		f->num[i] = s1[i];
+	i = -1;
+	while (++i < frac_default_size)
+		f->num[f->point + i] = s2[i];
+	f->num[f->point + i] = '\0';
 }

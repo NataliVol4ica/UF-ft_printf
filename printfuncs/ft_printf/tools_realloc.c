@@ -35,18 +35,11 @@ void		realloc_toprint(t_print_str *tp)
 void	realloc_t_float(t_float *f)
 {
 	char	*str;
-	size_t	i;
 
 	str = (char*)malloc(sizeof(char) * (f->mal_len * 2 + 1));
-	i = -1;
-	while (++i < f->mal_len)
-		str[i] = f->num[i];
-	i = -1;
-	while (++i < f->mal_len)
-		str[f->mal_len + i] = '\0';
-	str[f->mal_len * 2] = '\0';
 	free(f->num);
 	f->num = str;
+	f->mal_len *= 2;
 }
 
 void	realloc_t_str(t_str *tstr)
