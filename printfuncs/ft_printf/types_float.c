@@ -16,25 +16,29 @@
 void	type_fbf(va_list *ap, t_params *p)
 {
 	double			num;
+	size_t			i;
 	static t_float	*f = NULL;
 	
 	num = va_arg(*ap, double);
 	p->precision = p->precision < 0 ? 6 : p->precision;
 	f = !f ? init_t_float() : f;
 	set_float(f, num);
-	if ((size_t)p->precision < f->size - f->point)
-		round_float(&f->num[f->point], p, f->is_pos);
-	f->num[f->point + p->precision] = '\0';
-	for (size_t i = 0; i < f->point; i++)
+	round_float(f, p);
+	if (!f->is_pos)
+		print_symbol(p, '-');
+	i = -1;
+	while (++i < f->point)
 		print_symbol(p, f->num[i]);
 	if (!(!p->flags->hash && f->size == f->point))
 	{
 		print_symbol(p, '.');
-		f->size = f->point + p->precision < f->size ? f->point + p->precision : f->size;
-		for (size_t i = f->point; i < f->size; i++)
+		while (i < f->size && i < (size_t)p->precision)
+		{
 			print_symbol(p, f->num[i]);
-		p->precision += f->point;
-		for (int i = f->size; i < p->precision; i++)
+			i++;
+		}
+		i -= 1;
+		while (++i < (size_t)p->precision)
 			print_symbol(p, '0');
 	}
 }

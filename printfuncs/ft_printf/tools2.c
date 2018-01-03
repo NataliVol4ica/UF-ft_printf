@@ -30,13 +30,7 @@ t_float	*init_t_float(void)
 	f->num[i] = '\0';
 	f->size = 0;
 	f->point = -1;
-	f->mal_len = 512;
 	return (f);
-}
-
-void	zero_t_float(t_float *f)
-{
-	(void)f;
 }
 
 t_str	*init_t_str(size_t size)
@@ -50,20 +44,24 @@ t_str	*init_t_str(size_t size)
 	return (tstr);
 }
 
-void	round_float(char *str, t_params *p, _Bool is_pos)
+void	round_float(t_float *f, t_params *p)
 {
 	int		i;
 
-	i = p->precision - 1;
-	if ((FLT_ROUNDS == 2 && is_pos) || (FLT_ROUNDS == 3 && !is_pos) || FLT_ROUNDS == 1)
+	p->precision += f->point;
+	if ((size_t)p->precision < f->size)
+		if ((FLT_ROUNDS == 2 && f->is_pos) || (FLT_ROUNDS == 3 && !f->is_pos) ||
+			FLT_ROUNDS == 1)
 		{
-			str[i] += ((str[i + 1] - '0') / 5);
+			i = p->precision - 1;
+			f->num[i] += ((f->num[i + 1] - '0') / 5);
 			while (--i >= 0)
 			{
-				str[i + 1] -= '0';
-				str[i] += str[i + 1] / 10;
-				str[i + 1] %= 10;
-				str[i + 1] += '0';
+				f->num[i + 1] -= '0';
+				f->num[i] += f->num[i + 1] / 10;
+				f->num[i + 1] %= 10;
+				f->num[i + 1] += '0';
 			}
 		}
+//	f->num[p->precision] = '\0';
 }

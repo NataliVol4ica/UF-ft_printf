@@ -96,8 +96,9 @@ char	*get_int_str(double num_int, size_t *len)
 		i++;
 	}
 	i = 0;
-	while (str[i] == '0' && str[i + 1])
-		i++;
+	if (str[i] == '0')
+		while (str[i + 1] == '0' && str[i + 2])
+			i++;
 	*len = 310 - i;
 	return (&str[i]);
 }
@@ -116,8 +117,6 @@ void	set_float(t_float *f, double num)
 	s1 = get_int_str(num_int, &f->point);
 	s2 = get_frac_str(num_frac);
 	f->size = f->point + frac_default_size;
-	while (f->size > f->mal_len)
-		realloc_t_float(f);
 	i = -1;
 	while (++i < f->point)
 		f->num[i] = s1[i];

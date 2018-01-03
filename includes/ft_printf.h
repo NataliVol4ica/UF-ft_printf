@@ -85,7 +85,7 @@ t_float		*init_t_float(void);
 void		zero_t_float(t_float *f);
 t_str		*init_t_str(size_t size);
 void		set_float(t_float *f, double num);
-void		round_float(char *str, t_params *p, _Bool is_pos);
+void		round_float(t_float *f, t_params *p);
 
 /*
 ** REALLOCS

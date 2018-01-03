@@ -71,7 +71,6 @@ typedef struct	s_float
 	char		*num;
 	size_t		size;
 	size_t		point;
-	size_t		mal_len;
 
 }				t_float;
 
