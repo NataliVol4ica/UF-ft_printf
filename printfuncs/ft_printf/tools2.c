@@ -19,14 +19,9 @@
 t_float	*init_t_float(void)
 {
 	t_float	*f;
-	size_t	i;
 
 	f = (t_float*)malloc(sizeof(t_float));
-	f->num = (char*)malloc(sizeof(char) * (513));
-	i = -1;
-	while (++i < 512)
-		f->num[i] = '0';
-	f->num[i] = '\0';
+	f->num = (char*)malloc(sizeof(char) * (FLOAT_STR_MAX_SIZE + 1));
 	f->size = 0;
 	f->point = -1;
 	return (f);

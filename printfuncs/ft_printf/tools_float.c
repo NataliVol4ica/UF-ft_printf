@@ -14,7 +14,7 @@
 #include "../../includes/ft_printf_consts.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <math.h>
+#include <limits.h>
 
 #define frac_default_size 200
 
@@ -73,51 +73,55 @@ void	int_sum(char *str, char *s)
 	}
 }
 
-char	*get_int_str(long double num_int, size_t *len)
+char	*get_int_str(long double *num)
 {
-	static char	*str = NULL;
-	size_t		i;
-	size_t		count;
+	uintmax_t	ts;
+	char	*str;
+	size_t	i;
+	size_t	stepen_dvoiki;
+	size_t	mass_index;
+	char	*temp;
 
-	if (!str)
-		str = (char*)malloc(sizeof(char) * 311);
-	i = -1;
-	while (++i < 310)
-		str[i] = '0';
-	str[310] = '\0';
-	i = 0;
-	count = 0;
-	while (num_int > 1.0)
+	str = ft_strnew(20);
+	stepen_dvoiki = 0;
+	while (*num > ULLONG_MAX)
 	{
-		if ((int)fmodl(num_int, 2.0) == 1)
-		{
-			count++;
-			int_sum(str, g_twos[i]);
-		}
-		num_int /= 2;
-		i++;
+		*num /= 2.0;
+		stepen_dvoiki ++;
 	}
-	if (count == 0 && i > 0)
-		int_sum(str, g_twos[i]);
+	ts = (uintmax_t)*num;
+	*num -= ts;
 	i = 0;
-	if (str[i] == '0')
-		while (str[i + 1] == '0' && str[i + 2])
-			i++;
-	*len = 310 - i;
-	return (&str[i]);
+	if (ts == 0)
+		str[i++] = '0';
+	else
+		while (ts > 0)
+		{
+			str[i++] = ts % 10 + '0';
+			ts /= 10;
+		}
+	rev_str(str, &str[i - 1]);
+	mass_index = TWOS_POWS_MASS_SIZE;
+	while (stepen_dvoiki > 0 && mass_index--)
+		while (stepen_dvoiki >= g_twos_pows[mass_index].pow)
+		{
+			stepen_dvoiki -= g_twos_pows[mass_index].pow;
+			temp = long_mul(str, g_twos_pows[mass_index].val);
+			free(str);
+			str = temp;
+		}
+	return (str);
 }
 
 void	set_float(t_float *f, long double num)
 {
-	long double	num_int;
-	long double	num_frac;
 	char	*s1;
 	char	*s2;
 	size_t	i;
 
-	num_frac = modfl(num, &num_int);
-	s1 = get_int_str(num_int, &f->point);
-	s2 = get_frac_str(num_frac);
+	s1 = get_int_str(&num);
+	s2 = get_frac_str(num);
+	f->point = ft_strlen(s1);
 	f->size = f->point + frac_default_size;
 	i = -1;
 	while (++i < f->point)
@@ -126,4 +130,5 @@ void	set_float(t_float *f, long double num)
 	while (++i < frac_default_size)
 		f->num[f->point + i] = s2[i];
 	f->num[f->point + i] = '\0';
+	free(s1);
 }

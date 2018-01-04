@@ -19,6 +19,9 @@
 # include <stdint.h>
 # include <string.h>
 
+# define LIB_GN(x) x - '0'
+# define LIB_GC(x) x + '0'
+
 /*
 ** CALC FUNCS
 */
@@ -37,6 +40,7 @@ void	ft_sort_num_tab(int *mass, int size);
 void	ft_sort_word_tab(char **mass);
 long	ft_sqrt(long nb);
 void	ft_swap(int *a, int *b);
+char	*long_mul(char *ss1, char *ss2);
 
 /*
 ** CHAR FUNCS

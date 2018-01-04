@@ -122,7 +122,8 @@ CALCFUNCS = ft_atoi \
 			ft_abs \
 			ft_dsqrt \
 			get_next_line \
-			ft_count_digits_uns
+			ft_count_digits_uns \
+			long_mul
 CALCFDIR = ./calcfuncs
 DCALCFUNCS = $(patsubst %, $(CALCFDIR)/%, $(CALCFUNCS))
 CHARFUNCS = ft_isdigit \

@@ -20,6 +20,7 @@
 
 # define MAX_STR 32
 # define START_SIZE 2048
+# define FLOAT_STR_MAX_SIZE 5300
 # define NUMBERS_S "0123456789abcdef"
 # define NUMBERS_B "0123456789ABCDEF"
 
