@@ -40,6 +40,8 @@ void		rev_str(char *from, char *until);
 size_t		count_bits(wchar_t k);
 int			check_bits(size_t *b, wchar_t c, t_params *p);
 size_t		get_next_length(char *str, t_length *ll);
+void		float_flags(t_params *p);
+long double	get_float_num(va_list *ap, t_params *p);
 
 /*
 ** PRINTERS

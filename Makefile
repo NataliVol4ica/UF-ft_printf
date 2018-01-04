@@ -48,6 +48,7 @@ PRINTF =	ft_printf \
 			types_float_e \
 			tools1 \
 			tools2 \
+			tools3 \
 			tools_bits \
 			tools_float \
 			tools_realloc

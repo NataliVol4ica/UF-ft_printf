@@ -56,6 +56,7 @@ typedef struct	s_params
 	size_t		pref_len;
 	_Bool		isnegative;
 	char		*alphabet;
+	size_t		savelen;
 }				t_params;
 
 typedef void	(*t_f)(va_list*, t_params*);

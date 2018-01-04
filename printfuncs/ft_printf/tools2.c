@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <float.h>
 
-t_float	*init_t_float(void)
+t_float		*init_t_float(void)
 {
 	t_float	*f;
 
@@ -27,7 +27,7 @@ t_float	*init_t_float(void)
 	return (f);
 }
 
-t_str	*init_t_str(size_t size)
+t_str		*init_t_str(size_t size)
 {
 	t_str	*tstr;
 
@@ -38,7 +38,7 @@ t_str	*init_t_str(size_t size)
 	return (tstr);
 }
 
-void	final_round(t_float *f, t_params *p)
+static void	final_round(t_float *f, t_params *p)
 {
 	int j;
 
@@ -52,7 +52,7 @@ void	final_round(t_float *f, t_params *p)
 	}
 }
 
-void	round_float(t_float *f, t_params *p)
+void		round_float(t_float *f, t_params *p)
 {
 	size_t	j;
 
