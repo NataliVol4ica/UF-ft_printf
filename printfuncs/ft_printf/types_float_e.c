@@ -19,6 +19,7 @@ void	type_ebe(va_list *ap, t_params *p, char c)
 	int				until;
 	long double		num;
 	size_t			i;
+	size_t			savelen_exp;
 	int				point;
 	static t_float	*f = NULL;
 	
@@ -67,8 +68,23 @@ void	type_ebe(va_list *ap, t_params *p, char c)
 	print_symbol(p, c);
 	print_symbol(p, point < 0 ? '-' : '+');
 	point = point < 0 ? -point : point;
-	print_symbol(p, '0' + point / 10);
-	print_symbol(p, '0' + point % 10);
+	if (point == 0)
+		print_str(p, "00", 1);
+	else if (point < 10)
+	{
+		print_symbol(p, '0' + point / 10);
+		print_symbol(p, '0' + point % 10);
+	}
+	else
+	{
+		savelen_exp = p->toprint->len;
+		while (point > 0)
+		{
+			print_symbol(p, '0' + point % 10);
+			point /= 10;
+		}
+		rev_str(&p->toprint->str[savelen_exp], &p->toprint->str[p->toprint->len - 1]);
+	}
 	until = p->width - (p->toprint->len - savelen);
 	if (p->flags->minus)
 		for (int j = 0; j <until; j++)
