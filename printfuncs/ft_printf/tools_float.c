@@ -13,12 +13,10 @@
 #include "../../includes/ft_printf.h"
 #include "../../includes/ft_printf_consts.h"
 #include "libft.h"
-#include <stdlib.h>
 #include <limits.h>
+#include <stdlib.h>
 
-#define frac_default_size 200
-
-void	dec_sum(char *to, char *s) //200
+static void	dec_sum(char *to, char *s)
 {
 	for (int i = 0; i < 200; i++)
 	{
@@ -34,7 +32,7 @@ void	dec_sum(char *to, char *s) //200
 	}
 }
 
-char	*get_frac_str(long double num_frac)
+static char	*get_frac_str(long double num_frac)
 {
 	static t_str	*str = NULL;
 	int				i;
@@ -56,31 +54,29 @@ char	*get_frac_str(long double num_frac)
 	return (str->str);
 }
 
-void	int_sum(char *str, char *s)
+static char	*get_f_mul(size_t stepen_dvoiki, char *str)
 {
-	size_t	i;
+	size_t	mass_index;
+	char	*temp;
 
-	i = 310;
-	while (--i > 0)
-	{
-		str[i] += s[i];
-		str[i] -= '0';
-		str[i] -= '0';
-		str[i - 1] += str[i] / 10;
-		str[i] = str[i] % 10;
-		str[i] += '0';
-
-	}
+	mass_index = TWOS_POWS_MASS_SIZE;
+	while (stepen_dvoiki > 0 && mass_index--)
+		while (stepen_dvoiki >= g_twos_pows[mass_index].pow)
+		{
+			stepen_dvoiki -= g_twos_pows[mass_index].pow;
+			temp = long_mul(str, g_twos_pows[mass_index].val);
+			free(str);
+			str = temp;
+		}
+	return (str);
 }
 
-char	*get_int_str(long double *num)
+static char	*get_int_str(long double *num)
 {
 	uintmax_t	ts;
 	char	*str;
 	size_t	i;
 	size_t	stepen_dvoiki;
-	size_t	mass_index;
-	char	*temp;
 
 	str = ft_strnew(20);
 	stepen_dvoiki = 0;
@@ -100,20 +96,11 @@ char	*get_int_str(long double *num)
 			str[i++] = ts % 10 + '0';
 			ts /= 10;
 		}
-	rev_str(str, &str[i - 1]);
-	mass_index = TWOS_POWS_MASS_SIZE;
-	while (stepen_dvoiki > 0 && mass_index--)
-		while (stepen_dvoiki >= g_twos_pows[mass_index].pow)
-		{
-			stepen_dvoiki -= g_twos_pows[mass_index].pow;
-			temp = long_mul(str, g_twos_pows[mass_index].val);
-			free(str);
-			str = temp;
-		}
-	return (str);
+	rev_str(str, &str[i - 1]);	
+	return (get_f_mul(stepen_dvoiki, str));
 }
 
-void	set_float(t_float *f, long double num)
+void		set_float(t_float *f, long double num)
 {
 	char	*s1;
 	char	*s2;

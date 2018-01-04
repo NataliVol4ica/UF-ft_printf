@@ -21,6 +21,8 @@
 # define MAX_STR 32
 # define START_SIZE 2048
 # define FLOAT_STR_MAX_SIZE 5300
+# define frac_default_size 200
+
 # define NUMBERS_S "0123456789abcdef"
 # define NUMBERS_B "0123456789ABCDEF"
 
@@ -42,6 +44,7 @@ int			check_bits(size_t *b, wchar_t c, t_params *p);
 size_t		get_next_length(char *str, t_length *ll);
 void		float_flags(t_params *p);
 long double	get_float_num(va_list *ap, t_params *p);
+void		set_float(t_float *f, long double num);
 
 /*
 ** PRINTERS
