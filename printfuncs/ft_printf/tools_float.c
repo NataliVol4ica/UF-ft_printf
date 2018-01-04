@@ -121,11 +121,12 @@ void	set_float(t_float *f, long double num)
 
 	s1 = get_int_str(&num);
 	s2 = get_frac_str(num);
-	f->point = ft_strlen(s1);
+	f->point = ft_strlen(s1) + 1;
 	f->size = f->point + frac_default_size;
 	i = -1;
+	f->num[0] = '0';
 	while (++i < f->point)
-		f->num[i] = s1[i];
+		f->num[i + 1] = s1[i];
 	i = -1;
 	while (++i < frac_default_size)
 		f->num[f->point + i] = s2[i];
