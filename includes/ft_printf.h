@@ -115,6 +115,8 @@ void		type_x(va_list *ap, t_params *p);
 void		type_bx(va_list *ap, t_params *p);
 void		type_p(va_list *ap, t_params *p);
 void		type_fbf(va_list *ap, t_params *p);
+void		type_e(va_list *ap, t_params *p);
+void		type_be(va_list *ap, t_params *p);
 void		type_n(va_list *ap, t_params *p);
 void		type_none(char c, t_params *p);
 

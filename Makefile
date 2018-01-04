@@ -45,6 +45,7 @@ PRINTF =	ft_printf \
 			types_octhex \
 			types_extra \
 			types_float \
+			types_float_e \
 			tools1 \
 			tools2 \
 			tools_bits \

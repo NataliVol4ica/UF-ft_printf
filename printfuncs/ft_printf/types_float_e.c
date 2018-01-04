@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types_float.c                                      :+:      :+:    :+:   */
+/*   types_float_e.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,16 @@
 
 #include "../../includes/ft_printf.h"
 #include "libft.h"
-#include "locale.h"
 
-void	type_fbf(va_list *ap, t_params *p)
+void	type_ebe(va_list *ap, t_params *p, char c)
 {
 	size_t			savelen;
 	int				until;
 	long double		num;
 	size_t			i;
-	struct lconv	*loc;
+	int				point;
 	static t_float	*f = NULL;
 	
-	loc = localeconv();
 	num = p->length == BL ? va_arg(*ap, long double) : va_arg(*ap, double);
 	p->isnegative = num < 0 ? 1 : 0;
 	num = num < 0 ? -num : num;
@@ -31,16 +29,27 @@ void	type_fbf(va_list *ap, t_params *p)
 	p->precision = p->precision < 0 ? 6 : p->precision;
 	f = !f ? init_t_float() : f;
 	set_float(f, num);
+	point = f->point;
+	f->point = 1;
+	while (f->num[f->point - 1] == '0')
+		f->point++;
+	if (!f->num[f->point - 1])
+		f->point = 2;
 	round_float(f, p);
+	if (f->num[0] != '0')
+	{
+		f->point--;
+		p->precision--;
+	}
 	p->pref_len = p->isnegative || p->flags->plus || p->flags->space ? 1 : 0;
 	print_sign_pref(p);
-	i = f->num[0] == '0' && f->point > 1 ? 0 : -1;
+	i = -1;
+	while (f->num[i + 1] == '0')
+		i++;
+	if (!f->num[i + 1])
+		i = 0;
 	while (++i < f->point)
-	{
-		if (p->flags->apostrophe && p->toprint->len != savelen + p->pref_len && (f->point - i) % 3 == 0)
-			print_str(p, loc->thousands_sep, 1);
 		print_symbol(p, f->num[i]);
-	}
 	if (!(!p->flags->hash && f->size == f->point))
 	{
 		if ((size_t)p->precision != f->point || p->flags->hash)
@@ -54,6 +63,12 @@ void	type_fbf(va_list *ap, t_params *p)
 		while (++i < (size_t)p->precision)
 			print_symbol(p, '0');
 	}
+	point -= f->point;
+	print_symbol(p, c);
+	print_symbol(p, point < 0 ? '-' : '+');
+	point = point < 0 ? -point : point;
+	print_symbol(p, '0' + point / 10);
+	print_symbol(p, '0' + point % 10);
 	until = p->width - (p->toprint->len - savelen);
 	if (p->flags->minus)
 		for (int j = 0; j <until; j++)
@@ -72,4 +87,14 @@ void	type_fbf(va_list *ap, t_params *p)
 			print_symbol(p, ' ');
 		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
 	}
+}
+
+void	type_e(va_list *ap, t_params *p)
+{
+	type_ebe(ap, p, 'e');
+}
+
+void	type_be(va_list *ap, t_params *p)
+{
+	type_ebe(ap, p, 'E');
 }

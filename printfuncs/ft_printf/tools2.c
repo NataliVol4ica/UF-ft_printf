@@ -38,36 +38,42 @@ t_str	*init_t_str(size_t size)
 	return (tstr);
 }
 
+void	final_round(t_float *f, t_params *p)
+{
+	int j;
+
+	j = p->precision - 1;
+	while (--j >= 0)
+	{
+		f->num[j + 1] -= '0';
+		f->num[j] += f->num[j + 1] / 10;
+		f->num[j + 1] %= 10;
+		f->num[j + 1] += '0';
+	}
+}
+
 void	round_float(t_float *f, t_params *p)
 {
-	int		j;
+	size_t	j;
 
 	p->precision += f->point;
-	if ((size_t)p->precision < f->size)
-		if ((FLT_ROUNDS == 2 && !p->isnegative) || (FLT_ROUNDS == 3 && p->isnegative) ||
-			FLT_ROUNDS == 1)
-		{
-			j = p->precision - 1;
-			if (FLT_ROUNDS == 1)
-				f->num[p->precision - 1] += (size_t)p->precision == f->point ? 0 : ((f->num[p->precision] - '0') / 5);
-			else
-				while (++j < 512)
-					if ((f->num[j] == '4' && f->num[j + 1] < '4') ||
-						(f->num[j] == '0' && (f->num[j + 1] == '0' ||
-						f->num[j + 1] < '4')))
-						break;
-					else if (f->num[j] > '4')
-					{
-						f->num[p->precision - 1] += 1;
-						break;
-					}
-			j = p->precision - 1;
-			while (--j >= 0)
-			{
-				f->num[j + 1] -= '0';
-				f->num[j] += f->num[j + 1] / 10;
-				f->num[j + 1] %= 10;
-				f->num[j + 1] += '0';
-			}
-		}
+	if ((size_t)p->precision > f->size)
+		return;
+	if (FLT_ROUNDS == 1)
+	{
+		if (!((size_t)p->precision == f->point &&
+		(f->point > 2 || f->num[1] == '0')))
+			f->num[p->precision - 1] += ((f->num[p->precision] - '0') / 5);
+		final_round(f, p);
+	}
+	else if ((FLT_ROUNDS == 2 && !p->isnegative) || (FLT_ROUNDS == 3 && p->isnegative))
+	{
+		j = p->precision - 1;
+		while (++j < f->size)
+			if (f->num[j] != '0')
+				break;
+		if (j != f->size && !(f->num[1] == '0'))
+			f->num[p->precision - 1]++;
+		final_round(f, p);
+	}
 }
