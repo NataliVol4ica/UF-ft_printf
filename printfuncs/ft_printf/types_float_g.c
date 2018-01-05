@@ -33,19 +33,21 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	saveprec = p->precision;
 	p->precision -= f->point - 1;
 	round_float(f, p);
+	p->precision = saveprec;
 	i = 0;
 	while (f->num[i] == '0')
 		i++;
 	if (i == f->size)
-		i = 0;
+		i = 1;
 	expon -= i + 1;
-	p->precision = saveprec;
+	//printf("expon %d precision %d\n", expon, p->precision);
 	if (expon < -4 || expon >= p->precision)
 	{
 		;//print exp
 	}
 	else
 	{
+		print_sign_pref(p);
 		i = 0;
 		while (f->num[i] == '0' && i < f->point - 1)
 			i++;
@@ -56,6 +58,7 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		j = f->size - 1;
 		while (f->num[j] == '0' && j > -1)
 			j--;
+		j = j == -1 ? 0 : j;
 		f->size = f->size > (size_t)j ? j + 1 : f->size;
 		if (f->size > f->point)
 		{
