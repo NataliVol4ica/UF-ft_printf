@@ -15,7 +15,7 @@
 
 # include "ft_printf.h"
 
-# define NOFFUNCS 20
+# define NOFFUNCS 24
 
 static t_funcs	g_type_funcs[] =
 {
@@ -32,6 +32,10 @@ static t_funcs	g_type_funcs[] =
 	{'F', &type_bf},
 	{'e', &type_e},
 	{'E', &type_be},
+	{'a', &type_a},
+	{'A', &type_ba},
+	{'g', &type_g},
+	{'G', &type_bg},
 	{'o', &type_o},
 	{'O', &type_bo},
 	{'x', &type_x},

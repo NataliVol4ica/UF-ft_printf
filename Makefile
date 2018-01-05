@@ -46,6 +46,8 @@ PRINTF =	ft_printf \
 			types_extra \
 			types_float \
 			types_float_e \
+			types_float_g \
+			types_float_a \
 			tools1 \
 			tools2 \
 			tools3 \

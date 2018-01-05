@@ -16,18 +16,6 @@
 #define num_from_char(x) x >= '0' && x <= '9' ? x - '0' : x - 'a' + 10
 #define char_from_num(x) x <= 9 ? x + '0' : x - 10 + 'a'
 
-#include <stdio.h>
-
-void	print_ln(t_str *str)
-{
-	size_t	i;
-
-	i = -1;
-	while (++i < str->size)
-		printf("%d|", str->str[i]);
-	printf("\n");
-}
-
 static t_str	*insert_num(t_str *s, char num)
 {
 	t_str	*ans;
@@ -40,8 +28,6 @@ static t_str	*insert_num(t_str *s, char num)
 	while (++i < s->size)
 		ans->str[i] = s->str[i];
 	ans->str[s->size] = num;
-	//printf("inc str by %d\n", num);
-	//print_ln(ans);
 	free(s->str);
 	free(s);
 	return (ans);
@@ -56,9 +42,6 @@ static t_str	*long_sum(t_str *s1, t_str *s2, size_t base)
 	int		buf;
 	size_t	i;
 
-	//printf("Summing s1len %zu s2len %zu\n", s1->size, s2->size);
-	//print_ln(s1);
-	//print_ln(s2);
 	p1 = s1->size > s2->size ? s1 : s2;
 	p2 = p1 == s1 ? s2 : s1;
 
@@ -68,17 +51,12 @@ static t_str	*long_sum(t_str *s1, t_str *s2, size_t base)
 	i = -1;
 	while (++i < p1->size)
 		ans->str[i] = p1->str[i];
-//	printf("s1 "); print_ln(ans);
-
 	s = (t_str*)malloc(sizeof(t_str));
 	s->str = ft_strnew(p1->size);
 	s->size = p1->size;
 	i = -1;
 	while (++i < p2->size)
 		s->str[i] = p2->str[i];
-
-//	printf("s2 "); print_ln(s);
-
 	i = -1;
 	buf = 0;
 	while (++i < ans->size)
@@ -128,17 +106,14 @@ static t_str	*mul_num(t_str *s, int m, size_t base)
 	i = -1;
 	while (++i < ans->size)
 		ans->str[i] = s->str[i];
-	//print_ln(ans);
 	i = -1;
 	buf = 0;
 	while (++i < ans->size)
 	{
 		buf = ans->str[i] * m + buf;
-		//printf("buf %d\n", buf);
 		ans->str[i] = buf % base;
 		buf = buf / base;
 	}
-	//printf("buf %d\n", buf);
 	if (buf != 0)
 		ans = insert_num(ans, buf);
 	return (ans);
@@ -174,24 +149,17 @@ char		*long_mul_base(char *ss1, char *ss2, size_t base)
 	i = -1;
 	while (++i < s2->size)
 		s2->str[i] = num_from_char(s2->str[i]);
-//	print_ln(s1);
-//	print_ln(s2);
 	i = -1;
 	ans->str = ft_strnew(0);
 	ans->size = 0;
 	while (++i < s2->size)
 	{
-	//	printf("Muling %d\n", s2->str[i]);
-	//	print_ln(s1);
 		temp = mul_num(s1, s2->str[i], base);
-	//	printf("temp1 "); print_ln(temp);
 		temp = mul_base(temp, i);
-	//	printf("temp2 "); print_ln(temp);
 		ans = long_sum(ans, temp, base);
-	//	printf("ans "); print_ln(temp);
 	}
 	i = -1;
-	while (++i < ans->size / 2) //rev
+	while (++i < ans->size / 2)
 	{
 		c = ans->str[i];
 		ans->str[i] = ans->str[ans->size - i - 1];
