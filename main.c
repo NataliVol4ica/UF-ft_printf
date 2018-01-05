@@ -36,8 +36,8 @@ int		main(void)
 	char *s2 = "2";
 	char *s3;
 	
-	
-	
+	printf("%s\n", long_mul("1048576", "1048576"));	
+	/*
 	for (int i = 1; i < 15001; i++)
 	{
 		s3 = long_mul_base(s1, s2, 16);
@@ -49,7 +49,7 @@ int		main(void)
 			printf("\t{%d, \"%s\"},\n", i, s1);
 
 	}
-	
+	*/
 	/*
 	for (int i = 1; i < 15001; i++)
 	{

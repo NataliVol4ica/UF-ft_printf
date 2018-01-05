@@ -96,7 +96,7 @@ static char	*get_int_str(long double *num)
 			str[i++] = ts % 10 + '0';
 			ts /= 10;
 		}
-	rev_str(str, &str[i - 1]);	
+	rev_str(str, &str[i - 1]);
 	return (get_f_mul(stepen_dvoiki, str));
 }
 
