@@ -68,4 +68,15 @@ typedef struct	s_float
 
 }				t_float;
 
+typedef union
+{
+	double d;
+	struct
+	{
+		unsigned long cheat_mantissa : 52;
+		unsigned long cheat_exponent : 11;
+		unsigned long cheat_sign : 1;
+	} s_cheat;
+}		u_cheat;
+
 #endif

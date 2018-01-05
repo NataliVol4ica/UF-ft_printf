@@ -15,10 +15,15 @@
 
 static void	type_aba(va_list *ap, t_params *p, char c, _Bool is_cap)
 {
-	(void)ap;
-	(void)p;
+	long double		num;
+	static t_float	*f = NULL;
+	
+	num = get_float_num(ap, p, is_cap);
+	if (num < 0.0)
+		return ;
+	f = !f ? init_t_float() : f;
+	set_float(f, num);
 	(void)c;
-	(void)is_cap;
 }
 
 void		type_a(va_list *ap, t_params *p)

@@ -30,10 +30,22 @@ int		main(void)
 {
 	int	ret1, ret2;
 
-	ret1 =    printf("|%d|\n", 0);
-	ret2 = ft_printf("|%d|\n", 0);
-	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
-
+	   printf("|%.4g|\n", 0.0000245);
+	ft_printf("|%.4g|\n", 0.0000245);
+	   printf("|%.4g|\n", 200.245245);
+	ft_printf("|%.4g|\n", 200.245245);
+	   printf("|%.4g|\n", 999.999);
+	ft_printf("|%.4g|\n", 999.999);
+	   printf("|%.2g|\n", 988.2);
+	ft_printf("|%.2g|\n", 988.2);
+	   printf("|%.4g|\n", 998.099);
+	ft_printf("|%.4g|\n", 998.099);
+	   printf("|%.2g|\n", 988.099);
+	ft_printf("|%.2g|\n", 988.099);
+	   printf("|%.3g|\n", 9998.999);
+	ft_printf("|%.3g|\n", 9998.999);
+	   printf("|%.3g|\n", 0.999643287658734658368543);
+	ft_printf("|%.3g|\n", 0.999643287658734658368543);
 	/*
 	for (int i = 1; i < 15001; i++)
 	{

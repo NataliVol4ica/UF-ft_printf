@@ -75,12 +75,14 @@ static int	recogn_naninf(t_params *p, long double num, _Bool is_cap)
 long double	get_float_num(va_list *ap, t_params *p, _Bool is_cap)
 {
 	long double num;
+	u_cheat		cheat_union;
 
 	num = p->length == BL ? va_arg(*ap, long double) : va_arg(*ap, double);
 	if (recogn_naninf(p, num, is_cap))
 		return (-1.0);
-	p->isnegative = num < 0 ? 1 : 0;
-	num = num < 0 ? -num : num;
+	cheat_union.d = (double)num;
+	p->isnegative = cheat_union.s_cheat.cheat_sign;
+	num = p->isnegative ? -num : num;
 	p->savelen = p->toprint->len;
 	p->precision = p->precision < 0 ? 6 : p->precision;
 	return (num);
