@@ -27,12 +27,6 @@ typedef struct	s_print_str
 	size_t	size;
 }				t_print_str;
 
-typedef struct	s_str
-{
-	char	*str;
-	int		size;
-}				t_str;
-
 typedef struct	s_flags
 {
 	_Bool	space;

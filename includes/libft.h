@@ -41,6 +41,7 @@ void	ft_sort_word_tab(char **mass);
 long	ft_sqrt(long nb);
 void	ft_swap(int *a, int *b);
 char	*long_mul(char *ss1, char *ss2);
+char	*long_mul_base(char *ss1, char *ss2, size_t base);
 
 /*
 ** CHAR FUNCS

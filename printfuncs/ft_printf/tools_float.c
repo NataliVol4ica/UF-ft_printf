@@ -35,7 +35,7 @@ static void	dec_sum(char *to, char *s)
 static char	*get_frac_str(long double num_frac)
 {
 	static t_str	*str = NULL;
-	int				i;
+	size_t			i;
 
 	str = str ? str : init_t_str(frac_default_size);
 	i = -1;

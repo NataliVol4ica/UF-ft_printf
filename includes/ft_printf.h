@@ -17,6 +17,7 @@
 # include <stdint.h>
 # include <wchar.h>
 # include "ft_printf_structs.h"
+# include "list.h"
 
 # define MAX_STR 32
 # define START_SIZE 2048
