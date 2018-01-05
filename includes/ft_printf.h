@@ -22,7 +22,7 @@
 # define MAX_STR 32
 # define START_SIZE 2048
 # define FLOAT_STR_MAX_SIZE 5300
-# define frac_default_size 200
+# define frac_default_size 201
 
 # define NUMBERS_S "0123456789abcdef"
 # define NUMBERS_B "0123456789ABCDEF"
@@ -44,7 +44,7 @@ size_t		count_bits(wchar_t k);
 int			check_bits(size_t *b, wchar_t c, t_params *p);
 size_t		get_next_length(char *str, t_length *ll);
 void		float_flags(t_params *p);
-long double	get_float_num(va_list *ap, t_params *p);
+long double	get_float_num(va_list *ap, t_params *p, _Bool is_cap);
 void		set_float(t_float *f, long double num);
 
 /*
@@ -120,7 +120,8 @@ void		type_bo(va_list *ap, t_params *p);
 void		type_x(va_list *ap, t_params *p);
 void		type_bx(va_list *ap, t_params *p);
 void		type_p(va_list *ap, t_params *p);
-void		type_fbf(va_list *ap, t_params *p);
+void		type_f(va_list *ap, t_params *p);
+void		type_bf(va_list *ap, t_params *p);
 void		type_e(va_list *ap, t_params *p);
 void		type_be(va_list *ap, t_params *p);
 void		type_n(va_list *ap, t_params *p);

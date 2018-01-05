@@ -68,13 +68,15 @@ static void	print_e_exp(t_params *p, int point, char c)
 	}
 }
 
-static void	type_ebe(va_list *ap, t_params *p, char c)
+static void	type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
 {
 	long double		num;
 	int				point;
 	static t_float	*f = NULL;
 	
-	num = get_float_num(ap, p);
+	num = get_float_num(ap, p, is_cap);
+	if (num < 0.0)
+		return ;
 	f = !f ? init_t_float() : f;
 	set_float(f, num);
 	point = f->point;
@@ -97,10 +99,10 @@ static void	type_ebe(va_list *ap, t_params *p, char c)
 
 void		type_e(va_list *ap, t_params *p)
 {
-	type_ebe(ap, p, 'e');
+	type_ebe(ap, p, 'e', 0);
 }
 
 void		type_be(va_list *ap, t_params *p)
 {
-	type_ebe(ap, p, 'E');
+	type_ebe(ap, p, 'E', 1);
 }

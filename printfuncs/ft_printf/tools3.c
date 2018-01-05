@@ -12,12 +12,73 @@
 
 #include "../../includes/ft_printf.h"
 #include "../../includes/ft_printf_consts.h"
+#include <float.h>
 
-long double	get_float_num(va_list *ap, t_params *p)
+static void	print_float_word(t_params *p, char *str)
+{
+	int	i;
+
+	p->flags->plus = str[0] != 'i' && str[0] != 'I' ? 0 : p->flags->plus;
+	p->flags->space = p->flags->minus && (str[0] == 'n' || str[0] == 'N') ?
+		0 : p->flags->space;
+	if ((p->flags->plus || p->flags->space) && str[0] != '-')
+		i = 3;
+	else if (str[0] == 'i' || str[0] == 'n' || str[0] == 'I' || str[0] == 'N')
+		i = 2;
+	else
+		i = 3;
+	if (p->flags->minus)
+	{
+		if (str[0] != '-')
+			print_sign_pref(p);
+		print_str(p, str, 1);
+		while (++i < p->width)
+			print_symbol(p, ' ');
+		return ;
+	}
+	while (++i < p->width)
+		print_symbol(p, ' ');
+	if (str[0] != '-')
+		print_sign_pref(p);
+	print_str(p, str, 1);
+}
+
+static int	recogn_naninf(t_params *p, long double num, _Bool is_cap)
+{
+	if (num != num)
+	{
+		if (is_cap)
+			print_float_word(p, "NAN");
+		else
+			print_float_word(p, "nan");		
+		return (1);
+	}
+	if (num < -LDBL_MAX)
+	{
+		if (is_cap)
+			print_float_word(p, "-INF");
+		else
+			print_float_word(p, "-inf");		
+		return (1);
+	}
+	if (num > LDBL_MAX)
+	{
+		if (is_cap)
+			print_float_word(p, "INF");
+		else
+			print_float_word(p, "inf");		
+		return (1);
+	}
+	return (0);
+}
+
+long double	get_float_num(va_list *ap, t_params *p, _Bool is_cap)
 {
 	long double num;
 
 	num = p->length == BL ? va_arg(*ap, long double) : va_arg(*ap, double);
+	if (recogn_naninf(p, num, is_cap))
+		return (-1.0);
 	p->isnegative = num < 0 ? 1 : 0;
 	num = num < 0 ? -num : num;
 	p->savelen = p->toprint->len;

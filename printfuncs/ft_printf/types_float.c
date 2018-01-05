@@ -43,17 +43,29 @@ static void	print_float(t_float *f, t_params *p, struct lconv *loc)
 	}
 }
 
-void		type_fbf(va_list *ap, t_params *p)
+static void	type_fbf(va_list *ap, t_params *p, _Bool is_cap)
 {
 	long double		num;
 	struct lconv	*loc;
 	static t_float	*f = NULL;
 	
 	loc = localeconv();
-	num = get_float_num(ap, p);
+	num = get_float_num(ap, p, is_cap);
+	if (num < 0.0)
+		return ;
 	f = !f ? init_t_float() : f;
 	set_float(f, num);
 	round_float(f, p);
 	print_float(f, p, loc);
 	float_flags(p);
+}
+
+void		type_f(va_list *ap, t_params *p)
+{
+	type_fbf(ap, p, 0);
+}
+
+void		type_bf(va_list *ap, t_params *p)
+{
+	type_fbf(ap, p, 1);
 }
