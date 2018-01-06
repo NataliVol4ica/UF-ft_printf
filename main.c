@@ -28,7 +28,14 @@
 
 int		main(void)
 {
+	fflush(stdout);
 	int	ret1, ret2;
+
+	   printf("|%10.g|\n", 0.5);
+	ft_printf("|%10.g|\n", 0.5);
+	   printf("|%10.g|\n", 0.0);
+	ft_printf("|%10.g|\n", 0.0);
+	printf("\n");
 
 	printf("|%g|\n", 0.0);
 	printf("|%#g|\n", 0.0);
@@ -48,6 +55,7 @@ int		main(void)
 	ft_printf("|%#.1g|\n", 0.0);
 	ft_printf("|%.5g|\n", 0.0);
 	ft_printf("|%#.5g|\n", 0.0);
+
 	/*ret1 =    printf("|%.g|\n", 0.0);
 	ret2 = ft_printf("|%.g|\n", 0.0);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);

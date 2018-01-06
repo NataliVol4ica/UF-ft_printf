@@ -96,18 +96,22 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		p->precision = first_prec;
 		p->precision = p->precision == 0 ? 1 : p->precision;
 		p->precision = p->precision == -1 ? 6 : p->precision;
+		round_float(f, p);
+		p->precision -= f->point;
 		i = f->num[0] == '0' && f->point > 1 ? 0 : -1;
 		while (++i < f->point)
 		{
 			print_symbol(p, f->num[i]);
 			p->precision--;
 		}
-		if (!p->flags->hash)
-			while (f->num[f->size - 1] == '0')
-				f->size--;
+		i--;
+		while (f->num[f->size - 1] == '0')
+			f->size--;
+		if (i == 1 && f->num[1] == '0' && f->size != 0)
+			p->precision++;
 		if (p->flags->hash || (p->precision > 0 && f->size > f->point))
 			print_symbol(p, '.');
-		while (p->precision > 0 && i++ < f->size)
+		while (p->precision > 0 && ++i < f->size)
 		{
 			print_symbol(p, f->num[i]);
 			p->precision--;
