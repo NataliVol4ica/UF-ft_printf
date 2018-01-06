@@ -76,8 +76,9 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		expon += f->num[i - 1] == '0' ? 0 : 1;
 		print_symbol(p, f->num[i++]);
 		j = i + p->precision;
-		while (f->num[--j] == '0')
-			p->precision--;
+		if (!p->flags->hash)
+			while (f->num[--j] == '0')
+				p->precision--;
 		if (p->precision > 1 || p->flags->hash)
 		{
 			if (p->flags->hash && first_prec == -6)
@@ -89,6 +90,7 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 				print_symbol(p, f->num[i + j - 1]);		
 		}
 		print_e_exp(p, expon, c);
+		float_flags(p);
 	}
 	else
 	{
@@ -100,27 +102,30 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		while (f->num[i] == '0' && i < f->point - 1)
 			i++;
 		i--;
-		f->size = p->precision + (f->num[0] == '0' ? 1 : 0);
+		if ((int)f->size > p->precision + (f->num[0] == '0' ? 1 : 0))
+			f->size = p->precision + (f->num[0] == '0' ? 1 : 0);
 		while (++i < f->point)
 			print_symbol(p, f->num[i]);
 		j = f->size - 1;
 		while (f->num[j] == '0' && j > -1)
 			j--;
 		j = j == -1 ? 0 : j;
-		f->size = f->size > (size_t)j ? j + 1 : f->size;
+		f->size = f->size > (size_t)j && !p->flags->hash ? j + 1 : f->size;
 		if (f->size > f->point || p->flags->hash)
 		{
-			if (p->flags->hash && f->size <= f->point && first_prec == -1)
-				f->size += 6;
+			//if (p->flags->hash && f->size <= f->point && first_prec == -1)
+		//		f->size += 6;
 			i--;
 			print_symbol(p, '.');
 			save = p->toprint->len;
 			while (++i < f->size)
 				print_symbol(p, f->num[i]);
+			if (p->flags->hash)
+				while ((int)++i < p->precision)
+					print_symbol(p, '0');
 			float_flags(p);
 		}
 	}
-	(void)c;
 }
 
 void		type_g(va_list *ap, t_params *p)
