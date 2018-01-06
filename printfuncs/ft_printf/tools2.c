@@ -57,8 +57,6 @@ void		round_float(t_float *f, t_params *p, _Bool expo)
 	size_t	j;
 
 	p->precision += f->point;
-	//printf("%.70s\n", f->num);
-	//printf("prec %d \n", p->precision);
 	if ((size_t)p->precision > f->size)
 		return;
 	if (FLT_ROUNDS == 1)
@@ -74,8 +72,53 @@ void		round_float(t_float *f, t_params *p, _Bool expo)
 		while (++j < f->size)
 			if (f->num[j] != '0')
 				break;
-		if (j != f->size && (expo || !(f->num[1] == '0')))
+		if (j != f->size && (expo || f->num[1] != '0'))
 			f->num[p->precision - 1]++;
 		final_round(f, p);
 	}
+}
+
+static void	final_round_g(t_float *f, t_params *p)
+{
+	int j;
+
+	j = p->precision + 1;
+	while (--j >= 0)
+	{
+		f->num[j + 1] -= '0';
+		f->num[j] += f->num[j + 1] / 10;
+		f->num[j + 1] %= 10;
+		f->num[j + 1] += '0';
+	}
+}
+
+void		round_float_g(t_float *f, t_params *p, _Bool expo)
+{
+	size_t	j;
+	int		saveprec;
+
+	if (p->precision >= (int)f->size)
+		return ;
+	saveprec = p->precision;
+	p->precision += f->num[1] == '0' ? 1 : 0;
+	if (FLT_ROUNDS == 1)
+	{
+		f->num[p->precision] += ((f->num[p->precision + 1] - '0') / 5);
+		final_round_g(f, p);
+	}
+	else if ((FLT_ROUNDS == 2 && !p->isnegative) || (FLT_ROUNDS == 3 && p->isnegative))
+	{
+		//printf("%.70s\n", f->num);
+		//printf("prec %d\n", p->precision);
+		j = p->precision;
+		while (++j < f->size)
+			if (f->num[j] != '0')
+				break;
+		if (j != f->size && (expo || f->num[1] != '0'))
+			f->num[p->precision]++;
+		final_round_g(f, p);
+		//printf("%.70s\n", f->num);
+	}
+	(void)expo;
+	p->precision = saveprec;
 }

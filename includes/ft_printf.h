@@ -93,6 +93,7 @@ void		zero_t_float(t_float *f);
 t_str		*init_t_str(size_t size);
 void		set_float(t_float *f, long double num);
 void		round_float(t_float *f, t_params *p, _Bool expo);
+void		round_float_g(t_float *f, t_params *p, _Bool expo);
 
 /*
 ** REALLOCS
