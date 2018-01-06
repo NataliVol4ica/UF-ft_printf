@@ -88,13 +88,13 @@ void		print_bin_pref(t_params *p);
 ** FLOAT TOOLS
 */
 
-
 t_float		*init_t_float(void);
 void		zero_t_float(t_float *f);
 t_str		*init_t_str(size_t size);
 void		set_float(t_float *f, long double num);
 void		round_float(t_float *f, t_params *p, _Bool expo);
 void		round_float_g(t_float *f, t_params *p, _Bool expo);
+void		print_e_exp(t_params *p, int expon, char c);
 
 /*
 ** REALLOCS

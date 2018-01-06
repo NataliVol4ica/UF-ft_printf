@@ -13,6 +13,33 @@
 #include "../../includes/ft_printf.h"
 #include <float.h>
 
+void		print_e_exp(t_params *p, int expon, char c)
+{
+	size_t			savelen_exp;
+
+	print_symbol(p, c);
+	print_symbol(p, expon < 0 ? '-' : '+');
+	expon = expon < 0 ? -expon : expon;
+	if (expon == 0)
+		print_str(p, "00", 1);
+	else if (expon < 10)
+	{
+		print_symbol(p, '0' + expon / 10);
+		print_symbol(p, '0' + expon % 10);
+	}
+	else
+	{
+		savelen_exp = p->toprint->len;
+		while (expon > 0)
+		{
+			print_symbol(p, '0' + expon % 10);
+			expon /= 10;
+		}
+		rev_str(&p->toprint->str[savelen_exp],
+			&p->toprint->str[p->toprint->len - 1]);
+	}
+}
+
 static void	print_float_word(t_params *p, char *str)
 {
 	int	i;
