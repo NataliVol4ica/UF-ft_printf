@@ -112,10 +112,15 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		p->precision = first_prec;
 		p->precision = p->precision == 0 ? 1 : p->precision;
 		p->precision = p->precision == -1 ? 6 : p->precision;
-		if (f->num[1] != '0') p->precision--;
+		p->precision -= f->point - (f->num[1] != '0' ? 1 : 0);
+		//if (f->num[1] != '0') p->precision--;
+	//	printf("%.70s\n", f->num);
+		//printf("prec %d point %zu\n", p->precision, f->point);
 		round_float(f, p, 0);
-		if (f->num[1] != '0') p->precision++;
-		p->precision -= f->point;
+	//	printf("%.70s\n", f->num);
+		p->precision = first_prec;
+		p->precision = p->precision == 0 ? 1 : p->precision;
+		p->precision = p->precision == -1 ? 6 : p->precision;
 		i = f->num[0] == '0' && f->point > 1 ? 0 : -1;
 		while (++i < f->point)
 		{

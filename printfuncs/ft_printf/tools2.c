@@ -57,6 +57,8 @@ void		round_float(t_float *f, t_params *p, _Bool expo)
 	size_t	j;
 
 	p->precision += f->point;
+	//printf("%.70s\n", f->num);
+	//printf("prec %d \n", p->precision);
 	if ((size_t)p->precision > f->size)
 		return;
 	if (FLT_ROUNDS == 1)

@@ -30,6 +30,10 @@ int		main(void)
 {
 	fflush(stdout);
 	int	ret1, ret2;
+
+
+	   printf("|%.4g|\n", 998.099);
+	ft_printf("|%.4g|\n", 998.099);
 	   printf("|%.4g|\n", 1.0000545);
 	ft_printf("|%.4g|\n", 1.0000545);
 	   printf("|%.2g|\n", 0.00002055);
