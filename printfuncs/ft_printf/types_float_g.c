@@ -46,7 +46,6 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	int				expon;
 	size_t			i;
 	int				j;
-	size_t			save;
 	size_t			saveprec;
 	int				first_prec;
 	static t_float	*f = NULL;
@@ -81,7 +80,7 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 				p->precision--;
 		if (p->precision > 1 || p->flags->hash)
 		{
-			if (p->flags->hash && first_prec == -6)
+			if (p->flags->hash && first_prec == -1)
 				p->precision += 6;
 			print_symbol(p, '.');
 			f->size = p->precision + (f->num[0] == '0' ? 1 : 0);
@@ -94,37 +93,29 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	}
 	else
 	{
-		saveprec = p->precision;
-		p->precision -= f->point - 1;
-		round_float(f, p);
-		p->precision = saveprec;
-		i = 0;
-		while (f->num[i] == '0' && i < f->point - 1)
-			i++;
-		i--;
-		if ((int)f->size > p->precision + (f->num[0] == '0' ? 1 : 0))
-			f->size = p->precision + (f->num[0] == '0' ? 1 : 0);
+		p->precision = first_prec;
+		p->precision = p->precision == 0 ? 1 : p->precision;
+		p->precision = p->precision == -1 ? 6 : p->precision;
+		i = f->num[0] == '0' && f->point > 1 ? 0 : -1;
 		while (++i < f->point)
-			print_symbol(p, f->num[i]);
-		j = f->size - 1;
-		while (f->num[j] == '0' && j > -1)
-			j--;
-		j = j == -1 ? 0 : j;
-		f->size = f->size > (size_t)j && !p->flags->hash ? j + 1 : f->size;
-		if (f->size > f->point || p->flags->hash)
 		{
-			//if (p->flags->hash && f->size <= f->point && first_prec == -1)
-		//		f->size += 6;
-			i--;
-			print_symbol(p, '.');
-			save = p->toprint->len;
-			while (++i < f->size)
-				print_symbol(p, f->num[i]);
-			if (p->flags->hash)
-				while ((int)++i < p->precision)
-					print_symbol(p, '0');
-			float_flags(p);
+			print_symbol(p, f->num[i]);
+			p->precision--;
 		}
+		if (!p->flags->hash)
+			while (f->num[f->size - 1] == '0')
+				f->size--;
+		if (p->flags->hash || (p->precision > 0 && f->size > f->point))
+			print_symbol(p, '.');
+		while (p->precision > 0 && i++ < f->size)
+		{
+			print_symbol(p, f->num[i]);
+			p->precision--;
+		}
+		if (p->flags->hash)
+			while (p->precision-- > 0)
+				print_symbol(p, '0');
+		float_flags(p);
 	}
 }
 

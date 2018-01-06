@@ -30,8 +30,30 @@ int		main(void)
 {
 	int	ret1, ret2;
 
-	   printf("|%.100g|\n", -1024.1);
-	ft_printf("|%.100g|\n", -1024.1);
+	printf("|%g|\n", 0.0);
+	printf("|%#g|\n", 0.0);
+	printf("|%.g|\n", 0.0);
+	printf("|%#.g|\n", 0.0);
+	printf("|%.1g|\n", 0.0);
+	printf("|%#.1g|\n", 0.0);
+	printf("|%.5g|\n", 0.0);
+	printf("|%#.5g|\n", 0.0);
+	printf("\n");
+
+	ft_printf("|%g|\n", 0.0);
+	ft_printf("|%#g|\n", 0.0);
+	ft_printf("|%.g|\n", 0.0);
+	ft_printf("|%#.g|\n", 0.0);
+	ft_printf("|%.1g|\n", 0.0);
+	ft_printf("|%#.1g|\n", 0.0);
+	ft_printf("|%.5g|\n", 0.0);
+	ft_printf("|%#.5g|\n", 0.0);
+	/*ret1 =    printf("|%.g|\n", 0.0);
+	ret2 = ft_printf("|%.g|\n", 0.0);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
+	ret1 =    printf("|%#.g|\n", 0.0);
+	ret2 = ft_printf("|%#.g|\n", 0.0);
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);*/
 	/*
 	for (int i = 1; i < 15001; i++)
 	{
