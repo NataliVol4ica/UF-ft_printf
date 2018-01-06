@@ -30,9 +30,18 @@ int		main(void)
 {
 	fflush(stdout);
 	int	ret1, ret2;
+	   printf("|%.4g|\n", 1.0000545);
+	ft_printf("|%.4g|\n", 1.0000545);
+	   printf("|%.2g|\n", 0.00002055);
+	ft_printf("|%.2g|\n", 0.00002055);
+	   printf("|%#8.2g|\n", 998.999);
+	ft_printf("|%#8.2g|\n", 998.999);
+	   printf("|%8.2g|\n", 998.999);
+	ft_printf("|%8.2g|\n", 998.999);
+	   printf("|%8.3g|\n", 999.999);
+	ft_printf("|%8.3g|\n", 999.999);
 
-	fesetround(FE_UPWARD);
-	   printf("|%#g|\n", -256.0);
+	/*   printf("|%#g|\n", -256.0);
 	ft_printf("|%#g|\n", -256.0);
 	   printf("|%10.g|\n", 1.0245);
 	ft_printf("|%10.g|\n", 1.0245);
@@ -41,7 +50,7 @@ int		main(void)
 	ft_printf("|%10.g|\n", 0.5);
 	   printf("|%10.g|\n", 0.0);
 	ft_printf("|%10.g|\n", 0.0);
-	printf("\n");
+	printf("\n");*/
 /*
 	printf("|%g|\n", 0.0);
 	printf("|%#g|\n", 0.0);

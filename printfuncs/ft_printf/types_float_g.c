@@ -45,8 +45,6 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	long double		num;
 	int				expon;
 	size_t			i;
-	int				j;
-	size_t			saveprec;
 	int				first_prec;
 	static t_float	*f = NULL;
 	
@@ -64,30 +62,48 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		i = 1;
 	expon = f->point - i - 1;
 	print_sign_pref(p);
-	//printf("expon %d precision %d\n", expon, p->precision);
 	if (expon < -4 || expon >= p->precision)
 	{
-		saveprec = p->precision;
-		p->precision += i - f->point;
-		round_float(f, p);
-		p->precision = saveprec;
-		i -= f->num[i - 1] == '0' ? 0 : 1;
-		expon += f->num[i - 1] == '0' ? 0 : 1;
-		print_symbol(p, f->num[i++]);
-		j = i + p->precision;
-		if (!p->flags->hash)
-			while (f->num[--j] == '0')
-				p->precision--;
-		if (p->precision > 1 || p->flags->hash)
+		f->point = 1;
+		while (f->num[f->point - 1] == '0')
+			f->point++;
+		if (!f->num[f->point - 1])
+			f->point = 2;
+		//printf("%.70s\n", f->num);
+		//if (f->num[1] != '0') 
+		p->precision--;
+		//printf("%d\n", p->precision);
+		round_float(f, p, 1);
+		if (f->num[0] != '0')
 		{
-			if (p->flags->hash && first_prec == -1)
-				p->precision += 6;
-			print_symbol(p, '.');
-			f->size = p->precision + (f->num[0] == '0' ? 1 : 0);
-			j = 0;
-			while (++j < p->precision)	
-				print_symbol(p, f->num[i + j - 1]);		
+			f->point--;
+			expon++;
 		}
+		//printf("%.70s\n", f->num);
+		p->precision = first_prec;
+		p->precision = p->precision == 0 ? 1 : p->precision;
+		p->precision = p->precision == -1 ? 6 : p->precision;
+		print_symbol(p, f->num[f->point - 1]);
+		p->precision--;
+		if (!p->flags->hash)
+			while (f->num[f->point + p->precision - 1] == '0')
+				p->precision--;
+		//printf("%d\n", p->precision);
+		while (f->num[f->size - 1] == '0')
+			f->size--;
+		//printf("%c\n", f->num[f->size - 1]);
+		//printf("%s\n", f->num);
+		i = f->point - 1;
+		if (p->flags->hash || (p->precision > 0 && f->size > f->point))
+			print_symbol(p, '.');
+		while (p->precision > 0 && ++i < f->size)
+		{
+			print_symbol(p, f->num[i]);
+			p->precision--;
+		}
+		if (p->flags->hash)
+			while (p->precision-- > 0)
+				print_symbol(p, '0');
 		print_e_exp(p, expon, c);
 		float_flags(p);
 	}
@@ -97,12 +113,9 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		p->precision = p->precision == 0 ? 1 : p->precision;
 		p->precision = p->precision == -1 ? 6 : p->precision;
 		if (f->num[1] != '0') p->precision--;
-		//printf("%.70s\n", f->num);
-		round_float(f, p);
+		round_float(f, p, 0);
 		if (f->num[1] != '0') p->precision++;
-		//printf("%.70s\n", f->num);
 		p->precision -= f->point;
-		//printf("precision %d\n", p->precision);
 		i = f->num[0] == '0' && f->point > 1 ? 0 : -1;
 		while (++i < f->point)
 		{
@@ -114,6 +127,9 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 			f->size--;
 		if (i == 1 && f->num[1] == '0' && f->size != 0)
 			p->precision++;
+		if (!p->flags->hash)
+			while (f->num[f->point + p->precision - 1] == '0')
+				p->precision--;
 		if (p->flags->hash || (p->precision > 0 && f->size > f->point))
 			print_symbol(p, '.');
 		while (p->precision > 0 && ++i < f->size)

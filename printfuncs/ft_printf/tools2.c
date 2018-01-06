@@ -52,7 +52,7 @@ static void	final_round(t_float *f, t_params *p)
 	}
 }
 
-void		round_float(t_float *f, t_params *p)
+void		round_float(t_float *f, t_params *p, _Bool expo)
 {
 	size_t	j;
 
@@ -72,7 +72,7 @@ void		round_float(t_float *f, t_params *p)
 		while (++j < f->size)
 			if (f->num[j] != '0')
 				break;
-		if (j != f->size && !(f->num[1] == '0'))
+		if (j != f->size && (expo || !(f->num[1] == '0')))
 			f->num[p->precision - 1]++;
 		final_round(f, p);
 	}

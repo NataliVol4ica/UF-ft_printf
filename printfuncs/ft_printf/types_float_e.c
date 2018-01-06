@@ -85,7 +85,7 @@ static void	type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
 		f->point++;
 	if (!f->num[f->point - 1])
 		f->point = 2;
-	round_float(f, p);
+	round_float(f, p, 1);
 	if (f->num[0] != '0')
 	{
 		f->point--;

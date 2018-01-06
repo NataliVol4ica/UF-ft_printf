@@ -55,7 +55,7 @@ static void	type_fbf(va_list *ap, t_params *p, _Bool is_cap)
 		return ;
 	f = !f ? init_t_float() : f;
 	set_float(f, num);
-	round_float(f, p);
+	round_float(f, p, 0);
 	print_float(f, p, loc);
 	float_flags(p);
 }
