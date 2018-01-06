@@ -48,8 +48,10 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	int				j;
 	size_t			save;
 	size_t			saveprec;
+	int				first_prec;
 	static t_float	*f = NULL;
 	
+	first_prec = p->precision;
 	num = get_float_num(ap, p, is_cap);
 	p->precision = p->precision == 0 ? 1 : p->precision;
 	if (num < 0.0)
@@ -78,7 +80,7 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 			p->precision--;
 		if (p->precision > 1 || p->flags->hash)
 		{
-			if (p->flags->hash && p->precision == 1)
+			if (p->flags->hash && first_prec == -6)
 				p->precision += 6;
 			print_symbol(p, '.');
 			f->size = p->precision + (f->num[0] == '0' ? 1 : 0);
@@ -108,7 +110,7 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 		f->size = f->size > (size_t)j ? j + 1 : f->size;
 		if (f->size > f->point || p->flags->hash)
 		{
-			if (p->flags->hash && f->size <= f->point)
+			if (p->flags->hash && f->size <= f->point && first_prec == -1)
 				f->size += 6;
 			i--;
 			print_symbol(p, '.');

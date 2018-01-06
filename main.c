@@ -30,8 +30,8 @@ int		main(void)
 {
 	int	ret1, ret2;
 
-	   printf("|%#g|\n", -0.0);
-	ft_printf("|%#g|\n", -0.0);
+	   printf("|%#.g|\n", 0.0);
+	ft_printf("|%#.g|\n", 0.0);
 	/*
 	for (int i = 1; i < 15001; i++)
 	{
