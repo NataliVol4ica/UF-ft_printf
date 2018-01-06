@@ -26,11 +26,43 @@
 #include <fenv.h>
 #include <math.h>
 
+void	print_str_twos(char *str)
+{
+	int ret;
+
+	while (*str)
+	{
+		printf("\t\"");
+		ret = printf("%.72s", str);
+		str += ret;
+		printf("\"");
+		if (*str) printf("\n");
+	}
+}
+
 int		main(void)
 {
 	fflush(stdout);
 	int	ret1, ret2;
-
+	
+	char	*s1 = "1";
+	char	*s2 = "2";
+	for (int i = 1; i < 15001; i++)
+	{
+		s1 = long_mul(s1, s2);
+		if (i == 1 || i == 2 || i == 5 || i == 10 || i == 25 || i == 50 ||
+			i == 100 || i == 1000 || i == 2000 || i == 5000 || i == 10000 ||
+			i == 15000)
+		{
+			printf("\t{%d,\n", i);
+			print_str_twos(s1);
+			printf("}");
+			if (i != 15000)
+				printf(",");
+			printf("\n");
+		}
+		//printf("\t{%d,\n\t\"%s\"},\n", i, s1);
+	}
 	/*	
 	   printf("|%.4g|\n", 998.099);
 	ft_printf("|%.4g|\n", 998.099);
@@ -98,15 +130,9 @@ int		main(void)
 	ret1 =    printf("|%#.g|\n", 0.0);
 	ret2 = ft_printf("|%#.g|\n", 0.0);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
-	for (int i = 1; i < 15001; i++)
-	{
-		s1 = long_mul_base(s1, s2, 16);
-		//if (i > 1)
-		//	free (s1);
-		//s1 = s3;
-		printf("\t{%d, \"%s\"},\n", i, s1);
-	}
-	ret1 =    printf("|%d|\n", 0);
+	*/
+
+	/*ret1 =    printf("|%d|\n", 0);
 	ret2 = ft_printf("|%d|\n", 0);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
 	printf("|%D|\n", LONG_MIN);
