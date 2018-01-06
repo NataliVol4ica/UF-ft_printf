@@ -82,6 +82,7 @@ t_length	get_length(char *str, int *i);
 void		print_sign_pref(t_params *p);
 void		print_oct_pref(t_params *p);
 void		print_hex_pref(t_params *p);
+void		print_bin_pref(t_params *p);
 
 /*
 ** FLOAT TOOLS
@@ -130,6 +131,13 @@ void		type_bg(va_list *ap, t_params *p);
 void		type_e(va_list *ap, t_params *p);
 void		type_be(va_list *ap, t_params *p);
 void		type_n(va_list *ap, t_params *p);
+void		type_b(va_list *ap, t_params *p);
+void		type_bb(va_list *ap, t_params *p);
 void		type_none(char c, t_params *p);
+
+void		type_fbf(va_list *ap, t_params *p, _Bool is_cap);
+void		type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap);
+void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap);
+void		type_aba(va_list *ap, t_params *p, char c, _Bool is_cap);
 
 #endif

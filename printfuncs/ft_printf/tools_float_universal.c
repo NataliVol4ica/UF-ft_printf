@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools3.c                                           :+:      :+:    :+:   */
+/*   tools_float_universal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "../../includes/ft_printf_consts.h"
 #include <float.h>
 
 static void	print_float_word(t_params *p, char *str)

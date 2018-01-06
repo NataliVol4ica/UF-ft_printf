@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 void	print_symbol(t_params *p, char c)
 {

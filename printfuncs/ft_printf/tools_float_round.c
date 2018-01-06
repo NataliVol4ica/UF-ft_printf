@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools2.c                                           :+:      :+:    :+:   */
+/*   tools_float_round.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,32 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "../../includes/ft_printf_consts.h"
-#include "libft.h"
-#include <stdlib.h>
 #include <float.h>
-
-t_float		*init_t_float(void)
-{
-	t_float	*f;
-
-	f = (t_float*)malloc(sizeof(t_float));
-	f->num = (char*)malloc(sizeof(char) * (FLOAT_STR_MAX_SIZE + 1));
-	f->size = 0;
-	f->point = -1;
-	return (f);
-}
-
-t_str		*init_t_str(size_t size)
-{
-	t_str	*tstr;
-
-	tstr = (t_str*)malloc(sizeof(t_str));
-	tstr->str = ft_strnew(size + 1);
-	tstr->str[size] = '\0';
-	tstr->size = size;
-	return (tstr);
-}
 
 static void	final_round(t_float *f, t_params *p)
 {
@@ -108,8 +83,6 @@ void		round_float_g(t_float *f, t_params *p, _Bool expo)
 	}
 	else if ((FLT_ROUNDS == 2 && !p->isnegative) || (FLT_ROUNDS == 3 && p->isnegative))
 	{
-		//printf("%.70s\n", f->num);
-		//printf("prec %d\n", p->precision);
 		j = p->precision;
 		while (++j < f->size)
 			if (f->num[j] != '0')
@@ -117,7 +90,6 @@ void		round_float_g(t_float *f, t_params *p, _Bool expo)
 		if (j != f->size && (expo || f->num[1] != '0'))
 			f->num[p->precision]++;
 		final_round_g(f, p);
-		//printf("%.70s\n", f->num);
 	}
 	(void)expo;
 	p->precision = saveprec;

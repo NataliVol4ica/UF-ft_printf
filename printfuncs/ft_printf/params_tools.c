@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 #include <stdlib.h>
 
 void		read_params(t_params *p, char *fmt, size_t *pos, va_list *ap)

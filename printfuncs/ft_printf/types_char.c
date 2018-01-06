@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 #include <stdlib.h>
 
 void	type_percent(va_list *ap, t_params *p)

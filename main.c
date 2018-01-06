@@ -31,8 +31,8 @@ int		main(void)
 	fflush(stdout);
 	int	ret1, ret2;
 
-
-/*	   printf("|%.4g|\n", 998.099);
+	/*	
+	   printf("|%.4g|\n", 998.099);
 	ft_printf("|%.4g|\n", 998.099);
 	   printf("|%.4g|\n", 1.0000545);
 	ft_printf("|%.4g|\n", 1.0000545);
@@ -41,7 +41,7 @@ int		main(void)
 	   printf("|%#8.2g|\n", 998.999);
 	ft_printf("|%#8.2g|\n", 998.999);
 	   printf("|%8.2g|\n", 998.999);
-	ft_printf("|%8.2g|\n", 998.999);*/
+	ft_printf("|%8.2g|\n", 998.999);
 	   printf("|%10.g|\n", 0.5);
 	ft_printf("|%10.g|\n", 0.5);
 	   printf("|%+#.5g|\n", 0.12345);
@@ -54,15 +54,15 @@ int		main(void)
 	   printf("|%#.3g|\n", 0.999643287658734658368543);
 	   printf("|%.3g|\n", 999.0);
 	ft_printf("|%.3g|\n", 999.0);
-	  fesetround(FE_UPWARD);/*
+	  fesetround(FE_UPWARD);
 	   printf("|%8.3g|\n", 999.999);
 	ft_printf("|%8.3g|\n", 999.999);
 	   printf("|%10.g|\n", 1024.04445);
-	ft_printf("|%10.g|\n", 1024.04445);*/
+	ft_printf("|%10.g|\n", 1024.04445);
 	   printf("|% 10.g|\n", 1.0245);
 	ft_printf("|% 10.g|\n", 1.0245);
 
-	/*   printf("|%#g|\n", -256.0);
+	   printf("|%#g|\n", -256.0);
 	ft_printf("|%#g|\n", -256.0);
 	   printf("|%10.g|\n", 1.0245);
 	ft_printf("|%10.g|\n", 1.0245);
@@ -71,8 +71,8 @@ int		main(void)
 	ft_printf("|%10.g|\n", 0.5);
 	   printf("|%10.g|\n", 0.0);
 	ft_printf("|%10.g|\n", 0.0);
-	printf("\n");*/
-/*
+	printf("\n");
+
 	printf("|%g|\n", 0.0);
 	printf("|%#g|\n", 0.0);
 	printf("|%.g|\n", 0.0);
@@ -91,15 +91,13 @@ int		main(void)
 	ft_printf("|%#.1g|\n", 0.0);
 	ft_printf("|%.5g|\n", 0.0);
 	ft_printf("|%#.5g|\n", 0.0);
-	*/
 
-	/*ret1 =    printf("|%.g|\n", 0.0);
+	ret1 =    printf("|%.g|\n", 0.0);
 	ret2 = ft_printf("|%.g|\n", 0.0);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
 	ret1 =    printf("|%#.g|\n", 0.0);
 	ret2 = ft_printf("|%#.g|\n", 0.0);
-	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);*/
-	/*
+	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
 	for (int i = 1; i < 15001; i++)
 	{
 		s1 = long_mul_base(s1, s2, 16);
@@ -108,34 +106,22 @@ int		main(void)
 		//s1 = s3;
 		printf("\t{%d, \"%s\"},\n", i, s1);
 	}
-	*/
-	/*
 	ret1 =    printf("|%d|\n", 0);
 	ret2 = ft_printf("|%d|\n", 0);
 	printf("Ret1 = %d Ret2 = %d\n", ret1, ret2);
-	*/
-	/*
 	printf("|%D|\n", LONG_MIN);
 	ft_printf("|%D|\n", LONG_MIN);
-	*/
-	/*
 	float f1 = -100;
 	float f2 = 0;
 	printf("%f\n", f1/f2);
-	*/
-	/*
 	ft_printf("|%.0%|\n");
 	printf("|%.0%|\n");
-	*/
-	/*
 	printf("L  = %ld\n", INT_MAX);
 	printf("H  = %hd\n", INT_MAX);
 	printf("LH = %lhd\n", INT_MAX);
 	ft_printf("F LH = %lhd\n", INT_MAX);
 	printf("HL = %hld\n", INT_MAX);
 	ft_printf("F HL = %hld\n", INT_MAX);
-	*/
-	/*
 	float f = 643867256.46327f;
 	printf("%.10a\n", f);
 	*/

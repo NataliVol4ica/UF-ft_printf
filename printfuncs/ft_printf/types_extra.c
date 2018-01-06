@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 
 void	type_p(va_list *ap, t_params *p)
 {

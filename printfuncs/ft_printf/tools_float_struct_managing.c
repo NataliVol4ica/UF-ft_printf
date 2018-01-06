@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_realloc.c                                    :+:      :+:    :+:   */
+/*   tools_float_struct_managing.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,11 +11,30 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "../../includes/ft_printf_consts.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <float.h>
-#include <math.h>
+
+t_float		*init_t_float(void)
+{
+	t_float	*f;
+
+	f = (t_float*)malloc(sizeof(t_float));
+	f->num = (char*)malloc(sizeof(char) * (FLOAT_STR_MAX_SIZE + 1));
+	f->size = 0;
+	f->point = -1;
+	return (f);
+}
+
+t_str		*init_t_str(size_t size)
+{
+	t_str	*tstr;
+
+	tstr = (t_str*)malloc(sizeof(t_str));
+	tstr->str = ft_strnew(size + 1);
+	tstr->str[size] = '\0';
+	tstr->size = size;
+	return (tstr);
+}
 
 void		realloc_toprint(t_print_str *tp)
 {

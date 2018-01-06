@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types_float_a.c                                    :+:      :+:    :+:   */
+/*   tools_float_fe_funcs.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,22 @@
 
 #include "../../includes/ft_printf.h"
 
-void		type_aba(va_list *ap, t_params *p, char c, _Bool is_cap)
+void		type_f(va_list *ap, t_params *p)
 {
-	long double		num;
-	static t_float	*f = NULL;
-	
-	num = get_float_num(ap, p, is_cap);
-	if (num < 0.0)
-		return ;
-	f = !f ? init_t_float() : f;
-	set_float(f, num);
-	(void)c;
+	type_fbf(ap, p, 0);
+}
+
+void		type_bf(va_list *ap, t_params *p)
+{
+	type_fbf(ap, p, 1);
+}
+
+void		type_e(va_list *ap, t_params *p)
+{
+	type_ebe(ap, p, 'e', 0);
+}
+
+void		type_be(va_list *ap, t_params *p)
+{
+	type_ebe(ap, p, 'E', 1);
 }

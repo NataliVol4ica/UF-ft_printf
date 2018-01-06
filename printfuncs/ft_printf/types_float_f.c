@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types_float.c                                      :+:      :+:    :+:   */
+/*   types_float_f.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkolosov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 #include "locale.h"
 
 static void	print_float(t_float *f, t_params *p, struct lconv *loc)
@@ -43,7 +42,7 @@ static void	print_float(t_float *f, t_params *p, struct lconv *loc)
 	}
 }
 
-static void	type_fbf(va_list *ap, t_params *p, _Bool is_cap)
+void		type_fbf(va_list *ap, t_params *p, _Bool is_cap)
 {
 	long double		num;
 	struct lconv	*loc;
@@ -58,14 +57,4 @@ static void	type_fbf(va_list *ap, t_params *p, _Bool is_cap)
 	round_float(f, p, 0);
 	print_float(f, p, loc);
 	float_flags(p);
-}
-
-void		type_f(va_list *ap, t_params *p)
-{
-	type_fbf(ap, p, 0);
-}
-
-void		type_bf(va_list *ap, t_params *p)
-{
-	type_fbf(ap, p, 1);
 }

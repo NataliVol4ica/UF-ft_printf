@@ -43,17 +43,20 @@ PRINTF =	ft_printf \
 			types_char \
 			types_numeric \
 			types_octhex \
+			types_binary \
 			types_extra \
-			types_float \
+			types_float_f \
 			types_float_e \
 			types_float_g \
 			types_float_a \
 			tools1 \
-			tools2 \
-			tools3 \
 			tools_bits \
-			tools_float \
-			tools_realloc
+			tools_float_fe_funcs \
+			tools_float_ga_funcs \
+			tools_float_universal \
+			tools_float_convert_to_struct \
+			tools_float_struct_managing \
+			tools_float_round
 PRNTFDIR = $(PRINTFUNCDIR)/ft_printf
 DPRNTF = $(patsubst %, $(PRNTFDIR)/%, $(PRINTF))
 STRFUNCS =	ft_strlen \

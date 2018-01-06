@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 #include <float.h>
 
 static void	print_e_exp(t_params *p, int expon, char c)
@@ -41,7 +40,7 @@ static void	print_e_exp(t_params *p, int expon, char c)
 	}
 }
 
-static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
+void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 {
 	long double		num;
 	int				expon;
@@ -181,14 +180,4 @@ static void	type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 				print_symbol(p, '0');
 		float_flags(p);
 	}
-}
-
-void		type_g(va_list *ap, t_params *p)
-{
-	type_gbg(ap, p, 'e', 0);
-}
-
-void		type_bg(va_list *ap, t_params *p)
-{
-	type_gbg(ap, p, 'E', 1);
 }

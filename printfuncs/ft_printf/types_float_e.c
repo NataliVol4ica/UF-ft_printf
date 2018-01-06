@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
-#include "libft.h"
 
 static void	print_e_float(t_params *p, t_float *f)
 {
@@ -68,7 +67,7 @@ static void	print_e_exp(t_params *p, int expon, char c)
 	}
 }
 
-static void	type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
+void		type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
 {
 	long double		num;
 	int				expon;
@@ -95,14 +94,4 @@ static void	type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
 	expon -= f->point;
 	print_e_exp(p, expon, c);
 	float_flags(p);
-}
-
-void		type_e(va_list *ap, t_params *p)
-{
-	type_ebe(ap, p, 'e', 0);
-}
-
-void		type_be(va_list *ap, t_params *p)
-{
-	type_ebe(ap, p, 'E', 1);
 }
