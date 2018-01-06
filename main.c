@@ -31,12 +31,18 @@ int		main(void)
 	fflush(stdout);
 	int	ret1, ret2;
 
+	fesetround(FE_UPWARD);
+	   printf("|%#g|\n", -256.0);
+	ft_printf("|%#g|\n", -256.0);
+	   printf("|%10.g|\n", 1.0245);
+	ft_printf("|%10.g|\n", 1.0245);
+	
 	   printf("|%10.g|\n", 0.5);
 	ft_printf("|%10.g|\n", 0.5);
 	   printf("|%10.g|\n", 0.0);
 	ft_printf("|%10.g|\n", 0.0);
 	printf("\n");
-
+/*
 	printf("|%g|\n", 0.0);
 	printf("|%#g|\n", 0.0);
 	printf("|%.g|\n", 0.0);
@@ -55,6 +61,7 @@ int		main(void)
 	ft_printf("|%#.1g|\n", 0.0);
 	ft_printf("|%.5g|\n", 0.0);
 	ft_printf("|%#.5g|\n", 0.0);
+	*/
 
 	/*ret1 =    printf("|%.g|\n", 0.0);
 	ret2 = ft_printf("|%.g|\n", 0.0);
