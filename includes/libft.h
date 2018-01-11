@@ -22,6 +22,9 @@
 # define LIB_GN(x) x - '0'
 # define LIB_GC(x) x + '0'
 
+# define NUM_FROM_CHAR(x) x >= '0' && x <= '9' ? x - '0' : x - 'a' + 10
+# define CHAR_FROM_NUM(x) x <= 9 ? x + '0' : x - 10 + 'a'
+
 /*
 ** CALC FUNCS
 */
@@ -140,5 +143,13 @@ char	*ft_strstr(const char *big, const char *small);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s);
 char	*ft_strupper(char *str);
+
+/*
+** LONG MUL TOOLS
+*/
+
+t_str	*insert_num_base(t_str *s, char num);
+t_str	*long_sum_base(t_str *s1, t_str *s2, size_t base);
+void	str_to_num(t_str *s);
 
 #endif

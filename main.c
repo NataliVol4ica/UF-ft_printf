@@ -42,6 +42,11 @@ void	print_str_twos(char *str)
 
 int		main(void)
 {
+	intmax_t x = -129;
+	x = (signed char)x;
+
+	printf("%3$d %02$d %1$d\n", 1024, LLONG_MAX, 42);
+	ft_printf("%3$d %2$Lf\n", 1024, 0.999643287658734658368543L, 42);
 	/*fflush(stdout);
 	int	ret1, ret2;
 	
