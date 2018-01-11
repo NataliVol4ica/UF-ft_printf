@@ -13,28 +13,7 @@
 #include "../../includes/ft_printf.h"
 #include <stdlib.h>
 
-void	type_percent(va_list *ap, t_params *p)
-{
-	int		i;
-	char	filler;
-
-	(void)ap;
-	p->width--;
-	i = -1;
-	filler = p->flags->zero ? '0' : ' ';
-	if (p->flags->minus)
-	{
-		print_symbol(p, '%');
-		while (++i < p->width)
-			print_symbol(p, ' ');
-		return ;
-	}
-	while (++i < p->width)
-		print_symbol(p, filler);
-	print_symbol(p, '%');
-}
-
-void	type_c(va_list *ap, t_params *p)
+void		type_c(va_list *ap, t_params *p)
 {
 	int		i;
 	char	filler;
@@ -61,7 +40,7 @@ void	type_c(va_list *ap, t_params *p)
 	print_symbol(p, c);
 }
 
-void	type_bc(va_list *ap, t_params *p)
+void		type_bc(va_list *ap, t_params *p)
 {
 	size_t	savelen;
 	size_t	sum;
@@ -89,7 +68,7 @@ void	type_bc(va_list *ap, t_params *p)
 	}
 }
 
-void	type_s(va_list *ap, t_params *p)
+void		type_s(va_list *ap, t_params *p)
 {
 	char	*str;
 	size_t	savelen;
@@ -97,51 +76,12 @@ void	type_s(va_list *ap, t_params *p)
 	char	filler;
 
 	if (p->length == L)
-	{
 		type_bs(ap, p);
+	if (p->length == L)
 		return ;
-	}
 	savelen = p->toprint->len;
 	str = va_arg(*ap, char*);
 	print_str(p, str, 0);
-	filler = p->flags->zero ? '0' : ' ';
-	if (p->flags->minus)
-	{
-		sum = savelen + p->width;
-		while (p->toprint->len < sum)
-			print_symbol(p, ' ');
-	}
-	else
-	{
-		rev_str(&p->toprint->str[savelen],
-			&p->toprint->str[p->toprint->len - 1]);
-		sum = savelen + p->width;
-		while (p->toprint->len < sum)
-			print_symbol(p, filler);
-		rev_str(&p->toprint->str[savelen],
-			&p->toprint->str[p->toprint->len - 1]);
-	}
-}
-
-void	type_bs(va_list *ap, t_params *p)
-{
-	wchar_t	*str;
-	size_t	savelen;
-	size_t	sum;
-	char	filler;
-
-	savelen = p->toprint->len;
-	str = va_arg(*ap, wchar_t*);
-	sum = -1;
-	if (!str)
-		print_str(p, NULL, 0);
-	else
-	{
-		p->precision += p->precision >= 0 ? savelen : 0;
-		while (str[++sum])
-			if ((printf_putwchar(str[sum], p)))
-				break ;
-	}
 	filler = p->flags->zero ? '0' : ' ';
 	if (p->flags->minus)
 	{
@@ -155,4 +95,45 @@ void	type_bs(va_list *ap, t_params *p)
 	while (p->toprint->len < sum)
 		print_symbol(p, filler);
 	rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+}
+
+static void	type_bs_small(t_params *p, size_t savelen)
+{
+	size_t	sum;
+	char	filler;
+
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		sum = savelen + p->width;
+		while (p->toprint->len < sum)
+			print_symbol(p, ' ');
+		return ;
+	}
+	rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+	sum = savelen + p->width;
+	while (p->toprint->len < sum)
+		print_symbol(p, filler);
+	rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+}
+
+void		type_bs(va_list *ap, t_params *p)
+{
+	wchar_t	*str;
+	size_t	savelen;
+	size_t	i;
+
+	savelen = p->toprint->len;
+	str = va_arg(*ap, wchar_t*);
+	i = -1;
+	if (!str)
+		print_str(p, NULL, 0);
+	else
+	{
+		p->precision += p->precision >= 0 ? savelen : 0;
+		while (str[++i])
+			if ((printf_putwchar(str[i], p)))
+				break ;
+	}
+	type_bs_small(p, savelen);
 }

@@ -12,6 +12,27 @@
 
 #include "../../includes/ft_printf.h"
 
+void	type_percent(va_list *ap, t_params *p)
+{
+	int		i;
+	char	filler;
+
+	(void)ap;
+	p->width--;
+	i = -1;
+	filler = p->flags->zero ? '0' : ' ';
+	if (p->flags->minus)
+	{
+		print_symbol(p, '%');
+		while (++i < p->width)
+			print_symbol(p, ' ');
+		return ;
+	}
+	while (++i < p->width)
+		print_symbol(p, filler);
+	print_symbol(p, '%');
+}
+
 void	type_p(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
