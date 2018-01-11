@@ -42,7 +42,7 @@ void	print_str_twos(char *str)
 
 int		main(void)
 {
-	fflush(stdout);
+	/*fflush(stdout);
 	int	ret1, ret2;
 	
 	char	*s1 = "1";
@@ -62,7 +62,7 @@ int		main(void)
 			printf("\n");
 		}
 		//printf("\t{%d,\n\t\"%s\"},\n", i, s1);
-	}
+	}*/
 	/*	
 	   printf("|%.4g|\n", 998.099);
 	ft_printf("|%.4g|\n", 998.099);

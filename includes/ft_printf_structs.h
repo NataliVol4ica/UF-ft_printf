@@ -65,7 +65,7 @@ typedef struct	s_float
 	char		*num;
 	size_t		size;
 	size_t		point;
-
+	int			expon;
 }				t_float;
 
 typedef union

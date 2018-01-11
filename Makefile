@@ -34,6 +34,7 @@ PRINTFUNCS = ft_putchar \
 PRINTFUNCDIR = ./printfuncs
 DPRINTFUNCS = $(patsubst %, $(PRINTFUNCDIR)/%, $(PRINTFUNCS))
 PRINTF =	ft_printf \
+			ft_printf_fd \
 			length_converters \
 			buffer_string_forming \
 			params_set \

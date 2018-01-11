@@ -64,7 +64,7 @@ static void	print_e_prep(t_params *p, t_float *f, int first_prec)
 		f->size--;
 }
 
-static void	print_e(t_params *p, t_float *f, char c, int expon, int first_prec)
+static void	print_e(t_params *p, t_float *f, char c, int first_prec)
 {
 	size_t	i;
 
@@ -80,7 +80,7 @@ static void	print_e(t_params *p, t_float *f, char c, int expon, int first_prec)
 	if (p->flags->hash)
 		while (p->precision-- > 0)
 			print_symbol(p, '0');
-	print_e_exp(p, expon, c);
+	print_e_exp(p, f->expon, c);
 }
 
 static void	print_f(t_params *p, t_float *f)
@@ -114,7 +114,6 @@ static void	print_f(t_params *p, t_float *f)
 void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 {
 	long double		num;
-	int				expon;
 	size_t			i;
 	int				first_prec;
 	static t_float	*f = NULL;
@@ -130,11 +129,11 @@ void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	while (f->num[i] == '0')
 		i++;
 	i = f->size == i ? 1 : i;
-	expon = f->point - i - 1;
-	check_expon_extra(p, f, &expon, 0);
+	f->expon = f->point - i - 1;
+	check_expon_extra(p, f, &f->expon, 0);
 	print_sign_pref(p);
-	if (expon < -4 || expon >= p->precision)
-		print_e(p, f, c, expon, first_prec);
+	if (f->expon < -4 || f->expon >= p->precision)
+		print_e(p, f, c, first_prec);
 	else
 		print_f(p, f);
 	float_flags(p);
