@@ -42,7 +42,7 @@ static void	get_numbered_args(t_params *p, va_list *ap, va_list *begin)
 	}
 }
 
-static void	call_correct_func(size_t *j, char fmt_i, va_list *ap, t_params *p)
+static void	call_mathing_func(size_t *j, char fmt_i, va_list *ap, t_params *p)
 {
 	while (++(*j) < NOFFUNCS)
 		if (fmt_i == g_type_funcs[*j].c)
@@ -70,7 +70,7 @@ static void	run_while(va_list *ap, const char *fmt, t_params *p)
 				continue ;
 			get_numbered_args(p, ap, &begin);
 			j = -1;
-			call_correct_func(&j, fmt[i], ap, p);
+			call_mathing_func(&j, fmt[i], ap, p);
 			if (j == NOFFUNCS)
 				type_none(fmt[i], p);
 		}
