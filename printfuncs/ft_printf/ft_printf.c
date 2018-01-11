@@ -15,62 +15,62 @@
 #include "../../includes/ft_printf_funcs.h"
 #include <unistd.h>
 
-/*static void	get_numbered_args()
+static void	get_numbered_args(t_params *p, va_list *ap, va_list *begin)
 {
-
+	if (p->is_width_subst)
+	{
+		va_end(*ap);
+		va_copy(*ap, *begin);
+		while (--p->width > 0)
+			va_arg(*ap, size_t);
+		p->width = va_arg(*ap, int);
+	}
+	if (p->is_precision_subst)
+	{
+		va_end(*ap);
+		va_copy(*ap, *begin);
+		while (--p->precision > 0)
+			va_arg(*ap, size_t);
+		p->precision = va_arg(*ap, int);
+	}
+	if (p->n-- > 0)
+	{
+		va_end(*ap);
+		va_copy(*ap, *begin);
+		while (p->n-- > 0)
+			va_arg(*ap, size_t);
+	}
 }
-*/
-int			ft_printf(const char *fmt, ...)
-{
-	va_list			ap;
-	size_t			i;
-	size_t			j;
-	static t_params	*p = NULL;
 
-	p = p ? p : init_params();
-	p->toprint->len = 0;
-	if (!fmt)
-		return (-1);
-	va_start(ap, fmt);
+static void	call_correct_func(size_t *j, char fmt_i, va_list *ap, t_params *p)
+{
+	while (++(*j) < NOFFUNCS)
+		if (fmt_i == g_type_funcs[*j].c)
+		{
+			g_type_funcs[*j].func(ap, p);
+			break ;
+		}
+}
+
+static void	run_while(va_list *ap, const char *fmt, t_params *p)
+{
+	size_t			j;
+	size_t			i;
+	va_list			begin;
+
+	va_copy(begin, *ap);
 	i = 0;
 	while (fmt[i])
 	{
 		if (fmt[i] == '%')
 		{
 			i++;
-			read_params(p, (char*)fmt, &i, &ap);
+			read_params(p, (char*)fmt, &i, ap);
 			if (!fmt[i])
 				continue ;
-			if (p->is_width_subst)
-			{
-				va_end(ap);
-				va_start(ap, fmt);
-				while (--p->width > 0)
-					va_arg(ap, size_t);
-				p->width = va_arg(ap, int);
-			}
-			if (p->is_precision_subst)
-			{
-				va_end(ap);
-				va_start(ap, fmt);
-				while (--p->precision > 0)
-					va_arg(ap, size_t);
-				p->precision = va_arg(ap, int);
-			}
-			if (p->n-- > 0)
-			{
-				va_end(ap);
-				va_start(ap, fmt);
-				while (p->n-- > 0)
-					va_arg(ap, size_t);
-			}
+			get_numbered_args(p, ap, &begin);
 			j = -1;
-			while (++j < NOFFUNCS)
-				if (fmt[i] == g_type_funcs[j].c)
-				{
-					g_type_funcs[j].func(&ap, p);
-					break ;
-				}
+			call_correct_func(&j, fmt[i], ap, p);
 			if (j == NOFFUNCS)
 				type_none(fmt[i], p);
 		}
@@ -78,6 +78,19 @@ int			ft_printf(const char *fmt, ...)
 			print_symbol(p, fmt[i]);
 		i++;
 	}
+}
+
+int			ft_printf(const char *fmt, ...)
+{
+	va_list			ap;
+	static t_params	*p = NULL;
+
+	p = p ? p : init_params();
+	p->toprint->len = 0;
+	if (!fmt)
+		return (-1);
+	va_start(ap, fmt);
+	run_while(&ap, fmt, p);
 	va_end(ap);
 	write(1, p->toprint->str, p->toprint->len);
 	return (p->toprint->len);
