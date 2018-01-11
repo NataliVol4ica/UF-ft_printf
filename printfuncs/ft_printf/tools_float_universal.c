@@ -76,7 +76,7 @@ static int	recogn_naninf(t_params *p, long double num, _Bool is_cap)
 		if (is_cap)
 			print_float_word(p, "NAN");
 		else
-			print_float_word(p, "nan");		
+			print_float_word(p, "nan");
 		return (1);
 	}
 	if (num < -LDBL_MAX)
@@ -84,7 +84,7 @@ static int	recogn_naninf(t_params *p, long double num, _Bool is_cap)
 		if (is_cap)
 			print_float_word(p, "-INF");
 		else
-			print_float_word(p, "-inf");		
+			print_float_word(p, "-inf");
 		return (1);
 	}
 	if (num > LDBL_MAX)
@@ -92,7 +92,7 @@ static int	recogn_naninf(t_params *p, long double num, _Bool is_cap)
 		if (is_cap)
 			print_float_word(p, "INF");
 		else
-			print_float_word(p, "inf");		
+			print_float_word(p, "inf");
 		return (1);
 	}
 	return (0);
@@ -120,7 +120,7 @@ void		float_flags(t_params *p)
 	int		j;
 	size_t	from;
 	char	c;
-	
+
 	j = 0;
 	until = p->width - (p->toprint->len - p->savelen);
 	if (p->flags->minus)

@@ -32,7 +32,7 @@ void	print_hex_pref(t_params *p)
 {
 	if (!p->flags->hash)
 		return ;
-	print_symbol(p, p->alphabet[10] == 'a' ? 'x' : 'X');	
+	print_symbol(p, p->alphabet[10] == 'a' ? 'x' : 'X');
 	print_symbol(p, '0');
 }
 
@@ -40,6 +40,6 @@ void	print_bin_pref(t_params *p)
 {
 	if (!p->flags->hash)
 		return ;
-	print_symbol(p, p->alphabet[10] == 'a' ? 'x' : 'X');	
+	print_symbol(p, p->alphabet[10] == 'a' ? 'x' : 'X');
 	print_symbol(p, '0');
 }

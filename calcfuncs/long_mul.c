@@ -109,7 +109,7 @@ char		*long_mul(char *ss1, char *ss2)
 	char	*ans;
 	char	*temp;
 	int		i;
-	
+
 	if (!ss1)
 		return (ft_strdup(ss2));
 	if (!ss2)
@@ -125,7 +125,7 @@ char		*long_mul(char *ss1, char *ss2)
 		ans = long_sum(ans, temp);
 	}
 	ft_strrev(ans);
-	free (s1);
-	free (s2);
+	free(s1);
+	free(s2);
 	return (ans);
 }

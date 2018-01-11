@@ -51,7 +51,7 @@ void		realloc_toprint(t_print_str *tp)
 	tp->size *= 2;
 }
 
-void	realloc_t_str(t_str *tstr)
+void		realloc_t_str(t_str *tstr)
 {
 	free(tstr->str);
 	tstr->str = ft_strnew(tstr->size * 2 + 1);

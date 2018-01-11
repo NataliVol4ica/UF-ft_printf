@@ -47,7 +47,7 @@ void		type_fbf(va_list *ap, t_params *p, _Bool is_cap)
 	long double		num;
 	struct lconv	*loc;
 	static t_float	*f = NULL;
-	
+
 	loc = localeconv();
 	num = get_float_num(ap, p, is_cap);
 	if (num < 0.0)

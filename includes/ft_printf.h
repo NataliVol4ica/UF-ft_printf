@@ -22,7 +22,7 @@
 # define MAX_STR 32
 # define START_SIZE 2048
 # define FLOAT_STR_MAX_SIZE 5300
-# define frac_default_size 201
+# define FRAC_DEFAULT_SIZE 201
 
 # define NUMBERS_S "0123456789abcdef"
 # define NUMBERS_B "0123456789ABCDEF"
@@ -54,7 +54,8 @@ void		set_float(t_float *f, long double num);
 void		print_symbol(t_params *p, char c);
 void		print_str(t_params *p, char *str, _Bool ignore_prec);
 int			printf_putwchar(wchar_t c, t_params *p);
-void		print_number(uintmax_t n, size_t base, t_params *p, void (*preffunc)(t_params*));
+void		print_number(uintmax_t n, size_t base, t_params *p,
+						void (*preffunc)(t_params*));
 
 /*
 ** PARAM INITIALISATION

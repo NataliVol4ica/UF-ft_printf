@@ -45,7 +45,7 @@ void		type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
 	long double		num;
 	int				expon;
 	static t_float	*f = NULL;
-	
+
 	num = get_float_num(ap, p, is_cap);
 	if (num < 0.0)
 		return ;

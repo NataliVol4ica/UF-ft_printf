@@ -49,7 +49,8 @@ static void	pn_flags_none(t_params *p, void (*preffunc)(t_params*))
 	rev_str(&p->toprint->str[p->savelen],
 		&p->toprint->str[p->toprint->len - 1]);
 }
-static void parse_flags(t_params *p, void (*preffunc)(t_params*))
+
+static void	parse_flags(t_params *p, void (*preffunc)(t_params*))
 {
 	if (p->flags->minus)
 		pn_flags_minus(p, preffunc);

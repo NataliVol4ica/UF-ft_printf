@@ -32,8 +32,8 @@ void	print_str_twos(char *str)
 
 	while (*str)
 	{
-		printf("\t\"");
-		ret = printf("%.72s", str);
+		printf("\t\t\"");
+		ret = printf("%.68s", str);
 		str += ret;
 		printf("\"");
 		if (*str) printf("\n");

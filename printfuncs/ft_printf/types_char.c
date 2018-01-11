@@ -79,11 +79,13 @@ void	type_bc(va_list *ap, t_params *p)
 	}
 	else
 	{
-		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen],
+			&p->toprint->str[p->toprint->len - 1]);
 		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, filler);
-		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen],
+			&p->toprint->str[p->toprint->len - 1]);
 	}
 }
 
@@ -111,11 +113,13 @@ void	type_s(va_list *ap, t_params *p)
 	}
 	else
 	{
-		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen],
+			&p->toprint->str[p->toprint->len - 1]);
 		sum = savelen + p->width;
 		while (p->toprint->len < sum)
 			print_symbol(p, filler);
-		rev_str(&p->toprint->str[savelen], &p->toprint->str[p->toprint->len - 1]);
+		rev_str(&p->toprint->str[savelen],
+			&p->toprint->str[p->toprint->len - 1]);
 	}
 }
 

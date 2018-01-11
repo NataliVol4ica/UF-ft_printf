@@ -52,7 +52,7 @@ void	convert_ouxbx_t(uintmax_t *n, t_params *p)
 		num = (unsigned long long)num;
 	else if (sizeof(unsigned long int) == sizeof(ptrdiff_t))
 		num = (unsigned long int)num;
-	else 
+	else
 		num = (unsigned int)num;
 	*n = num;
 }

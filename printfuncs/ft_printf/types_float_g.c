@@ -19,7 +19,7 @@ static void	check_expon_extra(t_params *p, t_float *f, int *expon, int j)
 	{
 		while (++j <= p->precision)
 			if (f->num[j] != '9')
-				break;
+				break ;
 		if (j > p->precision)
 			if (f->num[j] >= '5')
 				(*expon)++;
@@ -27,15 +27,15 @@ static void	check_expon_extra(t_params *p, t_float *f, int *expon, int j)
 	else if ((FLT_ROUNDS == 2 && !p->isnegative) ||
 			(FLT_ROUNDS == 3 && p->isnegative))
 	{
-		j = 1;	
+		j = 1;
 		while (j <= p->precision && j < (int)f->size)
 			if (f->num[j++] != '9')
-				break;
+				break ;
 		if (j-- > p->precision && !(p->precision == 1 && f->num[1] != '9'))
 		{
 			while (++j < (int)f->size)
 				if (f->num[j] != '0')
-					break;
+					break ;
 			if (j != (int)f->size)
 				(*expon)++;
 		}
@@ -118,7 +118,7 @@ void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	size_t			i;
 	int				first_prec;
 	static t_float	*f = NULL;
-	
+
 	first_prec = p->precision;
 	num = get_float_num(ap, p, is_cap);
 	p->precision = p->precision == 0 ? 1 : p->precision;

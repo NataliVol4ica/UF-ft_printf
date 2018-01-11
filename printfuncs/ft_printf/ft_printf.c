@@ -15,6 +15,11 @@
 #include "../../includes/ft_printf_funcs.h"
 #include <unistd.h>
 
+/*static void	get_numbered_args()
+{
+
+}
+*/
 int			ft_printf(const char *fmt, ...)
 {
 	va_list			ap;
@@ -74,6 +79,6 @@ int			ft_printf(const char *fmt, ...)
 		i++;
 	}
 	va_end(ap);
-	write (1, p->toprint->str, p->toprint->len);
+	write(1, p->toprint->str, p->toprint->len);
 	return (p->toprint->len);
 }

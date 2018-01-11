@@ -13,8 +13,8 @@
 #include "libft.h"
 #include <stdlib.h>
 
-#define num_from_char(x) x >= '0' && x <= '9' ? x - '0' : x - 'a' + 10
-#define char_from_num(x) x <= 9 ? x + '0' : x - 10 + 'a'
+#define NUM_FROM_CHAR(x) x >= '0' && x <= '9' ? x - '0' : x - 'a' + 10
+#define CHAR_FROM_NUM(x) x <= 9 ? x + '0' : x - 10 + 'a'
 
 static t_str	*insert_num(t_str *s, char num)
 {
@@ -44,7 +44,6 @@ static t_str	*long_sum(t_str *s1, t_str *s2, size_t base)
 
 	p1 = s1->size > s2->size ? s1 : s2;
 	p2 = p1 == s1 ? s2 : s1;
-
 	ans = (t_str*)malloc(sizeof(t_str));
 	ans->str = ft_strnew(p1->size);
 	ans->size = p1->size;
@@ -119,7 +118,7 @@ static t_str	*mul_num(t_str *s, int m, size_t base)
 	return (ans);
 }
 
-char		*long_mul_base(char *ss1, char *ss2, size_t base)
+char			*long_mul_base(char *ss1, char *ss2, size_t base)
 {
 	t_str	*s1;
 	t_str	*s2;
@@ -128,27 +127,24 @@ char		*long_mul_base(char *ss1, char *ss2, size_t base)
 	size_t	i;
 	char	c;
 	char	*ret;
-	
+
 	if (!ss1)
 		return (ft_strdup(ss2));
 	if (!ss2)
 		return (ft_strdup(ss1));
-	
 	s1 = (t_str*)malloc(sizeof(t_str));
 	s2 = (t_str*)malloc(sizeof(t_str));
 	ans = (t_str*)malloc(sizeof(t_str));
-
 	s1->str = ft_strrev(ft_strdup(ss1));
 	s1->size = ft_strlen(ss1);
 	s2->str = ft_strrev(ft_strdup(ss2));
 	s2->size = ft_strlen(ss2);
-
 	i = -1;
 	while (++i < s1->size)
-		s1->str[i] = num_from_char(s1->str[i]);
+		s1->str[i] = NUM_FROM_CHAR(s1->str[i]);
 	i = -1;
 	while (++i < s2->size)
-		s2->str[i] = num_from_char(s2->str[i]);
+		s2->str[i] = NUM_FROM_CHAR(s2->str[i]);
 	i = -1;
 	ans->str = ft_strnew(0);
 	ans->size = 0;
@@ -169,7 +165,7 @@ char		*long_mul_base(char *ss1, char *ss2, size_t base)
 	free(s2->str);
 	i = -1;
 	while (++i < ans->size)
-		ans->str[i] = char_from_num(ans->str[i]);
+		ans->str[i] = CHAR_FROM_NUM(ans->str[i]);
 	ret = ans->str;
 	free(s1);
 	free(s2);
