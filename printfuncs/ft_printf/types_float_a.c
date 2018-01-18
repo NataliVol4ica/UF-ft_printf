@@ -77,8 +77,6 @@ char		hex_from_dec(char *buf, _Bool is_cap)
 	return (c);
 }
 
-#include <unistd.h>
-
 void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
 {
 	static t_str	*dbl = NULL;
@@ -104,13 +102,14 @@ void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
 			buf[j++] = '0';
 		f->num[f->size++] = hex_from_dec(buf, is_cap);
 		if (dbl->size < 4)
+		{
+			f->expon -= f->num[0] == '0' ? 1 : i;
 			return ;
+		}
 	}
 	else if (dbl->str[0] != '0')
 		f->num[f->size++] = dbl->str[0];
 	f->expon -= i;
-	//write(1, dbl->str, dbl->size);
-	//write(1, "\n", 1);
 	while (i + 3 < dbl->size)
 	{
 		buf[0] = dbl->str[i];
@@ -128,70 +127,6 @@ void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
 	while ((j == 0 && f->size == 0) || (j > 0 && j < 4))
 		buf[j++] = '0';
 	f->num[f->size++] = hex_from_dec(buf, is_cap);
-	//write(1, f->num, f->size);
-	//write(1, "\n", 1);
-	/*
-	s2 = get_frac_str(num);
-	slen = ft_strlen(s1);
-	if (slen == 1 && s1[0] == '0')
-	{
-		i = -1;
-		while (s2[++i])
-			if (s2[i] != '0')
-			{
-				f->expon = i;
-				break ;
-			}
-		if (!s2[i])
-		{
-			f->size = 1;
-			f->num[0] = '0';
-			f->expon = 0;
-			return ;
-		}
-	}
-	else
-		f->expon = slen + two_pow - 1;
-	f->size = 0;
-	f->num[f->size++] = s1[0];
-	i = 1;
-	while (i + 3 < slen)
-	{
-		buf[0] = s1[i];
-		buf[1] = s1[i + 1];
-		buf[2] = s1[i + 2];
-		buf[3] = s1[i + 3];
-		f->num[f->size++] = hex_from_dec(buf, is_cap);
-		i += 4;
-	}
-	if (f->size != 0)
-	{
-		j = 0;
-		while (i < slen)
-			buf[j++] = s1[i++];
-		i = 0;
-		slen = ft_strlen(s2);
-		while (j < 4 && i < slen)
-			buf[j++] = s2[i++];
-		f->num[f->size++] = hex_from_dec(buf, is_cap);
-	}
-	while (i + 3 < slen)
-	{
-		buf[0] = s2[i];
-		buf[1] = s2[i + 1];
-		buf[2] = s2[i + 2];
-		buf[3] = s2[i + 3];
-		c = hex_from_dec(buf, is_cap);
-		if (!(c == '0' && f->size == 0))
-			f->num[f->size++] = c;
-		i += 4;
-	}
-	j = 0;
-	while (i < slen)
-		buf[j++] = s1[i++];
-	while (j > 0 && j < 4)
-		buf[j++] = '0';
-	f->num[f->size++] = hex_from_dec(buf, is_cap);*/
 }
 
 void		print_a_exp(t_params *p, int expon, char c)
@@ -236,7 +171,8 @@ void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap)
 	print_symbol(p, '0');
 	print_symbol(p, c[0]);
 	print_symbol(p, f->num[0]);
-	if (f->size > 1 || p->precision > 0 || p->flags->hash)
+	//printf("%zu %d %d\n",f->size, p->precision, p->flags->hash );
+	if ((f->size > 1 && p->precision < 0) || p->precision > 0 || p->flags->hash)
 		print_symbol(p, '.');
 	i = 0;
 	if (p->precision == -1)
