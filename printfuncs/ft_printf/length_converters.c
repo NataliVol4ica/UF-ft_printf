@@ -13,70 +13,56 @@
 #include "../../includes/ft_printf.h"
 #include <stddef.h>
 
-void	convert_di(intmax_t *n, t_params *p)
+void		convert_di(va_list *ap, intmax_t *num, t_params *p)
 {
-	intmax_t	num;
-
-	num = *n;
 	if (p->length == HH)
-		num = (signed char)num;
+		*num = (signed char)va_arg(*ap, int);
 	else if (p->length == H)
-		num = (short)num;
+		*num = (short)va_arg(*ap, int);
 	else if (p->length == LL)
-		num = (long long)num;
+		*num = va_arg(*ap, long long);
 	else if (p->length == L)
-		num = (long)num;
+		*num = va_arg(*ap, long);
 	else if (p->length == J)
-		num = (intmax_t)num;
+		*num = va_arg(*ap, intmax_t);
 	else if (p->length == Z)
-		num = (size_t)num;
+		*num = va_arg(*ap, size_t);
 	else if (p->length == T)
-		num = (ptrdiff_t)num;
+		*num = va_arg(*ap, ptrdiff_t);
 	else
-		num = (int)num;
-	*n = num;
+		*num = va_arg(*ap, int);
 }
 
-void	convert_ouxbx_t(uintmax_t *n, t_params *p)
+static void	convert_ouxbx_t(va_list *ap, uintmax_t *num)
 {
-	uintmax_t	num;
-
-	num = *n;
-	if (p->length != T)
-		return ;
 	if (sizeof(unsigned char) == sizeof(ptrdiff_t))
-		num = (unsigned char)num;
+		*num = (unsigned char)va_arg(*ap, int);
 	else if (sizeof(unsigned short) == sizeof(ptrdiff_t))
-		num = (unsigned short)num;
+		*num = (unsigned short)va_arg(*ap, int);
 	else if (sizeof(unsigned long long) == sizeof(ptrdiff_t))
-		num = (unsigned long long)num;
+		*num = va_arg(*ap, unsigned long long);
 	else if (sizeof(unsigned long int) == sizeof(ptrdiff_t))
-		num = (unsigned long int)num;
+		*num = va_arg(*ap, unsigned long int);
 	else
-		num = (unsigned int)num;
-	*n = num;
+		*num = va_arg(*ap, unsigned int);
 }
 
-void	convert_ouxbx(uintmax_t *n, t_params *p)
+void		convert_ouxbx(va_list *ap, uintmax_t *num, t_params *p)
 {
-	uintmax_t	num;
-
-	num = *n;
 	if (p->length == HH)
-		num = (unsigned char)num;
+		*num = (unsigned char)va_arg(*ap, int);
 	else if (p->length == H)
-		num = (unsigned short)num;
+		*num = (unsigned short)va_arg(*ap, int);
 	else if (p->length == LL)
-		num = (unsigned long long)num;
+		*num = va_arg(*ap, unsigned long long);
 	else if (p->length == L)
-		num = (unsigned long int)num;
+		*num = va_arg(*ap, unsigned long);
 	else if (p->length == J)
-		num = (uintmax_t)num;
+		*num = va_arg(*ap, uintmax_t);
 	else if (p->length == Z)
-		num = (size_t)num;
+		*num = va_arg(*ap, size_t);
 	else if (p->length == T)
-		convert_ouxbx_t(n, p);
+		convert_ouxbx_t(ap, num);
 	else
-		num = (unsigned int)num;
-	*n = num;
+		*num = va_arg(*ap, unsigned int);
 }

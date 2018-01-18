@@ -123,7 +123,7 @@ void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap)
 	p->precision = p->precision == 0 ? 1 : p->precision;
 	if (num < 0.0)
 		return ;
-	f = !f ? init_t_float() : f;
+	f = !f ? init_t_float(FLOAT_STR_MAX_SIZE) : f;
 	set_float(f, num);
 	i = 0;
 	while (f->num[i] == '0')

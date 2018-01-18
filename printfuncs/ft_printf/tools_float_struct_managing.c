@@ -14,12 +14,12 @@
 #include "libft.h"
 #include <stdlib.h>
 
-t_float		*init_t_float(void)
+t_float		*init_t_float(size_t size)
 {
 	t_float	*f;
 
 	f = (t_float*)malloc(sizeof(t_float));
-	f->num = (char*)malloc(sizeof(char) * (FLOAT_STR_MAX_SIZE + 1));
+	f->num = (char*)malloc(sizeof(char) * (size + 1));
 	f->size = 0;
 	f->point = -1;
 	return (f);

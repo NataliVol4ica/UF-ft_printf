@@ -22,6 +22,7 @@
 # define MAX_STR 32
 # define START_SIZE 2048
 # define FLOAT_STR_MAX_SIZE 5300
+# define FLOAT_A_STR_MAX_SIZE 20000
 # define FRAC_DEFAULT_SIZE 201
 
 # define NUMBERS_S "0123456789abcdef"
@@ -31,8 +32,8 @@
 ** LENGTH CONVERTIONS
 */
 
-void		convert_di(intmax_t *n, t_params *p);
-void		convert_ouxbx(uintmax_t *n, t_params *p);
+void		convert_di(va_list *ap, intmax_t *num, t_params *p);
+void		convert_ouxbx(va_list *ap, uintmax_t *num, t_params *p);
 
 /*
 ** TOOLS
@@ -89,7 +90,7 @@ void		print_bin_pref(t_params *p);
 ** FLOAT TOOLS
 */
 
-t_float		*init_t_float(void);
+t_float		*init_t_float(size_t size);
 void		zero_t_float(t_float *f);
 t_str		*init_t_str(size_t size);
 void		set_float(t_float *f, long double num);

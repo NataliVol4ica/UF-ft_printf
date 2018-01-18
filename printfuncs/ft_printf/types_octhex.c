@@ -16,8 +16,7 @@ void	type_o(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
 
-	num = va_arg(*ap, uintmax_t);
-	convert_ouxbx(&num, p);
+	convert_ouxbx(ap, &num, p);
 	p->flags->hash = num == 0 && p->precision != 0 ? 0 : p->flags->hash;
 	p->pref_len = p->flags->hash ? 1 : 0;
 	p->flags->space = 0;
@@ -47,8 +46,7 @@ void	type_x(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
 
-	num = va_arg(*ap, uintmax_t);
-	convert_ouxbx(&num, p);
+	convert_ouxbx(ap, &num, p);
 	p->flags->hash = num == 0 && p->precision != 0 ? 0 : p->flags->hash;
 	p->pref_len = p->flags->hash ? 2 : 0;
 	p->flags->hash = num == 0 ? 0 : p->flags->hash;
@@ -63,8 +61,7 @@ void	type_bx(va_list *ap, t_params *p)
 {
 	uintmax_t	num;
 
-	num = va_arg(*ap, uintmax_t);
-	convert_ouxbx(&num, p);
+	convert_ouxbx(ap, &num, p);
 	p->flags->hash = num == 0 && p->precision != 0 ? 0 : p->flags->hash;
 	p->pref_len = p->flags->hash ? 2 : 0;
 	p->flags->hash = num == 0 ? 0 : p->flags->hash;

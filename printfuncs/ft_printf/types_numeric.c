@@ -17,8 +17,7 @@ void	type_di(va_list *ap, t_params *p)
 	intmax_t	num;
 	uintmax_t	n;
 
-	num = va_arg(*ap, intmax_t);
-	convert_di(&num, p);
+	convert_di(ap, &num, p);
 	p->pref_len = num < 0 || p->flags->plus || p->flags->space ? 1 : 0;
 	n = num < 0 ? -num : num;
 	p->flags->zero = p->precision >= 0 ? 0 : p->flags->zero;
@@ -43,8 +42,7 @@ void	type_u(va_list *ap, t_params *p)
 {
 	uintmax_t	n;
 
-	n = va_arg(*ap, uintmax_t);
-	convert_ouxbx(&n, p);
+	convert_ouxbx(ap, &n, p);
 	p->flags->space = 0;
 	p->flags->plus = 0;
 	p->pref_len = p->flags->plus ? 1 : 0;
