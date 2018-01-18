@@ -14,11 +14,13 @@
 
 void		type_a(va_list *ap, t_params *p)
 {
+	p->alphabet = NUMBERS_S;
 	type_aba(ap, p, "xp", 0);
 }
 
 void		type_ba(va_list *ap, t_params *p)
 {
+	p->alphabet = NUMBERS_B;
 	type_aba(ap, p, "XP", 1);
 }
 

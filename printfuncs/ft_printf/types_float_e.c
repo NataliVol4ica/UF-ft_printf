@@ -49,14 +49,14 @@ void		type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap)
 	num = get_float_num(ap, p, is_cap);
 	if (num < 0.0)
 		return ;
+	p->precision = p->precision < 0 ? 6 : p->precision;
 	f = !f ? init_t_float(FLOAT_STR_MAX_SIZE) : f;
 	set_float(f, num);
 	expon = f->point;
 	f->point = 1;
 	while (f->num[f->point - 1] == '0')
 		f->point++;
-	if (!f->num[f->point - 1])
-		f->point = 2;
+	f->point = !f->num[f->point - 1] ? 2 : f->point;
 	round_float(f, p, 1);
 	if (f->num[0] != '0')
 	{

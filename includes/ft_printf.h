@@ -140,6 +140,6 @@ void		type_none(char c, t_params *p);
 void		type_fbf(va_list *ap, t_params *p, _Bool is_cap);
 void		type_ebe(va_list *ap, t_params *p, char c, _Bool is_cap);
 void		type_gbg(va_list *ap, t_params *p, char c, _Bool is_cap);
-void		type_aba(va_list *ap, t_params *p, char c, _Bool is_cap);
+void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap);
 
 #endif

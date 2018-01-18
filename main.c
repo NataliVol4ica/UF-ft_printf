@@ -43,8 +43,19 @@ void	print_str_twos(char *str)
 int		main(void)
 {
 	fflush(stdout);
+
 	printf("%a\n", 1343.125);
 	ft_printf("%a\n", 1343.125);
+	printf("|%a|\n", 0.0);
+	ft_printf("|%a|\n", 0.0);
+	printf("|%#a|\n", 0.0);
+	ft_printf("|%#a|\n", 0.0);
+	printf("|%.a|\n", 0.0);
+	ft_printf("|%.a|\n", 0.0);
+	printf("|%.70a|\n", 0.0);
+	ft_printf("|%.70a|\n", 0.0);
+	printf("|%a|\n", -256.0);
+	ft_printf("|%a|\n", -256.0);
 	/*
 	intmax_t x = -129;
 	x = (signed char)x;

@@ -110,7 +110,6 @@ long double	get_float_num(va_list *ap, t_params *p, _Bool is_cap)
 	p->isnegative = cheat_union.s_cheat.cheat_sign;
 	num = p->isnegative ? -num : num;
 	p->savelen = p->toprint->len;
-	p->precision = p->precision < 0 ? 6 : p->precision;
 	return (num);
 }
 

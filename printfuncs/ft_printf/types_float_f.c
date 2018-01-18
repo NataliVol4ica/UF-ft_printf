@@ -50,6 +50,7 @@ void		type_fbf(va_list *ap, t_params *p, _Bool is_cap)
 
 	loc = localeconv();
 	num = get_float_num(ap, p, is_cap);
+	p->precision = p->precision < 0 ? 6 : p->precision;
 	if (num < 0.0)
 		return ;
 	f = !f ? init_t_float(FLOAT_STR_MAX_SIZE) : f;
