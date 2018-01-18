@@ -92,6 +92,8 @@ void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
 	get_int_str(&num, dbl);
 	f->expon = dbl->size;
 	get_frac_str(num , dbl);
+	write(1, dbl->str, dbl->size);
+	write(1, "\n", 1);
 	i = 1;
 	if (is_long)
 	{
@@ -169,8 +171,8 @@ void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap)
 	float_to_binary(f, num, is_cap, (p->length == BL ? 1 : 0));
 	while (f->num[f->size - 1] == '0' && f->size > 1)
 		f->size--;
-	//write(1, f->num, f->size);
-	//write(1, "\n", 1);
+	write(1, f->num, f->size);
+	write(1, "\n", 1);
 	f->point = 1;
 
 	p->pref_len = p->isnegative || p->flags->plus || p->flags->space ? 1 : 0;
