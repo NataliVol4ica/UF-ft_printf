@@ -15,51 +15,46 @@
 #include "libft.h"
 #include "limits.h"
 
-static char	*get_int_str(long double *num, size_t *stepen_dvoiki)
+static void	get_int_str(long double *num, t_str *f)
 {
 	uintmax_t	ts;
-	char		*str;
 	size_t		i;
+	size_t		stepen_dvoiki;
 
-	str = ft_strnew(100);
-	*stepen_dvoiki = 0;
+	stepen_dvoiki = 0;
 	while (*num > ULLONG_MAX)
 	{
 		*num /= 2.0;
-		*stepen_dvoiki = *stepen_dvoiki + 1;
+		stepen_dvoiki++;
 	}
 	ts = (uintmax_t)*num;
 	*num -= ts;
 	i = 0;
 	if (ts == 0)
-		str[i++] = '0';
+		f->str[f->size++] = '0';
 	else
 		while (ts > 0)
 		{
-			str[i++] = ts % 2 + '0';
+			f->str[f->size++] = ts % 2 + '0';
 			ts /= 2;
 		}
-	rev_str(str, &str[i - 1]);
-	return (str);
+	rev_str(f->str, &f->str[f->size - 1]);
+	while (stepen_dvoiki-- > 0)
+		f->str[f->size++] = '0';
 }
 
-static char	*get_frac_str(long double num_frac)
+static void	get_frac_str(long double num_frac, t_str *f)
 {
-	static t_str	*str;
 	size_t			i;
 
-	str = str ? str : init_t_str(1000);
-	str->size = 0;
 	i = -1;
 	while (++i < 1001 && num_frac > 0.0)
 	{
 		num_frac *= 2.0;
-		str->str[str->size++] = num_frac >= 1.0 ? '1' : '0';
+		f->str[f->size++] = num_frac >= 1.0 ? '1' : '0';
 		if (num_frac >= 1.0)
 			num_frac -= 1.0;
 	}
-	str->str[str->size] = '\0';
-	return (str->str);
 }
 
 char		hex_from_dec(char *buf, _Bool is_cap)
@@ -82,18 +77,60 @@ char		hex_from_dec(char *buf, _Bool is_cap)
 	return (c);
 }
 
-void		float_to_binary(t_float *f, long double num, _Bool is_cap)
-{
-	char	*s1;
-	char	*s2;
-	size_t	two_pow;
-	size_t	i;
-	size_t	j;
-	size_t	slen;
-	char	buf[4];
-	char	c;
+#include <unistd.h>
 
-	s1 = get_int_str(&num, &two_pow);
+void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
+{
+	static t_str	*dbl = NULL;
+	size_t			i;
+	size_t			j;
+	char			buf[4];
+	char			c;
+
+	dbl = !dbl ? init_t_str(FLOAT_A_STR_MAX_SIZE) : dbl;
+	dbl->size = 0;
+	f->size = 0;
+	get_int_str(&num, dbl);
+	f->expon = dbl->size;
+	get_frac_str(num , dbl);
+	i = 1;
+	if (is_long)
+	{
+		i += 3;
+		j = -1;
+		while (++j < 4 && j < dbl->size)
+			buf[j] = dbl->str[j];
+		while (j < 4)
+			buf[j++] = '0';
+		f->num[f->size++] = hex_from_dec(buf, is_cap);
+		if (dbl->size < 4)
+			return ;
+	}
+	else if (dbl->str[0] != '0')
+		f->num[f->size++] = dbl->str[0];
+	f->expon -= i;
+	//write(1, dbl->str, dbl->size);
+	//write(1, "\n", 1);
+	while (i + 3 < dbl->size)
+	{
+		buf[0] = dbl->str[i];
+		buf[1] = dbl->str[i + 1];
+		buf[2] = dbl->str[i + 2];
+		buf[3] = dbl->str[i + 3];
+		c = hex_from_dec(buf, is_cap);
+		if (!(c == '0' && f->size == 0))
+			f->num[f->size++] = c;
+		i += 4;
+	}
+	j = 0;
+	while (i < dbl->size)
+		buf[j++] = dbl->str[i++];
+	while ((j == 0 && f->size == 0) || (j > 0 && j < 4))
+		buf[j++] = '0';
+	f->num[f->size++] = hex_from_dec(buf, is_cap);
+	//write(1, f->num, f->size);
+	//write(1, "\n", 1);
+	/*
 	s2 = get_frac_str(num);
 	slen = ft_strlen(s1);
 	if (slen == 1 && s1[0] == '0')
@@ -154,9 +191,8 @@ void		float_to_binary(t_float *f, long double num, _Bool is_cap)
 		buf[j++] = s1[i++];
 	while (j > 0 && j < 4)
 		buf[j++] = '0';
-	f->num[f->size++] = hex_from_dec(buf, is_cap);
+	f->num[f->size++] = hex_from_dec(buf, is_cap);*/
 }
-
 
 void		print_a_exp(t_params *p, int expon, char c)
 {
@@ -189,14 +225,10 @@ void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap)
 	num = get_float_num(ap, p, is_cap);
 	if (num < 0.0)
 		return ;
-	f = !f ? init_t_float(FLOAT_A_STR_MAX_SIZE) : f;
-	float_to_binary(f, num, is_cap);
+	f = !f ? init_t_float(FLOAT_STR_MAX_SIZE) : f;
+	float_to_binary(f, num, is_cap, (p->length == BL ? 1 : 0));
 	while (f->num[f->size - 1] == '0' && f->size > 1)
 		f->size--;
-	p->precision = p->precision == -1 && f->num[0] != '0' ? f->size : p->precision;
-	//printf("precision %d\n", p->precision);
-	//while (f->num[f->size - 1] == '0' && f->size > 1)
-	//	f->size--;
 	f->point = 1;
 
 	p->pref_len = p->isnegative || p->flags->plus || p->flags->space ? 1 : 0;
@@ -204,11 +236,11 @@ void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap)
 	print_symbol(p, '0');
 	print_symbol(p, c[0]);
 	print_symbol(p, f->num[0]);
-	p->precision -= f->num[0] == '0' ? 0 : 1;
 	if (f->size > 1 || p->precision > 0 || p->flags->hash)
 		print_symbol(p, '.');
 	i = 0;
-	//printf("%zu %zu %d\n", i + 1, f->size, p->precision);
+	if (p->precision == -1)
+		p->precision = f->size - 1;
 	while (++i < f->size && p->precision-- > 0)
 		print_symbol(p, f->num[i]);
 	while (p->precision-- > 0)
