@@ -76,6 +76,7 @@ char		hex_from_dec(char *buf, _Bool is_cap)
 	}
 	return (c);
 }
+#include <unistd.h>
 
 void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
 {
@@ -121,12 +122,17 @@ void		float_to_binary(t_float *f, long double num, _Bool is_cap, _Bool is_long)
 			f->num[f->size++] = c;
 		i += 4;
 	}
-	j = 0;
-	while (i < dbl->size)
-		buf[j++] = dbl->str[i++];
-	while ((j == 0 && f->size == 0) || (j > 0 && j < 4))
-		buf[j++] = '0';
-	f->num[f->size++] = hex_from_dec(buf, is_cap);
+	//write(1, f->num, f->size);
+	//write(1, "\n", 1);
+	if (f->size == 0 || i != dbl->size)
+	{
+		j = 0;
+		while (i < dbl->size)
+			buf[j++] = dbl->str[i++];
+		while ((j == 0 && f->size == 0) || (j > 0 && j < 4))
+			buf[j++] = '0';
+		f->num[f->size++] = hex_from_dec(buf, is_cap);
+	}
 }
 
 void		print_a_exp(t_params *p, int expon, char c)
@@ -150,7 +156,6 @@ void		print_a_exp(t_params *p, int expon, char c)
 			&p->toprint->str[p->toprint->len - 1]);
 	}
 }
-
 void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap)
 {
 	long double		num;
@@ -164,6 +169,8 @@ void		type_aba(va_list *ap, t_params *p, char *c, _Bool is_cap)
 	float_to_binary(f, num, is_cap, (p->length == BL ? 1 : 0));
 	while (f->num[f->size - 1] == '0' && f->size > 1)
 		f->size--;
+	//write(1, f->num, f->size);
+	//write(1, "\n", 1);
 	f->point = 1;
 
 	p->pref_len = p->isnegative || p->flags->plus || p->flags->space ? 1 : 0;

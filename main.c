@@ -44,9 +44,13 @@ int		main(void)
 {
 	fflush(stdout);
 
-	printf("|%.0a|\n", 102420484096.0);
-	ft_printf("|%.0a|\n", 102420484096.0);
-	printf("%a\n", 1343.125);
+	/*printf("|%.0La|\n", 102420484096.0L);
+	ft_printf("|%.0La|\n", 102420484096.0L);*/
+	printf("%a\n", 0x1.f7p+8);
+	ft_printf("%a\n", 0x1.f7p+8);
+	/*printf("|%.0a|\n", 102420484096.0);
+	ft_printf("|%.0a|\n", 102420484096.0);*/
+	/*printf("%a\n", 1343.125);
 	ft_printf("%a\n", 1343.125);
 	printf("%a\n", -1343.125);
 	ft_printf("%a\n", -1343.125);
@@ -71,7 +75,7 @@ int		main(void)
 	printf("|%.8La|\n", 3.0L);
 	ft_printf("|%.8La|\n", 3.0L);
 	printf("|%.8La|\n", 0.0L);
-	ft_printf("|%.8La|\n", 0.0L);
+	ft_printf("|%.8La|\n", 0.0L);*/
 	/*
 	intmax_t x = -129;
 	x = (signed char)x;
