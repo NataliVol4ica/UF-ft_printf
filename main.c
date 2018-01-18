@@ -43,7 +43,7 @@ void	print_str_twos(char *str)
 int		main(void)
 {
 	fflush(stdout);
-	printf("%A\n", 1343.125);
+	printf("%a\n", 1343.125);
 	ft_printf("%a\n", 1343.125);
 	/*
 	intmax_t x = -129;

@@ -14,12 +14,12 @@
 
 void		type_a(va_list *ap, t_params *p)
 {
-	type_aba(ap, p, 'x', 0);
+	type_aba(ap, p, "xp", 0);
 }
 
 void		type_ba(va_list *ap, t_params *p)
 {
-	type_aba(ap, p, 'X', 1);
+	type_aba(ap, p, "XP", 1);
 }
 
 void		type_g(va_list *ap, t_params *p)
